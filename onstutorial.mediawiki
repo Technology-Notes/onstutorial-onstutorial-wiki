@@ -24,12 +24,11 @@ After completing this tutorial, please fill out the
 *** Subhasree Mandal (Google): [http://www.openflow.org/wk/images/0/0f/OpenFlowTutorial-Google.pdf pdf]
 
 
-
 __TOC__
 
 =Overview=
 
-[[File:Tutorial_flow_hw.png]]
+[[images/Tutorial_flow_hw.png]]
 
 In this tutorial, you'll turn the provided hub controller into a controller-based learning switch, then a flow-accelerated learning switch, and extend this from a single-switch network to a multiple-switch multiple-host network. You can also find guidelines for further extensions. Along the way, you'll learn the full suite of OpenFlow debugging tools.  You will:
 * view flow tables with dpctl
@@ -273,7 +272,7 @@ If you start up puTTY as a GUI application, you can connect by entering your VM'
 
 To enable X11 forwarding from puTTY's GUI, click puTTY->Connection->SSH->X11, then click on Forwarding->"Enable X11 Forwarding", as shown below:
 
-[[File:Putty_x11_fwding.PNG]]
+[[images/Putty_x11_fwding.PNG]]
 
 You can also run putty (with the -X option for X11 forwarding) from the Windows command line:
 
@@ -348,7 +347,7 @@ Let's get started...
 The network you'll use for the first exercise includes 3 hosts and a switch (and, eventually, an OpenFlow controller, but we'll get to that later):
 
 
-[[File:Three_switch_layout_simple.png]]
+[[images/Three_switch_layout_simple.png]]
  
 
 To create this network in the VM, in an SSH terminal, enter:
@@ -953,8 +952,8 @@ Go to Eclipse and stop Beacon (you should see a square, red button in the consol
 '''NOTE : You can run only one controller at the same time (otherwise you'll get a port conflict). Make sure that you stop any running instance of Beacon before you start another one. With Eclipse this might be tricky. To check the running programs open the Debug perspective (Window->Open Perspective->Debug). On the top-left corner you can see the running programs, click on it then hit the red square to terminate the redundant ones...'''
 
 {| class="wikitable"
-| [[File:Eclipse_console_stop.png|none|thumb|200px]]
-| [[File:Eclipse_debug_stop.png|none|thumb|200px]]
+| [[images/Eclipse_console_stop.png|none|thumb|200px]]
+| [[images/Eclipse_debug_stop.png|none|thumb|200px]]
 |}
 
 The file you'll modify is '''net.beaconcontroller.tutorial/src/main/java/net/beaconcontroller/tutorial/LearningSwitchTutorial.java'''.  Find this file in the left pane of Eclipse and double-click it to open it in the editor window.
@@ -1399,7 +1398,7 @@ If you are using Beacon and Mininet 1.0, use the --ip option:
 Your created topology looks like this:
 
 
-[[File:Linear2.png]]
+[[images/Linear2.png]]
 
 
 This will create a 2-switch topology where each switch has a single connected host.
@@ -1437,7 +1436,7 @@ Ideally, you shouldn't write any code for this experiment. You will have to form
 
 Here is the topology that we will use:
 
-[[File:Virtualized_layout_detail.png|center|thumb|500px]]
+[[images/Virtualized_layout_detail.png|center|thumb|500px]]
 
 
 
@@ -1489,7 +1488,7 @@ where <guestIP> is the IP address of the eth1 interface of the VM, and X is 100 
 To enable port forwarding on the Putty, please enter the appropriate fields during connection setup
 
 
-[[File:Putty_port_fwding.PNG]]
+[[images/Putty_port_fwding.PNG]]
 
 ===Verify reachability===
 
@@ -1587,7 +1586,7 @@ Please note that this is an advanced exercise, and given that most implementatio
 You'll need a slightly different topology, something like this:
 
 
-[[File:Router_topo.png]]
+[[images/Router_topo.png]]
 
 
 … which will need to be described in a way that Mininet will understand.
