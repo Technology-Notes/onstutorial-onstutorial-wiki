@@ -952,8 +952,8 @@ Go to Eclipse and stop Beacon (you should see a square, red button in the consol
 '''NOTE : You can run only one controller at the same time (otherwise you'll get a port conflict). Make sure that you stop any running instance of Beacon before you start another one. With Eclipse this might be tricky. To check the running programs open the Debug perspective (Window->Open Perspective->Debug). On the top-left corner you can see the running programs, click on it then hit the red square to terminate the redundant ones...'''
 
 {| style="color:black; background-color:#ffffff;" cellpadding="10" cellspacing="0" border="1"
-| [[images/Eclipse_console_stop.png|width=200px]]
-| [[images/Eclipse_debug_stop.png|width=200px]]
+| [[images/200px-Eclipse_console_stop.png|width=200px]]
+| [[images/200px-Eclipse_debug_stop.png|width=200px]]
 |}
 
 The file you'll modify is '''net.beaconcontroller.tutorial/src/main/java/net/beaconcontroller/tutorial/LearningSwitchTutorial.java'''.  Find this file in the left pane of Eclipse and double-click it to open it in the editor window.
