@@ -7,21 +7,21 @@ This tutorial is your opportunity to gain hands-on experience with the platforms
 '''Innovate in your network!'''
 
 After completing this tutorial, please fill out the 
-[https://spreadsheets.google.com/viewform?formkey=dHRnaTVNQzJTNTlrVDZiM21QSGxfZlE6MA feedback form].
+[[feedback form|https://spreadsheets.google.com/viewform?formkey=dHRnaTVNQzJTNTlrVDZiM21QSGxfZlE6MA]].
 
 '''Active ONS Tutorial Slides (4/16/2012):'''
-* Main Slides [http://www.stanford.edu/~brandonh/ONS/OpenFlowTutorial_ONS_Heller.pptx pptx], [http://www.stanford.edu/~brandonh/ONS/OpenFlowTutorial_ONS_Heller.pdf pdf]
+* Main Slides [[pptx|http://www.stanford.edu/~brandonh/ONS/OpenFlowTutorial_ONS_Heller.pptx]], [[pdf|http://www.stanford.edu/~brandonh/ONS/OpenFlowTutorial_ONS_Heller.pdf]]
 * Virtualization
 * Controller Showdown
 * Deployment Experiences
 
 '''Archived Tutorial Slides:'''
-* [http://opennetsummit.org/ OpenNetSummit] Tutorial (10/19/2011)
-** Main Slides: [http://stanford.edu/~brandonh/downloads/OpenFlowTutorial_ONS.pdf pdf], [http://stanford.edu/~brandonh/downloads/OpenFlowTutorial_ONS.pptx pptx]
+* [[OpenNetSummit|http://opennetsummit.org/]] Tutorial (10/19/2011)
+** Main Slides: [[pdf|http://stanford.edu/~brandonh/downloads/OpenFlowTutorial_ONS.pdf]], [[pptx|http://stanford.edu/~brandonh/downloads/OpenFlowTutorial_ONS.pptx]]
 ** Deployment Forum:
-*** Johan van Reijendam (Stanford): [http://stanford.edu/~brandonh/downloads/jvanreij.tgz tgz]
-*** David Erickson (Stanford): [http://yuba.stanford.edu/~derickso/docs/ons_deployment_panel.pptx pptx]
-*** Subhasree Mandal (Google): [http://www.openflow.org/wk/images/0/0f/OpenFlowTutorial-Google.pdf pdf]
+*** Johan van Reijendam (Stanford): [[tgz|http://stanford.edu/~brandonh/downloads/jvanreij.tgz]]
+*** David Erickson (Stanford): [[pptx|http://yuba.stanford.edu/~derickso/docs/ons_deployment_panel.pptx]]
+*** Subhasree Mandal (Google): [[pdf|http://www.openflow.org/wk/images/0/0f/OpenFlowTutorial-Google.pdf]]
 
 
 __TOC__
@@ -47,7 +47,7 @@ These instructions consider Linux, OS X, and Windows.  Linux and OS X are prefer
 
 You will need administrative access to the machine.
 
-The tutorial instructions require no prior knowledge of OpenFlow.  The [http://www.openflowswitch.org/wp/learnmore/ OpenFlow Learn More page] is a concise introduction.
+The tutorial instructions require no prior knowledge of OpenFlow.  The [[OpenFlow Learn More page|http://www.openflowswitch.org/wp/learnmore/]] is a concise introduction.
 
 == Stuck?  Found a bug?  Questions?  ==
 Email [openflow-discuss - at - lists.stanford.edu] if you're stuck, think you've found a bug, or just want to send some feedback.
@@ -69,7 +69,7 @@ You'll need to download the files corresponding to your OS, plus the tutorial VM
 
 Start now with downloading a compressed VM image:
 
-* [https://github.com/downloads/mininet/mininet/mininet-2.0.0-113012-amd64-ovf.zip Virtual Machine Image (OVF format, 64-bit, Mininet 2.0)]
+* [[Virtual Machine Image (OVF format, 64-bit, Mininet 2.0)|https://github.com/downloads/mininet/mininet/mininet-2.0.0-113012-amd64-ovf.zip]]
 
 <span style="color: red">'''Important: For this VM image, the user name is 'mininet' with password 'mininet'.'''</span>
 
@@ -77,16 +77,16 @@ The OVF format can be imported into VirtualBox, VMware, or other popular virtual
 
 If this does not work for you, you can also try our older VM image that uses Mininet 1.0:
 
-* [http://www.openflow.org/downloads/OpenFlowTutorial-101311.zip VirtualBox VM Image (zipped VM image, 32-bit, Mininet 1.0)]
+* [[VirtualBox VM Image (zipped VM image, 32-bit, Mininet 1.0)|http://www.openflow.org/downloads/OpenFlowTutorial-101311.zip]]
 
 <span style="color: red">'''Important: For this VM image, the user name is 'openflow' with password 'openflow'.'''</span>
 
 <!--
-* If you're using VirtualBox (which we assume you are for this tutorial) you will want the [http://openflowswitch.org/downloads/cs244-VM-0107.zip VirtualBox VM image].
+* If you're using VirtualBox (which we assume you are for this tutorial) you will want the [[VirtualBox VM image|http://openflowswitch.org/downloads/cs244-VM-0107.zip]].
 -->
 
 <!--
- * If you already run VMware, you may wish to try the [http://openflowswitch.org/downloads/OpenFlowTutorial-081910.vmware.zip older VMware VM image].
+ * If you already run VMware, you may wish to try the [[older VMware VM image|http://openflowswitch.org/downloads/OpenFlowTutorial-081910.vmware.zip]].
 -->
 The download will take a while - it's on the order of 2GB in size.
 
@@ -101,31 +101,31 @@ You will also need virtualization software, an X server, and an ssh-capable term
 |-
 |Windows
 |7+
-|[http://www.virtualbox.org/wiki/Downloads VirtualBox]
-|[http://sourceforge.net/project/downloading.php?group_id=156984&filename=Xming-6-9-0-31-setup.exe Xming]
-|[http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe PuTTY]
+|[[VirtualBox|http://www.virtualbox.org/wiki/Downloads]]
+|[[Xming|http://sourceforge.net/project/downloading.php?group_id=156984&filename=Xming-6-9-0-31-setup.exe]]
+|[[PuTTY|http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe]]
 |-
 |Windows
 |XP
-|[http://www.virtualbox.org/wiki/Downloads VirtualBox]
-|[http://sourceforge.net/project/downloading.php?group_id=156984&filename=Xming-6-9-0-31-setup.exe Xming]
-|[http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe PuTTY]
+|[[VirtualBox|http://www.virtualbox.org/wiki/Downloads]]
+|[[Xming|http://sourceforge.net/project/downloading.php?group_id=156984&filename=Xming-6-9-0-31-setup.exe]]
+|[[PuTTY|http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe]]
 |-
 |Mac
 |OS X 10.7-10.8 Lion/Mountain Lion
-|[http://www.virtualbox.org/wiki/Downloads VirtualBox]
-|download and install [http://xquartz.macosforge.org/trac/wiki XQuartz]
+|[[VirtualBox|http://www.virtualbox.org/wiki/Downloads]]
+|download and install [[XQuartz|http://xquartz.macosforge.org/trac/wiki]]
 |Terminal.app (built in)
 |-
 |Mac
 |OS X 10.5-10.6 Leopard/Snow Leopard
-|[http://www.virtualbox.org/wiki/Downloads VirtualBox]
-|X11 (install from OS X main system DVD, preferred), or download [http://xquartz.macosforge.org/trac/wiki XQuartz]
+|[[VirtualBox|http://www.virtualbox.org/wiki/Downloads]]
+|X11 (install from OS X main system DVD, preferred), or download [[XQuartz|http://xquartz.macosforge.org/trac/wiki]]
 |Terminal.app (built in)
 |-
 |Linux
 |Ubuntu 10.04+
-|[http://www.virtualbox.org/wiki/Downloads VirtualBox]
+|[[VirtualBox|http://www.virtualbox.org/wiki/Downloads]]
 |X server already installed
 |gnome terminal + SSH built in
 |}
@@ -149,7 +149,7 @@ You may also be able to simply double-click the .ovf file to open it up in your 
 
 This step will take a while - the unpacked image is about 3 GB.
 
-* '''Continue with [[#Finish VM Setup | Finish VM Setup]] below.'''
+* '''Continue with [[onstutorial.mediawiki#Finish-VM-Setup|Finish VM Setup]] below.'''
 
 
 '''Note: If you downloaded the older .zip archive instead of the .ovf image, setup requires a few more steps:'''
@@ -180,7 +180,7 @@ Select your VM and go to the Settings Tab. Go to Network->Adapter 2. Select the 
 
 At that point you should be ready to start your VM. Press the "Start" arrow icon or double-click your VM within the VirtualBox window. 
 
-In the VM console window, log in with the [[#Download Files | user name and password]] for your VM.
+In the VM console window, log in with the [[onstutorial.mediawiki#Download-Files|user name and password]] for your VM.
 
 Note that this user is a sudoer, so you can execute commands with root permissions by typing <tt>sudo ''command''</tt>, where <tt>''command''</tt> is the command you wish to execute with root permission.
 
@@ -251,11 +251,11 @@ Note the IP address (probably the 192.168 one) for the '''host-only''' network; 
 Open a terminal (Terminal.app in Mac, Gnome terminal in Ubuntu, etc).  In that terminal, run:
  $ ssh -X [user]@[Guest IP Here]
 
-Replace [user] with the correct [[#Download Files | user name]] for your VM image.
+Replace [user] with the correct [[onstutorial.mediawiki#Download-Files|user name]] for your VM image.
 
 Replace [Guest IP Here] with the IP you just noted. If ssh does not connect, make sure that you can ping the IP address you are connecting to.
 
-Enter the [[#Download Files | password]] for your VM image.  Next, try starting up an X terminal using
+Enter the [[onstutorial.mediawiki#Download-Files|password]] for your VM image.  Next, try starting up an X terminal using
  $ xterm
 
 and a new terminal window should appear.  If you have succeeded, you are done with the basic setup.  Close the xterm.  If you get a 'xterm: DISPLAY is not set error', verify your X server installation from above.
@@ -302,7 +302,7 @@ If the xterm window does not appear, or if you get an error like "xterm:  DISPLA
 
 As an alternative to running X11 on your host machine, you may find it
 useful or convenient to install X11 into the VM itself. To install X11 
-and a simple window manager, log in to the '''VM console window''' - ''not'' via an ssh session! - using the correct [[#Download Files | user name and password]] for your VM, and type:
+and a simple window manager, log in to the '''VM console window''' - ''not'' via an ssh session! - using the correct [[onstutorial.mediawiki#Download-Files|user name and password]] for your VM, and type:
  $ sudo apt-get install xinit flwm
 
 At this point, you should be able to start an X11 session in the VM console window
@@ -335,7 +335,7 @@ The OpenFlowTutorial VM includes a number of OpenFlow-specific and general netwo
 
 * '''iperf''': general command-line utility for testing the speed of a single TCP connection.
 
-* '''Mininet''': network emulation platform.  Mininet creates a virtual OpenFlow network - controller, switches, hosts, and links - on a single real or virtual machine. More Mininet details can be found at the [http://openflow.org/mininet Mininet web page].
+* '''Mininet''': network emulation platform.  Mininet creates a virtual OpenFlow network - controller, switches, hosts, and links - on a single real or virtual machine. More Mininet details can be found at the [[Mininet web page|http://openflow.org/mininet]].
 
 * '''cbench''': utility for testing the flow setup rate of OpenFlow controllers. 
 
@@ -363,7 +363,7 @@ Here's what Mininet just did:
 * Configure the OpenFlow switch to connect to a remote controller.
 
 == Mininet Brief Intro ==
-Since you'll be working in [http://mininet.github.com Mininet] for the whole tutorial, it's worth learning a few Mininet-specific commands:
+Since you'll be working in [[Mininet|http://mininet.github.com]] for the whole tutorial, it's worth learning a few Mininet-specific commands:
 
 To see the list of nodes available, in the Mininet console, run:
  mininet> nodes
@@ -386,9 +386,9 @@ If Mininet is not working correctly (or has crashed and needs to be restarted), 
 
 and running Mininet again. 
 
-<font color=red> NB: The prompt <code> mininet> </code> is for Mininet console, <code> $ </code> is for SSH terminal (normal user) and <code> # </code> is for SSH terminal (root user) </font> (See  [http://www.openflow.org/wk/index.php/OpenFlow_Tutorial#Command_Prompt_Notes Command Prompt Notes]).  Hereafter we follow with this rule.
+<font color=red> NB: The prompt <code> mininet> </code> is for Mininet console, <code> $ </code> is for SSH terminal (normal user) and <code> # </code> is for SSH terminal (root user) </font> (See  [[Command Prompt Notes|http://www.openflow.org/wk/index.php/OpenFlow_Tutorial#Command_Prompt_Notes]]).  Hereafter we follow with this rule.
 
-Mininet has loads of other commands and startup options to help with debugging, and this brief starter should be sufficient for the tutorial.  If you're curious about other options, follow the [http://www.openflowswitch.org/foswiki/bin/view/OpenFlow/MininetWalkthrough Mininet Walkthrough] after the main tutorial.
+Mininet has loads of other commands and startup options to help with debugging, and this brief starter should be sufficient for the tutorial.  If you're curious about other options, follow the [[Mininet Walkthrough|http://www.openflowswitch.org/foswiki/bin/view/OpenFlow/MininetWalkthrough]] after the main tutorial.
 
 == dpctl Example Usage ==
 '''dpctl''' is a utility that comes with the OpenFlow reference distribution and enables visibility and control over a single switch's flow table.  It is especially useful for debugging, by viewing flow state and flow counters.  Most OpenFlow switches can start up with a passive listening port (in your current setup this is 6634), from which you can poll the switch, without having to add debugging code to the controller.
@@ -577,15 +577,15 @@ Later, you'll turn this into a flow-based switch, where seeing a packet with a k
 
 For this tutorial you will need to choose a controller platform to build on top of.  The best option is likely the controller written in the language you are most familiar with.  Plus, after making your controller, rewriting it on another controller platform should go quickly and be a useful exercise.  Your options are:
 
-* '''Java''': [[#Controller Choice: Beacon (Java)|Beacon]], [[#Controller Choice: Floodlight (Java)|Floodlight]]
-* '''Python''': [[#Controller Choice: POX (Python)|POX]], [[#Controller Choice: Ryu (Python)|Ryu]], [[#Controller Choice: NOX w/Python|NOX (Deprecated)]]
-* '''Ruby''': [[#Controller Choice: Trema (Ruby)|Trema]]
+* '''Java''': [[onstutorial.mediawiki#Controller-Choice:-Beacon-(Java)|Beacon]],-[[#Controller-Choice:-Floodlight-(Java)|Floodlight]]
+* '''Python''': [[onstutorial.mediawiki#Controller-Choice:-POX-(Python)|POX]],-[[#Controller-Choice:-Ryu-(Python)|Ryu]],-[[#Controller-Choice:-NOX-w/Python|NOX (Deprecated)]]
+* '''Ruby''': [[onstutorial.mediawiki#Controller-Choice:-Trema-(Ruby)|Trema]]
 
 ==Controller Choice: POX (Python) ==
 
 ''' NOTE: The POX version of the tutorial is quite new, and feedback on the pox-dev mailing list is very welcome! '''
 
-One option for the first exercise is to use POX.  POX is a Python-based SDN controller platform geared towards research and education.  For more details on POX, see [http://www.noxrepo.org/pox/about-pox/ About POX] or [http://www.noxrepo.org/pox/documentation/ POX Documentation] on [http://www.noxrepo.org NOXRepo.org].
+One option for the first exercise is to use POX.  POX is a Python-based SDN controller platform geared towards research and education.  For more details on POX, see [[About POX|http://www.noxrepo.org/pox/about-pox/]] or [[POX Documentation|http://www.noxrepo.org/pox/documentation/]] on [[NOXRepo.org|http://www.noxrepo.org]].
 
 We're not going to be using the reference controller anymore, which may still be running (do '<code>ps -A | grep controller</code>' if you're unsure), so you should either press Ctrl-C in the window running the controller program, or kill it from the other SSH window:
  $ sudo killall controller
@@ -595,7 +595,7 @@ You should also run <code>sudo mn -c</code> and restart Mininet to make sure tha
  $ sudo mn -c
  $ sudo mn --topo single,3 --mac --switch ovsk --controller remote
 
-You then need to download the POX code from the [https://github.com/noxrepo/pox POX repository on github] into your VM:
+You then need to download the POX code from the [[POX repository on github|https://github.com/noxrepo/pox]] into your VM:
  $ git clone http://github.com/noxrepo/pox
  $ cd pox
 
@@ -693,10 +693,10 @@ To comment a line of code:
  # Prepend comments with a #; no // or /**/
 
 More Python resources:
-* [http://docs.python.org/lib/built-in-funcs.html List of built-in functions] 
-* [http://docs.python.org/tutorial/ Official Python tutorial]
+* [[List of built-in functions|http://docs.python.org/lib/built-in-funcs.html]] 
+* [[Official Python tutorial|http://docs.python.org/tutorial/]]
 
-The subsections below give details about POX APIs that should prove useful in the exercise.  There is also other documentation available in the [http://www.noxrepo.org/pox/documentation/ appropriate section of POX's website]. 
+The subsections below give details about POX APIs that should prove useful in the exercise.  There is also other documentation available in the [[appropriate section of POX's website|http://www.noxrepo.org/pox/documentation/]]. 
 
 === Sending OpenFlow messages with POX ===
 
@@ -812,7 +812,7 @@ Many fields are common to all Python objects and can be ignored, but this can be
 Now, skip ahead to Testing Your Controller below.
 
 == Controller Choice: Beacon (Java) ==
-Beacon is a Java-based OpenFlow controller platform.  For more details and tutorials see the [http://www.beaconcontroller.net Beacon Homepage]. 
+Beacon is a Java-based OpenFlow controller platform.  For more details and tutorials see the [[Beacon Homepage|http://www.beaconcontroller.net]]. 
 
 Beacon is very easily developed using the Eclipse Integrated Development Environment which runs on any operating system (OS).
 
@@ -822,17 +822,17 @@ The next section will help you do that.
 
 === Setting up a Beacon Development Environment ===
 
-This section is a modified copy of the [https://openflow.stanford.edu/display/Beacon/Quick+Start original] Beacon quick-start guide.
+This section is a modified copy of the [[original|https://openflow.stanford.edu/display/Beacon/Quick+Start]] Beacon quick-start guide.
 
 ==== Prerequisites ====
 
 You will need the following installed in your '''host machine''' :
 
-* [http://java.sun.com/javase/downloads/widget/jdk6.jsp Java 6 JDK & JRE] (Java 7 JDK is fine on OSX)
+* [[Java 6 JDK & JRE|http://java.sun.com/javase/downloads/widget/jdk6.jsp]] (Java 7 JDK is fine on OSX)
 
 Next, download the Beacon tutorial package for your '''host machine's operating system''', the file names begin with beacon-tutorial-eclipse:
 
-* [https://openflow.stanford.edu/static/beacon/releases/1.0.2/ Tutorial Packages]
+* [[Tutorial Packages|https://openflow.stanford.edu/static/beacon/releases/1.0.2/]]
 
 After the download is complete extract it to your desktop, or somewhere else that is convenient. For guide purposes, the folder you extracted it to will be referred to by <path to>/beacon-tutorial-1.0.2
 
@@ -1030,11 +1030,11 @@ Use the appropriate setters to construct the flow-mod you need. Assuming you kno
 
 == Controller Choice: Floodlight (Java) ==
 
-Floodlight is a Java-based OpenFlow controller platform.  For more details and tutorials see the [http://floodlight.openflowhub.org/ FloodLight OpenFlowHub page]. 
+Floodlight is a Java-based OpenFlow controller platform.  For more details and tutorials see the [[FloodLight OpenFlowHub page|http://floodlight.openflowhub.org/]]. 
 
 === Install Prerequisites ===
 
-Note: these instructions are a customized version of those on the [http://floodlight.openflowhub.org/ Floodlight Download page]
+Note: these instructions are a customized version of those on the [[Floodlight Download page|http://floodlight.openflowhub.org/]]
 
 Make sure that you have Internet access:
  ping -c1 www.stanford.edu
@@ -1053,16 +1053,16 @@ Install prereqs:
 
 === Getting Started ===
 
-While the dependencies are installing on your VM, follow the [http://floodlight.openflowhub.org/getting-started/ Floodlight Getting Started instructions].
+While the dependencies are installing on your VM, follow the [[Floodlight Getting Started instructions|http://floodlight.openflowhub.org/getting-started/]].
 
 === Developing ===
 
-Once through with the getting started part, work through [http://floodlight.openflowhub.org/developing-floodlight/ Developing on Floodlight.]
+Once through with the getting started part, work through [[Developing on Floodlight.|http://floodlight.openflowhub.org/developing-floodlight/]]
 
 
 ==Controller Choice: Trema (Ruby)==
 
-Trema is a Ruby-based OpenFlow controller platform and testing environment.  For more details and tutorials see the [http://trema.github.com/trema/ Trema GitHub page]. 
+Trema is a Ruby-based OpenFlow controller platform and testing environment.  For more details and tutorials see the [[Trema GitHub page|http://trema.github.com/trema/]]. 
 
 === Install Prerequisites ===
 
@@ -1083,17 +1083,17 @@ Install prereqs:
 
 === Getting Started ===
 
-Follow the instructions on the [http://trema.github.com/trema/ main Trema page], which has links to tutorial videos and more.
+Follow the instructions on the [[main Trema page|http://trema.github.com/trema/]], which has links to tutorial videos and more.
 
 == Controller Choice: Ryu (Python) ==
 
 Ryu is a python-based OpenFlow controller.
-For details, please visit the [http://osrg.github.com/ryu/ Ryu Official Site]
+For details, please visit the [[Ryu Official Site|http://osrg.github.com/ryu/]]
 
 === Ryu VM Image ===
 The VM image set up for Ryu is available at
 
-* [http://people.valinux.co.jp/~yamahata/ryu/openflow-tutorial/OpenFlow_Tutorial_Ryu-ovf.zip Virtual Machine Image(zipped OVF format, 64-bit, Mininet 2.0)].
+* [[Virtual Machine Image(zipped OVF format, 64-bit, Mininet 2.0)|http://people.valinux.co.jp/~yamahata/ryu/openflow-tutorial/OpenFlow_Tutorial_Ryu-ovf.zip]].
 This can be import into virtualbox, VMWare or other popular virtualization
 programs.
 
@@ -1130,19 +1130,19 @@ install prereqs:
     time sudo apt-get install python-gevent python-routes python-webob python-paramiko
 
 ===Getting Started and developing===
-Please visit the [https://github.com/osrg/ryu/wiki/OpenFlow_Tutorial OpenFlow Tutorial page].
+Please visit the [[OpenFlow Tutorial page|https://github.com/osrg/ryu/wiki/OpenFlow_Tutorial]].
 
 == Controller Choice: NOX w/Python ==
 ''' NOTE: The version of NOX used in this tutorial is no longer current.  In fact, all Python-based development in NOX is now deprecated.
 
 <span style="color: red;">DEVELOPERS WISHING TO USE PYTHON ARE ENCOURAGED TO USE POX INSTEAD.</span>''' 
 
-One option for the first exercise is to use  NOX, a controller platform that allows you to write a controller on top, in Python, C++, or some combination of the two. From [http://noxrepo.org noxrepo.org]:
+One option for the first exercise is to use  NOX, a controller platform that allows you to write a controller on top, in Python, C++, or some combination of the two. From [[noxrepo.org|http://noxrepo.org]]:
 <blockquote> 
 NOX is an open-source platform that simplifies the creation of software for controlling or monitoring networks. Programs written within NOX (using either C++ or Python) have flow-level control of the network. This means that they can determine which flows are allowed on the network and the path they take.
 </blockquote>
 
-For more details, see the [http://www.noxrepo.org/support/about-nox/ NOX overview].
+For more details, see the [[NOX overview|http://www.noxrepo.org/support/about-nox/]].
 
 If NOX classic is not already installed in your Mininet 2.0 VM, you can install it by typing
   cd ~
@@ -1251,15 +1251,15 @@ To comment a line of code:
  # Prepend comments with a #; no // or /**/
 
 More Python resources:
-* [http://docs.python.org/lib/built-in-funcs.html List of built-in functions] 
-* [http://docs.python.org/tutorial/ Official Python tutorial]
+* [[List of built-in functions|http://docs.python.org/lib/built-in-funcs.html]] 
+* [[Official Python tutorial|http://docs.python.org/tutorial/]]
 
 The subsections below give details about NOX APIs that should prove useful in the exercise.
 
 
 === Sending OpenFlow messages with NOX ===
 
-NOX API documentation can be found [http://noxrepo.org/~yapkke/doc/ here]. Please look there for the appropriate calls. 
+NOX API documentation can be found [[here|http://noxrepo.org/~yapkke/doc/]]. Please look there for the appropriate calls. 
 We also list a few functions here, that will be useful for your first steps into NOX.
 
  Component.send_openflow( ... ) # send a packet out a port
@@ -1568,7 +1568,7 @@ Look what others said at http://10.0.0.1:8000/posts
 
 In this exercise, you'll make a static layer-3 forwarder/switch.  It's not exactly a router, because it won't decrement the IP TTL and recompute the checksum at each hop (so traceroute won't work).  Actions to do TTL and checksum modification are expected in the upcoming OpenFlow version 1.1.  However, it will match on masked IP prefix ranges, just like a real router.
 
-From [http://www.faqs.org/rfcs/rfc1812.html#ixzz0oPra4P9C RFC 1812]:
+From [[RFC 1812|http://www.faqs.org/rfcs/rfc1812.html#ixzz0oPra4P9C]]:
 <blockquote>
 An IP router can be distinguished from other sorts of packet switching devices in that a router examines the IP protocol header as part of the switching process. It generally removes the Link Layer header a message was received with, modifies the IP header, and replaces the Link Layer header for retransmission.
 </blockquote>
@@ -1715,7 +1715,7 @@ Lastly, packets for unreachable subnets should be responded to with ICMP network
 == Testing your router ==
 
 If the router works properly:
-* attempts to send from 10.0.1.2 to an unknown address range like 10.99.0.1 should yield an [http://en.wikipedia.org/wiki/ICMP_Destination_Unreachable ICMP destination unreachable] message.
+* attempts to send from 10.0.1.2 to an unknown address range like 10.99.0.1 should yield an [[ICMP destination unreachable|http://en.wikipedia.org/wiki/ICMP_Destination_Unreachable]] message.
 * packets sent to hosts on the same subnet should be treated like before.
 * packets sent to hosts on a known address range should have their MAC dst field changed to that of the next-hop router.
 * the router should be pingable, and should generate an ICMP echo reply in response to an ICMP echo request.
@@ -1746,14 +1746,14 @@ You can change the port used by iperf with the -p option.  Both server and clien
 
 ==OpenFlow==
 
-To learn more about OpenFlow in general, consult the [http://www.openflowswitch.org main OpenFlow page].  There are videos, blog entries, and more.  Check the wiki for link to OpenFlow-based projects and demos.
+To learn more about OpenFlow in general, consult the [[main OpenFlow page|http://www.openflowswitch.org]].  There are videos, blog entries, and more.  Check the wiki for link to OpenFlow-based projects and demos.
 
 ==Additional Tools==
-*[http://www.openflowswitch.org/foswiki/bin/view/OpenFlow/Mininet Mininet].
-*[http://www.openflow.org/wk/index.php/FlowVisor FlowVisor].
+*[[Mininet|http://www.openflowswitch.org/foswiki/bin/view/OpenFlow/Mininet]].
+*[[FlowVisor|http://www.openflow.org/wk/index.php/FlowVisor]].
 
 ==Old Regression Tests==
-Note: you will need to install additional stuff to get the old regression tests working.  See the install instructions for your platform, referenced at the top of the [http://openflow.org/wk OpenFlow wiki]
+Note: you will need to install additional stuff to get the old regression tests working.  See the install instructions for your platform, referenced at the top of the [[OpenFlow wiki|http://openflow.org/wk]]
 
 The OpenFlow reference distribution includes a set of tests to verify that an OpenFlow switch correctly sends and receives packets.  In this section, you'll run through some of the "Black Box" tests, where the regression switch acts as a controller and verifies that a switch responds properly to OpenFlow messages, as well as properly forwards packets sent to the input ports of the switch.  The Black Box regression tests use this layout:
 
@@ -1987,7 +1987,7 @@ The three values you added above should be shown.
 Save your network settings for future reboots, by powering down the VM, from the VM window:
  sudo poweroff
 
-Restart the OpenFlowTutorial VM once again, by clicking 'Start' at the top of VirtualBox.  Login again with the correct [[#Download Files | user name and password]].  
+Restart the OpenFlowTutorial VM once again, by clicking 'Start' at the top of VirtualBox.  Login again with the correct [[onstutorial.mediawiki#Download-Files|user name and password]].  
 
 '''Windows Users''' You may need to change the VM configuration.  Edit  /etc/network/interfaces.  Check that it says:
  allow hot-plug eth1
@@ -1998,8 +1998,8 @@ If it says eth0, change it to eth1; note that to write the file you'll need to u
 
 === Mac OS X and Linux ===
 To SSH from the local machine to the VM, on the local machine run:
- ssh -Y -l [[#Download Files | <user name>]] -p 2222 localhost
-with the correct [[#Download Files | user name and password]].  Test the X11 forwarding by running on the local machine:
+ ssh -Y -l [[onstutorial.mediawiki#Download-Files|<user name>]] -p 2222 localhost
+with the correct [[onstutorial.mediawiki#Download-Files|user name and password]].  Test the X11 forwarding by running on the local machine:
  xterm
 and a new terminal window should appear.  If you have succeeded, you are done with the basic setup.  Close the xterm.
 
@@ -2016,7 +2016,7 @@ A new window will pop up; type in the password.  Now, type:
  xterm
 A white terminal window should appear. If you have succeeded, you are done with the basic setup. Close the xterm.
 
-Make sure you use the correct [[#Download Files | user name and password]] for your VM image.
+Make sure you use the correct [[onstutorial.mediawiki#Download-Files|user name and password]] for your VM image.
 
 <!--
 
