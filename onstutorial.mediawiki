@@ -1436,7 +1436,7 @@ Ideally, you shouldn't write any code for this experiment. You will have to form
 
 Here is the topology that we will use:
 
-[[images/Virtualized_layout_detail.png|align=center|width=500px]]
+[[images/500px-Virtualized_layout_detail.png|align=center|width=500px]]
 
 
 
