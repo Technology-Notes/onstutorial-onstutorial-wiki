@@ -834,10 +834,10 @@ Next, download the Beacon tutorial package for your '''host machine's operating 
 
 * [[Tutorial Packages|https://openflow.stanford.edu/static/beacon/releases/1.0.2/]]
 
-After the download is complete extract it to your desktop, or somewhere else that is convenient. For guide purposes, the folder you extracted it to will be referred to by <path to>/beacon-tutorial-1.0.2
+After the download is complete extract it to your desktop, or somewhere else that is convenient. For guide purposes, the folder you extracted it to will be referred to by [path to]/beacon-tutorial-1.0.2
 
 ==== Setup ====
-Launch Eclipse by running the eclipse executable inside <path to>/beacon-tutorial-1.0.2/eclipse/
+Launch Eclipse by running the eclipse executable inside [path to]/beacon-tutorial-1.0.2/eclipse/
 
 (Optional) Create a new Eclipse workspace if you are not starting from a fresh Eclipse install
 
@@ -849,7 +849,7 @@ Set Eclipse's compliance level to 1.6
 
 Import Beacon and OpenFlowJ projects
 
-* File -> Import -> General -> Existing Projects into Workspace, Select <path to>/beacon-tutorial-1.0.2/beacon-tutorial-1.0.2/src as the root directory, click ok, then select all the projects, ensure copy projects into workspace is not checked and click finish.
+* File -> Import -> General -> Existing Projects into Workspace, Select [path to]/beacon-tutorial-1.0.2/beacon-tutorial-1.0.2/src as the root directory, click ok, then select all the projects, ensure copy projects into workspace is not checked and click finish.
 
 '''''Note at this point you will see many Java errors, the libraries Beacon depends on will be installed in the next step which will resolve the errors, do not panic!'''''
 
@@ -860,7 +860,7 @@ Set the target (download libraries)
 
 Import the Beacon code style settings
 
-* Click Window -> Preferences. Then in the left column click Java -> Code Style -> Formatter, then click the Import button, and select <path to>/beacon-tutorial-1.0.2/src/beacon-1.0.2/beacon_style_settings.xml and hit ok, then ensure the Active profile is Beacon.
+* Click Window -> Preferences. Then in the left column click Java -> Code Style -> Formatter, then click the Import button, and select [path to]/beacon-tutorial-1.0.2/src/beacon-1.0.2/beacon_style_settings.xml and hit ok, then ensure the Active profile is Beacon.
 
 That's it! Your Beacon controller is ready to rock'n'roll.
 
@@ -1009,7 +1009,7 @@ The subsections below give details about a few Beacon Classes that should prove 
 === Useful Beacon Classes ===
 
 In your beacon-tutorial-1.0.2 directory, there is an apidocs folder which contains Javadoc documentation for all essential classes in this assignment.
-Open your browser and point to <your beacon-tutorial-1.0.2 directory>/apidocs/index.html and look for the classes mentioned below, which should help while implementing your code.
+Open your browser and point to [your beacon-tutorial-1.0.2 directory]/apidocs/index.html and look for the classes mentioned below, which should help while implementing your code.
 
 To send a message to an OpenFlow switch, look at IOFSwitch class. The starter forward_as_hub function sends packets out using:
  sw.getOutputStream().write(po);
