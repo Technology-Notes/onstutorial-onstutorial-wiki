@@ -577,8 +577,8 @@ Later, you'll turn this into a flow-based switch, where seeing a packet with a k
 
 For this tutorial you will need to choose a controller platform to build on top of.  The best option is likely the controller written in the language you are most familiar with.  Plus, after making your controller, rewriting it on another controller platform should go quickly and be a useful exercise.  Your options are:
 
-* '''Java''': [[onstutorial#Controller-Choice:-Beacon-(Java)|Beacon]],-[[#Controller-Choice:-Floodlight-(Java)|Floodlight]]
-* '''Python''': [[onstutorial#Controller-Choice:-POX-(Python)|POX]],-[[#Controller-Choice:-Ryu-(Python)|Ryu]],-[[#Controller-Choice:-NOX-w/Python|NOX (Deprecated)]]
+* '''Java''': [[onstutorial#Controller-Choice:-Beacon-(Java)|Beacon]],-[[onstutorial#Controller-Choice:-Floodlight-(Java)|Floodlight]]
+* '''Python''': [[onstutorial#Controller-Choice:-POX-(Python)|POX]],-[[onstutorial#Controller-Choice:-Ryu-(Python)|Ryu]],-[[onstutorial#Controller-Choice:-NOX-w/Python|NOX (Deprecated)]]
 * '''Ruby''': [[onstutorial#Controller-Choice:-Trema-(Ruby)|Trema]]
 
 ==Controller Choice: POX (Python) ==
