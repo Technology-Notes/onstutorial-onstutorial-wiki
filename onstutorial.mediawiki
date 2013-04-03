@@ -149,7 +149,7 @@ You may also be able to simply double-click the .ovf file to open it up in your 
 
 This step will take a while - the unpacked image is about 3 GB.
 
-* '''Continue with [[onstutorial.mediawiki#Finish-VM-Setup|Finish VM Setup]] below.'''
+* '''Continue with [[onstutorial#Finish-VM-Setup|Finish VM Setup]] below.'''
 
 
 '''Note: If you downloaded the older .zip archive instead of the .ovf image, setup requires a few more steps:'''
@@ -180,7 +180,7 @@ Select your VM and go to the Settings Tab. Go to Network->Adapter 2. Select the 
 
 At that point you should be ready to start your VM. Press the "Start" arrow icon or double-click your VM within the VirtualBox window. 
 
-In the VM console window, log in with the [[onstutorial.mediawiki#Download-Files|user name and password]] for your VM.
+In the VM console window, log in with the [[onstutorial#Download-Files|user name and password]] for your VM.
 
 Note that this user is a sudoer, so you can execute commands with root permissions by typing <tt>sudo ''command''</tt>, where <tt>''command''</tt> is the command you wish to execute with root permission.
 
@@ -251,11 +251,11 @@ Note the IP address (probably the 192.168 one) for the '''host-only''' network; 
 Open a terminal (Terminal.app in Mac, Gnome terminal in Ubuntu, etc).  In that terminal, run:
  $ ssh -X [user]@[Guest IP Here]
 
-Replace [user] with the correct [[onstutorial.mediawiki#Download-Files|user name]] for your VM image.
+Replace [user] with the correct [[onstutorial#Download-Files|user name]] for your VM image.
 
 Replace [Guest IP Here] with the IP you just noted. If ssh does not connect, make sure that you can ping the IP address you are connecting to.
 
-Enter the [[onstutorial.mediawiki#Download-Files|password]] for your VM image.  Next, try starting up an X terminal using
+Enter the [[onstutorial#Download-Files|password]] for your VM image.  Next, try starting up an X terminal using
  $ xterm
 
 and a new terminal window should appear.  If you have succeeded, you are done with the basic setup.  Close the xterm.  If you get a 'xterm: DISPLAY is not set error', verify your X server installation from above.
@@ -302,7 +302,7 @@ If the xterm window does not appear, or if you get an error like "xterm:  DISPLA
 
 As an alternative to running X11 on your host machine, you may find it
 useful or convenient to install X11 into the VM itself. To install X11 
-and a simple window manager, log in to the '''VM console window''' - ''not'' via an ssh session! - using the correct [[onstutorial.mediawiki#Download-Files|user name and password]] for your VM, and type:
+and a simple window manager, log in to the '''VM console window''' - ''not'' via an ssh session! - using the correct [[onstutorial#Download-Files|user name and password]] for your VM, and type:
  $ sudo apt-get install xinit flwm
 
 At this point, you should be able to start an X11 session in the VM console window
@@ -577,9 +577,9 @@ Later, you'll turn this into a flow-based switch, where seeing a packet with a k
 
 For this tutorial you will need to choose a controller platform to build on top of.  The best option is likely the controller written in the language you are most familiar with.  Plus, after making your controller, rewriting it on another controller platform should go quickly and be a useful exercise.  Your options are:
 
-* '''Java''': [[onstutorial.mediawiki#Controller-Choice:-Beacon-(Java)|Beacon]],-[[#Controller-Choice:-Floodlight-(Java)|Floodlight]]
-* '''Python''': [[onstutorial.mediawiki#Controller-Choice:-POX-(Python)|POX]],-[[#Controller-Choice:-Ryu-(Python)|Ryu]],-[[#Controller-Choice:-NOX-w/Python|NOX (Deprecated)]]
-* '''Ruby''': [[onstutorial.mediawiki#Controller-Choice:-Trema-(Ruby)|Trema]]
+* '''Java''': [[onstutorial#Controller-Choice:-Beacon-(Java)|Beacon]],-[[#Controller-Choice:-Floodlight-(Java)|Floodlight]]
+* '''Python''': [[onstutorial#Controller-Choice:-POX-(Python)|POX]],-[[#Controller-Choice:-Ryu-(Python)|Ryu]],-[[#Controller-Choice:-NOX-w/Python|NOX (Deprecated)]]
+* '''Ruby''': [[onstutorial#Controller-Choice:-Trema-(Ruby)|Trema]]
 
 ==Controller Choice: POX (Python) ==
 
@@ -951,9 +951,9 @@ Go to Eclipse and stop Beacon (you should see a square, red button in the consol
 
 '''NOTE : You can run only one controller at the same time (otherwise you'll get a port conflict). Make sure that you stop any running instance of Beacon before you start another one. With Eclipse this might be tricky. To check the running programs open the Debug perspective (Window->Open Perspective->Debug). On the top-left corner you can see the running programs, click on it then hit the red square to terminate the redundant ones...'''
 
-{| class="wikitable"
-| [[images/Eclipse_console_stop.png|none|thumb|200px]]
-| [[images/Eclipse_debug_stop.png|none|thumb|200px]]
+{| style="color:black; background-color:#ffffff;" cellpadding="10" cellspacing="0" border="1"
+| [[images/Eclipse_console_stop.png|width=200px]]
+| [[images/Eclipse_debug_stop.png|width=200px]]
 |}
 
 The file you'll modify is '''net.beaconcontroller.tutorial/src/main/java/net/beaconcontroller/tutorial/LearningSwitchTutorial.java'''.  Find this file in the left pane of Eclipse and double-click it to open it in the editor window.
@@ -1436,7 +1436,7 @@ Ideally, you shouldn't write any code for this experiment. You will have to form
 
 Here is the topology that we will use:
 
-[[images/Virtualized_layout_detail.png|center|thumb|500px]]
+[[images/Virtualized_layout_detail.png|align=center|width=500px]]
 
 
 
@@ -1758,7 +1758,7 @@ Note: you will need to install additional stuff to get the old regression tests 
 The OpenFlow reference distribution includes a set of tests to verify that an OpenFlow switch correctly sends and receives packets.  In this section, you'll run through some of the "Black Box" tests, where the regression switch acts as a controller and verifies that a switch responds properly to OpenFlow messages, as well as properly forwards packets sent to the input ports of the switch.  The Black Box regression tests use this layout:
 
 
-[[Image:Regression_tests.png]]
+[[images/Regression_tests.png]]
  
 
 First, exit from the Mininet console:
@@ -1987,7 +1987,7 @@ The three values you added above should be shown.
 Save your network settings for future reboots, by powering down the VM, from the VM window:
  sudo poweroff
 
-Restart the OpenFlowTutorial VM once again, by clicking 'Start' at the top of VirtualBox.  Login again with the correct [[onstutorial.mediawiki#Download-Files|user name and password]].  
+Restart the OpenFlowTutorial VM once again, by clicking 'Start' at the top of VirtualBox.  Login again with the correct [[onstutorial#Download-Files|user name and password]].  
 
 '''Windows Users''' You may need to change the VM configuration.  Edit  /etc/network/interfaces.  Check that it says:
  allow hot-plug eth1
@@ -1998,8 +1998,8 @@ If it says eth0, change it to eth1; note that to write the file you'll need to u
 
 === Mac OS X and Linux ===
 To SSH from the local machine to the VM, on the local machine run:
- ssh -Y -l [[onstutorial.mediawiki#Download-Files|<user name>]] -p 2222 localhost
-with the correct [[onstutorial.mediawiki#Download-Files|user name and password]].  Test the X11 forwarding by running on the local machine:
+ ssh -Y -l [[onstutorial#Download-Files|<user name>]] -p 2222 localhost
+with the correct [[onstutorial#Download-Files|user name and password]].  Test the X11 forwarding by running on the local machine:
  xterm
 and a new terminal window should appear.  If you have succeeded, you are done with the basic setup.  Close the xterm.
 
@@ -2016,7 +2016,7 @@ A new window will pop up; type in the password.  Now, type:
  xterm
 A white terminal window should appear. If you have succeeded, you are done with the basic setup. Close the xterm.
 
-Make sure you use the correct [[onstutorial.mediawiki#Download-Files|user name and password]] for your VM image.
+Make sure you use the correct [[onstutorial#Download-Files|user name and password]] for your VM image.
 
 <!--
 
