@@ -69,8 +69,7 @@ If you have another preferred text editor, feel free to install it now:
  $ sudo apt-get install <editor>
 
 === Command Prompt Notes ===
- 
-<font color=red> In this tutorial, commands are shown along with a command prompt to indicate what subsystem they are intended for </font>. For example, 
+<font color=red>In this tutorial, commands are shown along with a command prompt to indicate what subsystem they are intended for </font>. For example, 
 
  $ ls
 
