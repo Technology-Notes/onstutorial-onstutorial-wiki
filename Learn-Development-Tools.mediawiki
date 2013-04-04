@@ -142,7 +142,7 @@ Now, set up a filter for OpenFlow control traffic, by typing 'of' in Filter box 
 
 Press the apply button to apply the filter to all recorded traffic.
 
-== Start Controller and view Startup messages in Wireshark ==
+== Start Controller and View Startup Messages in Wireshark ==
 
 Now, with the Wireshark dissector listening, start the OpenFlow reference controller.
 In your SSH terminal:
