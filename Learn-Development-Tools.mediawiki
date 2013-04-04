@@ -79,7 +79,7 @@ Mininet has loads of other commands and startup options to help with debugging, 
 == dpctl Example Usage ==
 '''dpctl''' is a utility that comes with the OpenFlow reference distribution and enables visibility and control over a single switch's flow table.  It is especially useful for debugging, by viewing flow state and flow counters.  Most OpenFlow switches can start up with a passive listening port (in your current setup this is 6634), from which you can poll the switch, without having to add debugging code to the controller.
 
-Create a second SSH window if you don't already have one, and run:
+'''Create a second SSH window if you don't already have one''', and run:
  $ dpctl show tcp:127.0.0.1:6634
 
 The 'show' command connects to the switch and dumps out its port state and capabilities.
@@ -112,23 +112,23 @@ Run the ping command again. In your mininet console:
 
 Do you get replies now? Check the flow-table again and look the statistics for each flow entry. Is this what you expected to see based on the ping traffic?
 
-'''NOTE''': if you didn't see any ping replies coming through, it might be the case that the flow-entries expired before you start your ping test. When you do a "dpctl dump-flows" you can see an "idle_timeout" option for each entry, which defaults to 60s. This means that the flow will expire after 60secs if there is no incoming traffic. Run again respecting this limit, or install a flow-entry with longer timeout.
+'''NOTE''': if you didn't see any ping replies coming through, it might be the case that the flow-entries expired before you start your ping test. When you do a "dpctl dump-flows" you can see an "idle_timeout" option for each entry, which defaults to 60 seconds. This means that the flow will expire after 60 seconds if there is no incoming traffic. Run again respecting this limit, or install a flow-entry with longer timeout.
  $ dpctl add-flow tcp:127.0.0.1:6634 in_port=1,idle_timeout=120,actions=output:2
 
 == Start Wireshark ==
 
 The VM image includes the OpenFlow Wireshark dissector pre-installed.  Wireshark is extremely useful for watching OpenFlow protocol messages, as well as general debugging.  
 
-Start a new SSH terminal and connect to the VM with X11 forwarding. 
+'''Start a new SSH terminal''' and connect to the VM with X11 forwarding. 
 
-(Reminder: here are the command-line commands to do so:
+As a friendly reminder, here are the command-line commands to do so:
 
 If you're using MAC OS X or Linux, enter:
  $ ssh -X openflow@[guest ip address]
 If you're using putty.exe from the Windows command-lineshell, enter:
  C:> putty.exe -X openflow@[guest ip address]
 
-If you're using putty's GUI, make sure X11 forwarding is enabled.)
+If you're using putty's GUI, make sure X11 forwarding is enabled.
 
 Now open Wireshark:
  $ sudo wireshark &
