@@ -245,91 +245,23 @@ Now, skip ahead to Testing Your Controller below.
 == Controller Choice: Beacon (Java) ==
 Beacon is a Java-based OpenFlow controller platform.  For more details and tutorials see the [[Beacon Homepage|http://www.beaconcontroller.net]]. 
 
-Beacon is very easily developed using the Eclipse Integrated Development Environment which runs on any operating system (OS).
-
-'''<span style="color:red">Therefore, for this tutorial you will you need to download Beacon and run Eclipse on your host machine, rather than inside the Mininet virtual machine.</span>'''
-
-The next section will help you do that.
-
-=== Setting up a Beacon Development Environment ===
-
-This section is a modified copy of the [[original|https://openflow.stanford.edu/display/Beacon/Quick+Start]] Beacon quick-start guide.
-
-==== Prerequisites ====
-
-You will need the following installed in your '''host machine''' :
-
-* [[Java 6 JDK & JRE|http://java.sun.com/javase/downloads/widget/jdk6.jsp]] (Java 7 JDK is fine on OSX)
-
-Next, download the Beacon tutorial package for your '''host machine's operating system''', the file names begin with beacon-tutorial-eclipse:
-
-* [[Tutorial Packages|https://openflow.stanford.edu/static/beacon/releases/1.0.2/]]
-
-After the download is complete extract it to your desktop, or somewhere else that is convenient. For guide purposes, the folder you extracted it to will be referred to by [path to]/beacon-tutorial-1.0.2
-
-==== Setup ====
-Launch Eclipse by running the eclipse executable inside [path to]/beacon-tutorial-1.0.2/eclipse/
-
-(Optional) Create a new Eclipse workspace if you are not starting from a fresh Eclipse install
-
-* File -> Switch Workspace -> Other, pick a new folder to host the workspace
-
-Set Eclipse's compliance level to 1.6
-
-* Window (or Eclipse for MAC) -> Preferences -> Java -> Compiler then under JDK Compliance, change Compiler compliance level to 1.6.
-
-Import Beacon and OpenFlowJ projects
-
-* File -> Import -> General -> Existing Projects into Workspace, Select [path to]/beacon-tutorial-1.0.2/beacon-tutorial-1.0.2/src as the root directory, click ok, then select all the projects, ensure copy projects into workspace is not checked and click finish.
-
-'''''Note at this point you will see many Java errors, the libraries Beacon depends on will be installed in the next step which will resolve the errors, do not panic!'''''
-
-Set the target (download libraries)
-
-* Open the Beacon Main Target project, double click the main-local.target file.
-* Click Set as Target Platform in the top right corner of the main.target window. (Note if you click before it has been resolved, you will receive an error). Wait a few seconds, at this point all compilation errors should be gone.
-
-Import the Beacon code style settings
-
-* Click Window -> Preferences. Then in the left column click Java -> Code Style -> Formatter, then click the Import button, and select [path to]/beacon-tutorial-1.0.2/src/beacon-1.0.2/beacon_style_settings.xml and hit ok, then ensure the Active profile is Beacon.
-
-That's it! Your Beacon controller is ready to rock'n'roll.
+==== Start Eclipse ====
+Start Eclipse by double clicking the Eclipse shortcut on the desktop.
 
 === Running the Tutorial Controller ===
 
-Back in your VM, We're not going to be using the reference controller anymore, which is running in the background (do 'ps -A | grep controller' if you're unsure). 
-
-The switches are all trying to connect to a controller, and will increase the period of their attempts to contact the controller, up to a maximum of 15 seconds.  Since the OpenFlow switch has not connected yet, this delay may be anything between 0 and 15 seconds.   If this is too long to wait, the switch can be configured  to wait no more than N seconds using the --max-backoff parameter.
-
-Make sure the reference controller used before is not running:
+Make sure the reference controller used before is not running, run the following in a terminal:
  $ sudo killall controller
-
-You will need to tell the Mininet virtual switches to connect to your host machine's IP address.  To get that, from your Mininet ssh window run the command sudo route:
-
- openflow@openflowtutorial:~$ sudo route
- Kernel IP routing table
- Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
- 192.168.206.0   *               255.255.255.0   U     0      0        0 eth0
- default         192.168.206.2   0.0.0.0         UG    0      0        0 eth0
-
-Look for the line that starts with default, and typically your host's IP address will be the IP in the Gateway column.  If that IP address ends with .1, and later you are unable to connect Mininet to Beacon, try the same IP but swapping the ending .1 with .2.
 
 You should also restart Mininet to make sure that everything is "clean". From your Mininet console:
  mininet> exit
- $ sudo mn --topo single,3 --mac --switch ovsk --controller remote,ip=<your_host_ip>
+ $ sudo mn --topo single,3 --mac --switch ovsk --controller remote
 
 Make sure you do not add extra spaces around the comma.
 
-Note: The above syntax is for Mininet 2.0 - for Mininet 1.0, use the following syntax instead:
- $ sudo mn --topo single,3 --mac --switch ovsk --controller remote --ip <your_host_ip>
+Now it's time to start Beacon in Debug mode.
 
-The ip parameter defines in which IP your controller is located. Note that this is the IP your host uses to communicate with the VM, as discussed above. In my case, the VM's IP is 192.168.206.4 and the host's IP is 192.168.206.2 . Thus, I started mininet using
- $ sudo mn --topo single,3 --mac --switch ovsk --controller remote,ip=192.168.206.2
-
-
-Now it's time to start Beacon. 
-
-Launching Beacon from Eclipse in debug mode
+Within Eclipse do the following:
 
 * Run -> Debug Configurations
 * Look for the OSGi Framework on the left, expand its children and select 'beacon Tutorial LearningSwitch', then click Debug.
