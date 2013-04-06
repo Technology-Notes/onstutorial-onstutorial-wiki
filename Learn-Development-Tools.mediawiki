@@ -4,9 +4,8 @@ In this section, you'll bring up the development environment.  In the process, y
 
 Let's define some terminology, starting with terminal types:
 
-* '''VirtualBox''' console terminal: connects to OpenFlowTutorial.  This is the one created when you started up the VM.  You can't copy and paste from this tutorial page to the console terminal, so it's a bit of a pain.  '''Minimize this NOW, if you haven't already done so'''.  Once you've used it to set up networking, it won't be needed.
 
-* '''SSH''' terminal: connects to OpenFlowTutorial.  Created by using putty on Windows or SSH on OS X / Linux, as described in the previous section.  Copy and paste should work on this terminal.
+* terminal: Created by launching a terminal in the VM.
 
 * '''xterm''' terminal: connects to a host in the virtual network.  Created in the next section when you start up the virtual network.  Will be labeled at the top with the name of the host.
 
@@ -36,7 +35,7 @@ The network you'll use for the first exercise includes 3 hosts and a switch (and
 
 [[images/Three_switch_layout_simple.png]]
 
-To create this network in the VM, in an SSH terminal, enter:
+To create this network in the VM, in a terminal, enter:
  $ sudo mn --topo single,3 --mac --switch ovsk --controller remote
 
 This tells Mininet to start up a 3-host, single-(openvSwitch-based)switch topology, set the MAC address of each host equal to its IP, and point to a remote controller which defaults to the localhost.
@@ -72,14 +71,14 @@ If Mininet is not working correctly (or has crashed and needs to be restarted), 
 
 and running Mininet again. 
 
-<font color=red> NB: The prompt <code> mininet> </code> is for Mininet console, <code> $ </code> is for SSH terminal (normal user) and <code> # </code> is for SSH terminal (root user) </font> (See  [[Command Prompt Notes|http://www.openflow.org/wk/index.php/OpenFlow_Tutorial#Command_Prompt_Notes]]).  Hereafter we follow with this rule.
+<font color=red> NB: The prompt <code> mininet> </code> is for Mininet console, <code> $ </code> is for terminal (normal user) and <code> # </code> is for terminal (root user) </font> (See  [[Command Prompt Notes|http://www.openflow.org/wk/index.php/OpenFlow_Tutorial#Command_Prompt_Notes]]).  Hereafter we follow with this rule.
 
 Mininet has loads of other commands and startup options to help with debugging, and this brief starter should be sufficient for the tutorial.  If you're curious about other options, follow the [[Mininet Walkthrough|http://www.openflowswitch.org/foswiki/bin/view/OpenFlow/MininetWalkthrough]] after the main tutorial.
 
 == dpctl Example Usage ==
 '''dpctl''' is a utility that comes with the OpenFlow reference distribution and enables visibility and control over a single switch's flow table.  It is especially useful for debugging, by viewing flow state and flow counters.  Most OpenFlow switches can start up with a passive listening port (in your current setup this is 6634), from which you can poll the switch, without having to add debugging code to the controller.
 
-'''Create a second SSH window if you don't already have one''', and run:
+'''Create a second terminal if you don't already have one''', and run:
  $ dpctl show tcp:127.0.0.1:6634
 
 The 'show' command connects to the switch and dumps out its port state and capabilities.
@@ -100,11 +99,11 @@ Do you get any replies? Why? Why not?
 
 As you saw before, switch flow table is empty. Besides that, there is no controller connected to the switch and therefore the switch doesn't know what to do with incoming traffic, leading to ping failure.
 
-You'll use dpctl to manually install the necessary flows. In your SSH terminal:
+You'll use dpctl to manually install the necessary flows. In your terminal:
  $ dpctl add-flow tcp:127.0.0.1:6634 in_port=1,actions=output:2
  $ dpctl add-flow tcp:127.0.0.1:6634 in_port=2,actions=output:1
 
-This will forward packets coming at port 1 to port 2 and vice-verca. Verify by checking the flow-table
+This will forward packets coming at port 1 to port 2 and vice versa. Verify by checking the flow-table
  $ dpctl dump-flows tcp:127.0.0.1:6634
 
 Run the ping command again. In your mininet console:
@@ -119,21 +118,7 @@ Do you get replies now? Check the flow-table again and look the statistics for e
 
 The VM image includes the OpenFlow Wireshark dissector pre-installed.  Wireshark is extremely useful for watching OpenFlow protocol messages, as well as general debugging.  
 
-'''Start a new SSH terminal''' and connect to the VM with X11 forwarding. 
-
-As a friendly reminder, here are the command-line commands to do so:
-
-If you're using MAC OS X or Linux, enter:
- $ ssh -X openflow@[guest ip address]
-If you're using putty.exe from the Windows command-lineshell, enter:
- C:> putty.exe -X openflow@[guest ip address]
-
-If you're using putty's GUI, make sure X11 forwarding is enabled.
-
-Now open Wireshark:
- $ sudo wireshark &
-
-You'll probably get a warning message for using wireshark with root access. Press OK.
+Double click on the Wireshark shortcut on the desktop to launch Wireshark.
 
 Click on Capture->Interfaces in the menu bar.  Click on the Start button next to 'lo', the loopback interface.  You may see some packets going by.
 
@@ -152,6 +137,8 @@ This starts a simple controller that acts as a learning switch without installin
 You should see a bunch of messages displayed in Wireshark, from the Hello exchange onwards.  As an example, click on the Features Reply message.  Click on the triangle by the 'OpenFlow Protocol' line in the center section to expand the message fields.  Click the triangle by Switch Features to display datapath capabilities - feel free to explore.
 
 These messages include:
+
+<font color=red>''' TODO: I didn't see anything other than hello and echo req/response '''</font>
 
 {| style="color:black; background-color:#ffffff;" cellpadding="10" cellspacing="0" border="1"
 |Message
@@ -252,8 +239,13 @@ Start the same Mininet with the user-space switch:
 Run one more iperf test with the reference controller:
  mininet> iperf
 
+<font color=red>''' This never worked for me, I got a string of "waiting for iperf to start up...".  Also does this actually add much to the tutorial? '''</font>
+
 See a difference?  With the user-space switch, packets must cross from user-space to kernel-space and back on every hop, rather than staying in the kernel as they go through the switch.  The user-space switch is easier to modify (no kernel oops'es to deal with), but slower for simulation.
 
 Exit Mininet:
  mininet> exit
 
+== Stop the controller ==
+
+Click the terminal running the controller, then on your keyboard press ctl-c to stop it.
