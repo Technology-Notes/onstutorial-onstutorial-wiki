@@ -275,18 +275,20 @@ Wait until the application indicates that the OpenFlow switch has connected.  Wh
 === Verify Hub Behavior with tcpdump ===
 
 Now we verify that hosts can ping each other, and that all hosts see the exact same traffic - the behavior of a hub.  To do this, we'll create xterms for each host, and view the traffic in each.  In the Mininet console, start up three xterms:
- mininet> xterm h2 h3 h4
+ mininet> xterm h1 h2 h3
+
+<font color=red>''' TODO: These xterm windows are not named properly, the .bashrc command prompt is overwriting the title '''</font>
 
 Arrange each xterm so that they're all on the screen at once.  This may require reducing the height of to fit a cramped laptop screen.
 
-In the xterms for h3 and h4, run tcpdump, a utility to print the packets seen by a host:
- # tcpdump -XX -n -i h3-eth0
+In the xterms for h2 and h3, run tcpdump, a utility to print the packets seen by a host:
+ # tcpdump -XX -n -i h2-eth0
 
 and respectively:
- # tcpdump -XX -n -i h4-eth0
+ # tcpdump -XX -n -i h3-eth0
 
-In the xterm for h2, send a ping:
- # ping -c1 10.0.0.3
+In the xterm for h1, send a ping:
+ # ping -c1 10.0.0.2
 
 The ping packets are now going up to the controller, which then floods them out all interfaces except the sending one.   You should see identical ARP and ICMP packets corresponding to the ping in both xterms running tcpdump.
 
