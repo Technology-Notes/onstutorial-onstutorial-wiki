@@ -98,7 +98,7 @@ API documentation is available for both Beacon's classes and the general Java cl
 
 Each time you change and save the LearningSwitchTutorial file, make sure to stop and start your running instance, then use pings to verify hub or Ethernet learning switch behavior.  Hosts that are not the destination should display no tcpdump traffic after the initial broadcast ARP request.
 
-There is a significant number of comments in the LearningSwitchTutorial file to help you create the proper functionality, and tips provided in the subsequent sections of this tutorial ('''read these!''').  At a high level there are two phases of work for you to do:
+There is a significant number of comments in the LearningSwitchTutorial file to help you create the proper functionality, and tips provided in the subsequent sections of this tutorial ('''read these!''').  At a high level there are two phases of work, and two optional (and independent) extra credit sections:
 
 ==== Phase 1 ====
 ----
@@ -220,14 +220,14 @@ At the end of phase 2, when pinging and viewing the controller traffic in Wiresh
 * Switch to your Wireshark view.  You should see an initial Packet In/Out for the first ARP request where the switch does not know where the destination is at.  All subsequent Packet Ins should have a corresponding Flow Mod, but no Packet Out.  An example can be seen in the following screenshot:
 [[images/phase1-test2.png]]
 
-== Support Multiple Switches ==
-
-Your controller so far has only had to support a single switch, with a single MAC table.  In this section, you'll extend it to support multiple switches.
+==== Extra Credit 1 ====
+----
+===== Extra Credit 1 - Overview =====
+Your learning switch so far only supports a single switch, with a single MAC table.  In this section, you'll extend it to support multiple switches.
 
 Start mininet with a different topology.  In the Mininet console:
  mininet> exit
  $ sudo mn --topo linear --switch ovsk --controller remote
-
 
 Your created topology looks like this:
 
@@ -237,18 +237,27 @@ Your created topology looks like this:
 
 This will create a 2-switch topology where each switch has a single connected host.
 
-Now, modify your switch so that it stores a MAC-to-port table for each DPID.  This strategy only works on spanning tree networks, and the delay for setting up new paths between far-away hosts is proportional to the number of switches between them.  Other modules could act smarter. For example, one can maintain an all-pairs shortest path data structure and immediately push down all flow entries needed to previously-seen sources and destinations. This is out-of-scope for this assignment.
+* Modify the application to have a unique MAC table for each connected switch
 
-After the mods, to verify that your controller works, in the Mininet console, run:
+===== Extra Credit 1 - Tips =====
+* Change the existing single Map macTable to a Map of macTables, indexed by the switch.
+<dl><dd><pre>
+    protected Map<IOFSwitch, Map<Long,Short>> macTables =
+        new HashMap<IOFSwitch, Map<Long,Short>>();
+</pre></dd></dl>
+* You will need to create a macTable once for each switch, and store it into the macTables Map.  One good place to do this is in the ''addedSwitch'' method, which is called once when a new switch connects.
+* In the ''forwardAsLearningSwitch'' method you will need to retrieve the proper macTable to use for the current ''OFPacketIn'', use the ''sw'' object as the key to retrieve it.
+
+===== Extra Credit 1 - Testing =====
+* Start Beacon
+* Start Wireshark and turn on its capturing
+* Start Mininet
+ $ sudo mn --topo linear --switch ovsk --controller remote
+* Wait for Beacon's console to report the switches have connected
+* Run the pingall test
  mininet> pingall
-
-Congratulations on getting this far.  If you are doing this as part of the CS244 assignment, you are done! 
-
-
-If you want to continue, you have three options:
-* run your code over real networking gear (if you are on a live tutorial)
-* add layer-3 forwarding capabilities to your switch
-* add firewall capabilities to your switch
-
-Proceed to the section you prefer.
-
+* Check that the pings were successful
+ *** Ping: testing ping reachability
+ h1 -> h2 
+ h2 -> h1 
+ *** Results: 0% dropped (0/2 lost)
