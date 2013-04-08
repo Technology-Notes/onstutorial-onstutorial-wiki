@@ -182,7 +182,34 @@ At the end of phase 2, when pinging and viewing the controller traffic in Wiresh
 
 == Testing Your Controller ==
 
-Once you have completed both Phases 1 and 2 you can start a ping and using dpctl to verify the flows exist and check their counters.  Another indicator is that pings after the first complete much faster, because they are not passing through the controller.  You can also verify this behavior by running iperf in Mininet and checking that only initial packet-in messages are sent.  The reported iperf bandwidth should be much higher as well, and should match the number you got when using the reference learning switch controller earlier.
+To test your controller-based Ethernet switch, first verify that when all packets arrive at the controller, only broadcast packets (like ARPs) and packets with unknown destination locations (like the first packet sent for a flow) go out all non-input ports.  You can do this with tcpdump running on an xterm for each host.
+
+Once the switch no longer has hub behavior, work to push down a flow when the source and destination ports are known.  You can use dpctl to verify the flow counters, and if subsequent pings complete much faster, you'll know that they're not passing through the controller.  You can also verify this behavior by running iperf in Mininet and checking that no OpenFlow packet-in messages are getting sent.  The reported iperf bandwidth should be much higher as well, and should match the number you got when using the reference learning switch controller earlier.
+
+== Support Multiple Switches ==
+
+Your controller so far has only had to support a single switch, with a single MAC table.  In this section, you'll extend it to support multiple switches.
+
+Start mininet with a different topology.  In the Mininet console:
+ mininet> exit
+ $ sudo mn --topo linear --switch ovsk --controller remote
+
+
+Your created topology looks like this:
+
+
+[[images/Linear2.png]]
+
+
+This will create a 2-switch topology where each switch has a single connected host.
+
+Now, modify your switch so that it stores a MAC-to-port table for each DPID.  This strategy only works on spanning tree networks, and the delay for setting up new paths between far-away hosts is proportional to the number of switches between them.  Other modules could act smarter. For example, one can maintain an all-pairs shortest path data structure and immediately push down all flow entries needed to previously-seen sources and destinations. This is out-of-scope for this assignment.
+
+After the mods, to verify that your controller works, in the Mininet console, run:
+ mininet> pingall
+
+Congratulations on getting this far.  If you are doing this as part of the CS244 assignment, you are done! 
+
 
 If you want to continue, you have three options:
 * run your code over real networking gear (if you are on a live tutorial)
