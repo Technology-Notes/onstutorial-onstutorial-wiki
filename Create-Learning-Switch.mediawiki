@@ -41,8 +41,6 @@ Wait until the application indicates that the OpenFlow switch has connected.  Wh
 Now we verify that hosts can ping each other, and that all hosts see the exact same traffic - the behavior of a hub.  To do this, we'll create xterms for each host, and view the traffic in each.  In the Mininet console, start up three xterms:
  mininet> xterm h1 h2 h3
 
-<font color=red>''' TODO: These xterm windows are not named properly, the .bashrc command prompt is overwriting the title '''</font>
-
 Arrange each xterm so that they're all on the screen at once.  This may require reducing the height of to fit a cramped laptop screen.
 
 In the xterms for h2 and h3, run tcpdump, a utility to print the packets seen by a host:
