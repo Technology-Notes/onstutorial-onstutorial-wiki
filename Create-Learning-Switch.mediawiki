@@ -92,11 +92,13 @@ Take a quick look through the file, the key things to notice:
 * The forwardAsHub method behaves as a broadcast hub, and has code that gives you an example of how to send an OFPacketOut message.
 * The forwardAsLearningSwitch method is where you will be writing all of your code (with the exception of the receive method mentioned earlier).  It should take you around 30 lines of code in this method to implement a learning switch.
 
-Wireshark will be very useful to you in getting your code working.  Try starting Beacon and doing some pings with Mininet while capturing with Wireshark.  You should see OFPacketIn and OFPacketOut messages, and if you explore the OFPacketOut messages you should see their action is to flood.
+Use Wireshark to inspect the packets sent and received by your controller to help debug your code.
+
+API documentation is available for both Beacon's classes and the general Java classes, look for the shortcuts on your desktop to launch a browser to view these.
 
 Each time you change and save the LearningSwitchTutorial file, make sure to stop and start your running instance, then use pings to verify hub or Ethernet learning switch behavior.  Hosts that are not the destination should display no tcpdump traffic after the initial broadcast ARP request.
 
-There is a significant number of comments in the LearningSwitchTutorial file to help you create the proper functionality, and tips provided in the subsequent sections of this tutorial ('''read these!''').  At a high level there are two phases of work for you to do.
+There is a significant number of comments in the LearningSwitchTutorial file to help you create the proper functionality, and tips provided in the subsequent sections of this tutorial ('''read these!''').  At a high level there are two phases of work for you to do:
 
 ==== Phase 1 ====
 ----
@@ -129,6 +131,11 @@ log.debug("Your message here")
  Ethernet.toLong(match.getDataLayerSource())
 </pre></dd></dl>
 
+* You can also convert a byte[] to a String for easy logging:
+<dl><dd><pre>
+log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
+</pre></dd></dl>
+
 * To check for an element in your HashMap:
 <dl><dd><pre>
  if (macTable.containsKey(mac_address_key)) {
@@ -150,43 +157,28 @@ log.debug("Your message here")
 At the end of phase 2, when pinging and viewing the controller traffic in Wireshark you should see an initial OFPacketOut that floods for the request/response, then an OFFlodMod being sent for both request/response, then no further traffic for the same ping.
 
 ===== Tips =====
-
-=== Learning Java and Beacon ===
-
-Here are a few Java tips you might find useful down the road.
-
-
-To convert a MAC address in a byte[] to a Long:
- Ethernet.toLong(match.getDataLayerSource()/match.getDataLayerDestination())
-
-To print a debug message in Beacon:
- log.debug("Learned new MAC!")
-
-You can change the logging level using info or error instead of debug.
-
-The subsections below give details about a few Beacon Classes that should prove useful in the exercise.
-
-=== Useful Beacon Classes ===
-
-In your beacon-tutorial-1.0.2 directory, there is an apidocs folder which contains Javadoc documentation for all essential classes in this assignment.
-Open your browser and point to [your beacon-tutorial-1.0.2 directory]/apidocs/index.html and look for the classes mentioned below, which should help while implementing your code.
-
-To send a message to an OpenFlow switch, look at IOFSwitch class. The starter forward_as_hub function sends packets out using:
- sw.getOutputStream().write(po);
-
-
-Down the road, you may want to print a mac address, or use it as a key to a HashMap. OFMatch will give you the address as a byte array. Use the functions/classes below in case needed:
- HexString.toHexString(byte[] bytes) // Convert a string of bytes to a ':' separated hex string
- Long mac_address_key = Ethernet.toLong(byte array); // Creates a Long key from a byte array.
-
-Finally, at some  point you will have to install a flow in the network. Use OFFlowMod and OFActionOutput to do that. Here is a way to initialize a flow-mod message for a specific switch:
+* To install a flow in the network you will create an ''OFFlowMod'' object:
+<dl><dd><pre>
  OFFlowMod fm = new OFFlowMod();
+</pre></dd></dl>
 
-Use the appropriate setters to construct the flow-mod you need. Assuming you know the outgoing port for this flow, this is a snippet on how to include this in your flow-mod message:
+* Before you can send the ''OFFlowMod'' to the switch you will need to initialize the following fields of the object:
+** buffer id - Retrieve this from the ''OFPacketIn''
+** match - You created this in Phase 1
+** command - Add, OFFlowMod.OFPFC_ADD
+** idle timeout - 5 seconds
+** actions - See the next Tip
+
+* You ''OFFlowMod'' when matched should output to the port learned for this destination, use the snippet below to create the action and set it on the ''OFFlowMod'' instance:
+<dl><dd><pre>
  OFActionOutput action = new OFActionOutput(outPort);
  fm.setActions(Collections.singletonList((OFAction)action));
+</pre></dd></dl>
 
-Now, skip ahead to Testing Your Controller below.
+* To send a message to an OpenFlow switch do the following:
+<dl><dd><pre>
+ sw.getOutputStream().write(po);
+</pre></dd></dl>
 
 == Testing Your Controller ==
 
