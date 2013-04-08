@@ -156,6 +156,13 @@ log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
 * Wait for Beacon's console to report the switch has connected
 * Send a single ping from h1 to h2 
  mininet> h1 ping -c1 h2
+* Check that the ping was successful
+ PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+ 64 bytes from 10.0.0.2: icmp_req=1 ttl=64 time=1.68 ms
+
+ --- 10.0.0.2 ping statistics ---
+ 1 packets transmitted, 1 received, 0% packet loss, time 0ms
+ rtt min/avg/max/mdev = 1.683/1.683/1.683/0.000 ms
 
 * Switch to your Wireshark view, find the first Packet Out in the top pane, select it, then expand the OpenFlow Protocol section at the bottom until you get to the Action's output port.  The first Packet Out's output port should be Flood, as seen in this screenshot:
 [[images/phase1-test1.png]]
@@ -165,12 +172,12 @@ log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
 
 ==== Phase 2 ====
 ----
-===== Overview =====
+===== Phase 2 - Overview =====
 * If the destination port is known, instead of sending an OFPacketOut, send an OFFlowMod so that subsequent pings are matched on the switch.
 
 At the end of phase 2, when pinging and viewing the controller traffic in Wireshark you should see an initial OFPacketOut that floods for the request/response, then an OFFlodMod being sent for both request/response, then no further traffic for the same ping.
 
-===== Tips =====
+===== Phase 2 - Tips =====
 * To install a flow in the network you will create an ''OFFlowMod'' object:
 <dl><dd><pre>
  OFFlowMod fm = new OFFlowMod();
@@ -194,11 +201,24 @@ At the end of phase 2, when pinging and viewing the controller traffic in Wiresh
  sw.getOutputStream().write(po);
 </pre></dd></dl>
 
-== Testing Your Controller ==
+===== Phase 2 - Testing =====
+* Start Beacon
+* Start Wireshark and turn on its capturing
+* Start Mininet
+ $ sudo mn --topo single,2 --switch ovsk --controller remote
+* Wait for Beacon's console to report the switch has connected
+* Send a single ping from h1 to h2 
+ mininet> h1 ping -c1 h2
+* Check that the ping was successful
+ PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+ 64 bytes from 10.0.0.2: icmp_req=1 ttl=64 time=1.68 ms
 
-To test your controller-based Ethernet switch, first verify that when all packets arrive at the controller, only broadcast packets (like ARPs) and packets with unknown destination locations (like the first packet sent for a flow) go out all non-input ports.  You can do this with tcpdump running on an xterm for each host.
+ --- 10.0.0.2 ping statistics ---
+ 1 packets transmitted, 1 received, 0% packet loss, time 0ms
+ rtt min/avg/max/mdev = 1.683/1.683/1.683/0.000 ms
 
-Once the switch no longer has hub behavior, work to push down a flow when the source and destination ports are known.  You can use dpctl to verify the flow counters, and if subsequent pings complete much faster, you'll know that they're not passing through the controller.  You can also verify this behavior by running iperf in Mininet and checking that no OpenFlow packet-in messages are getting sent.  The reported iperf bandwidth should be much higher as well, and should match the number you got when using the reference learning switch controller earlier.
+* Switch to your Wireshark view.  You should see an initial Packet In/Out for the first ARP request where the switch does not know where the destination is at.  All subsequent Packet Ins should have a corresponding Flow Mod, but no Packet Out.  An example can be seen in the following screenshot:
+[[images/phase1-test2.png]]
 
 == Support Multiple Switches ==
 
