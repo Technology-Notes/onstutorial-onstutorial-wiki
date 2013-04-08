@@ -102,7 +102,7 @@ There is a significant number of comments in the LearningSwitchTutorial file to 
 
 ==== Phase 1 ====
 ----
-===== Overview =====
+===== Phase 1 - Overview =====
 * Build an OFMatch object based on the incoming OFPacketIn
 * Learn that the source MAC address is at the incoming port and store it in the Map
 * Retrieve the port the destination MAC address is at, if it is known
@@ -110,7 +110,7 @@ There is a significant number of comments in the LearningSwitchTutorial file to 
 
 At the end of this phase you should be able to send pings back and forth, and in Wireshark you should see an initial OFPacketOut in both directions with its action set to flood, subsequent OFPacketOut messages should have their action set to send to a single port.
 
-===== Tips =====
+===== Phase 1 - Tips =====
 * To log a message to the console
 <dl><dd><pre>
 log.debug("Your message here")
@@ -148,6 +148,20 @@ log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
  learned_port = macTable.get(mac_address_key)
 </pre></dd></dl>
 
+===== Phase 1 - Testing =====
+* Start Beacon
+* Start Wireshark and turn on its capturing
+* Start Mininet
+ $ sudo mn --topo single,2 --switch ovsk --controller remote
+* Wait for Beacon's console to report the switch has connected
+* Send a single ping from h1 to h2 
+ mininet> h1 ping -c1 h2
+
+* Switch to your Wireshark view, find the first Packet Out in the top pane, select it, then expand the OpenFlow Protocol section at the bottom until you get to the Action's output port.  The first Packet Out's output port should be Flood, as seen in this screenshot:
+[[images/phase1-test1.png]]
+
+* Subsequent Packet Out actions should be directed to a single port, to indicate the switch is learning properly, as seen in this screenshot:
+[[images/phase1-test2.png]]
 
 ==== Phase 2 ====
 ----
