@@ -99,6 +99,8 @@ Each time you change and save the LearningSwitchTutorial file, make sure to stop
 There is a significant number of comments in the LearningSwitchTutorial file to help you create the proper functionality, and tips provided in the subsequent sections of this tutorial ('''read these!''').  At a high level there are two phases of work for you to do.
 
 ==== Phase 1 ====
+----
+===== Overview =====
 * Build an OFMatch object based on the incoming OFPacketIn
 * Learn that the source MAC address is at the incoming port and store it in the Map
 * Retrieve the port the destination MAC address is at, if it is known
@@ -106,29 +108,57 @@ There is a significant number of comments in the LearningSwitchTutorial file to 
 
 At the end of this phase you should be able to send pings back and forth, and in Wireshark you should see an initial OFPacketOut in both directions with its action set to flood, subsequent OFPacketOut messages should have their action set to send to a single port.
 
+===== Tips =====
+* To log a message to the console
+<dl><dd><pre>
+log.debug("Your message here")
+</pre></dd></dl>
+
+* The ''OFMatch'' class can be used to retrieve packet header data contained in the ''OFPacketIn'' class.  The following command will return a new ''OFMatch'' object containing data from the ''OFPacketIn'' pi object.
+<dl><dd><pre>
+ match.loadFromPacket(pi.getPacketData(), pi.getInPort()); 
+</pre></dd></dl>
+
+* The following command shows how to add an element to a Map
+<dl><dd><pre>
+ macTable.put(mac_address_key, port)
+</pre></dd></dl>
+
+* The macTable Map object is keyed by the ''Long'' data type, but MAC addresses in the ''OFMatch'' class are byte[].  The following command will take a byte[] from the match object and return a Long:
+<dl><dd><pre>
+ Ethernet.toLong(match.getDataLayerSource())
+</pre></dd></dl>
+
+* To check for an element in your HashMap:
+<dl><dd><pre>
+ if (macTable.containsKey(mac_address_key)) {
+   do..something..here
+ }
+</pre></dd></dl>
+
+* To get an element from the HashMap:
+<dl><dd><pre>
+ learned_port = macTable.get(mac_address_key)
+</pre></dd></dl>
+
+
 ==== Phase 2 ====
+----
+===== Overview =====
 * If the destination port is known, instead of sending an OFPacketOut, send an OFFlowMod so that subsequent pings are matched on the switch.
 
 At the end of phase 2, when pinging and viewing the controller traffic in Wireshark you should see an initial OFPacketOut that floods for the request/response, then an OFFlodMod being sent for both request/response, then no further traffic for the same ping.
+
+===== Tips =====
 
 === Learning Java and Beacon ===
 
 Here are a few Java tips you might find useful down the road.
 
-To add an element to a HashMap:
- macTable.put(mac_address_key, port)
 
 To convert a MAC address in a byte[] to a Long:
  Ethernet.toLong(match.getDataLayerSource()/match.getDataLayerDestination())
 
-To check for an element in your HashMap:
- if (macTable.containsKey(mac_address_key))
-    log.debug("mac_address_key is in hashmap")
-
-To get an element from the HashMap:
-```
- learned_port = macTable.get(mac_address_key)
-``` 
 To print a debug message in Beacon:
  log.debug("Learned new MAC!")
 
@@ -144,8 +174,6 @@ Open your browser and point to [your beacon-tutorial-1.0.2 directory]/apidocs/in
 To send a message to an OpenFlow switch, look at IOFSwitch class. The starter forward_as_hub function sends packets out using:
  sw.getOutputStream().write(po);
 
-Look at OFMatch and OFPacketIn to get header information from an OpenFlow packet-in. You should find the following command particularly useful:
- match.loadFromPacket(pi.getPacketData(), pi.getInPort()); 
 
 Down the road, you may want to print a mac address, or use it as a key to a HashMap. OFMatch will give you the address as a byte array. Use the functions/classes below in case needed:
  HexString.toHexString(byte[] bytes) // Convert a string of bytes to a ':' separated hex string
