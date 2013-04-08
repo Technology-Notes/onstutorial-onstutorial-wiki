@@ -94,7 +94,9 @@ Take a quick look through the file, the key things to notice:
 
 Use Wireshark to inspect the packets sent and received by your controller to help debug your code.
 
+
 API documentation is available for both Beacon's classes and the general Java classes, look for the shortcuts on your desktop to launch a browser to view these.
+
 
 Each time you change and save the LearningSwitchTutorial file, make sure to stop and start your running instance, then use pings to verify hub or Ethernet learning switch behavior.  Hosts that are not the destination should display no tcpdump traffic after the initial broadcast ARP request.
 
