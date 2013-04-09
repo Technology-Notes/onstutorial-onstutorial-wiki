@@ -78,8 +78,8 @@ Go to Eclipse and stop Beacon (you should see a square, red button in the consol
 
 '''NOTE : You can run only one controller at the same time (otherwise you'll get a port conflict). Make sure that you stop any running instance of Beacon before you start another one. With Eclipse this might be tricky. To check the running programs open the Debug perspective (Window->Open Perspective->Debug). On the top-left corner you can see the running programs, click on it then hit the red square to terminate the redundant ones...'''
 
-<a href="images/Eclipse_console_stop.png" target="_new">[[images/Eclipse_console_stop.png]]</a>
-<a href="images/Eclipse_debug_stop.png" target="_new">[[images/Eclipse_debug_stop.png]]</a>
+<a href="images/Eclipse_console_stop.png" target="_blank">[[images/Eclipse_console_stop.png]]</a>
+<a href="images/Eclipse_debug_stop.png" target="_blank">[[images/Eclipse_debug_stop.png]]</a>
 
 The file you'll modify is '''net.beaconcontroller.tutorial/src/main/java/net/beaconcontroller/tutorial/LearningSwitchTutorial.java'''.  Find this file in the left pane of Eclipse and double-click it to open it in the editor window.
 
@@ -163,10 +163,10 @@ log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
  rtt min/avg/max/mdev = 1.683/1.683/1.683/0.000 ms
 
 * Switch to your Wireshark view, find the first Packet Out in the top pane, select it, then expand the OpenFlow Protocol section at the bottom until you get to the Action's output port.  The first Packet Out's output port should be Flood, as seen in this screenshot:
-[[images/phase1-test1.png]]
+<a href="images/phase1-test1.png" target="_blank">[[images/phase1-test1.png]]</a>
 
 * Subsequent Packet Out actions should be directed to a single port, to indicate the switch is learning properly, as seen in this screenshot:
-[[images/phase1-test2.png]]
+<a href="images/phase1-test2.png" target="_blank">[[images/phase1-test2.png]]</a>
 
 ==== Phase 2 ====
 ----
@@ -216,7 +216,7 @@ At the end of phase 2, when pinging and viewing the controller traffic in Wiresh
  rtt min/avg/max/mdev = 1.683/1.683/1.683/0.000 ms
 
 * Switch to your Wireshark view.  You should see an initial Packet In/Out for the first ARP request where the switch does not know where the destination is at.  All subsequent Packet Ins should have a corresponding Flow Mod, but no Packet Out.  An example can be seen in the following screenshot:
-[[images/phase1-test2.png]]
+<a href="images/phase2-test1.png" target="_blank">[[images/phase2-test1.png]]</a>
 
 ==== Extra Credit 1 ====
 ----
@@ -301,4 +301,5 @@ In phase 2 when you send a Flow Mod to the switch it included the ''buffer id'' 
 * Switch to your Wireshark view.  After the initial Packet In/Packet Out you should see all subsequent Packet In's followed by a Flow Mod and a Packet Out.  
 * Note there is a bug in Wireshark currently that a single network packet containing both a Flow Mod and a Packet Out shows up in the Wireshark top view as only a Packet Out, if you select it then expand it in the bottom view you will see two OpenFlow packets, the Flow Mod followed by the Packet Out.
 * The Flow Mod and Packet Out's ''buffer id'' should both be set to None, as seen in the following screenshot:
-[[images/phase1-test2.png]]
+<a href="images/extracredit2-test1.png" target="_blank">[[images/extracredit2-test1.png]]</a>
+<a href="images/extracredit2-test2.png" target="_blank">[[images/extracredit2-test2.png]]</a>
