@@ -261,3 +261,46 @@ This will create a 2-switch topology where each switch has a single connected ho
  h1 -> h2 
  h2 -> h1 
  *** Results: 0% dropped (0/2 lost)
+
+==== Extra Credit 2 ====
+----
+===== Extra Credit 2 - Overview =====
+When OpenFlow switches send a Packet In to a controller they also typically keep a copy of the packet locally, with an assigned id - the ''buffer id'', which is also included in the Packet In message.  Some switches may not support buffering packets locally, or could be out of space to buffer additional packets.  In this case the 'buffer id' on a Packet In will be set to ''OFPacketOut.BUFFER_ID_NONE''.
+
+In phase 2 when you send a Flow Mod to the switch it included the ''buffer id'' of the packet, and once the Flow Mod was installed the switch sent the packet with the provided ''buffer id''.  However this does not work if the packet has not been buffered.  The solution is to send a Flow Mod followed by a Packet Out that contains the actual packet data.  The Flow Mod's buffer id should be set to ''OFPacketOut.BUFFER_ID_NONE''.
+
+* Modify the phase 2 code to send an ''OFPacketOut'' after the ''OFFlowMod'' when the OFPacketIn's ''buffer id'' is set to ''OFPacketOut.BUFFER_ID_NONE''
+
+===== Extra Credit 2 - Tips =====
+* After sending the Flow Mod from phase 2, test if the OFPacketIn's buffer id is none
+<dl><dd><pre>
+ if (pi.getBufferId() == OFPacketOut.BUFFER_ID_NONE) {
+</pre></dd></dl>
+* You'll need to create an ''OFPacketOut'' object much like you did in phase 1.
+** Make sure you copy the packet data from the ''OFPacketIn'' to the ''OFPacketOut''
+** Also ensure you set the ''OFActionOutput''s port to the outgoing port if known.
+
+===== Extra Credit 2 - Testing =====
+* Because the switches included in Mininet buffer all packets by default, you'll need to simulate this behavior in Beacon by modifying the actual ''OFPacketIn'' object and overwriting its ''buffer id''.  Add the following line of code right after the ''forwardAsLearningSwitch'' method declaration:
+ pi.setBufferId(OFPacketOut.BUFFER_ID_NONE);
+
+
+* Start Beacon
+* Start Wireshark and turn on its capturing
+* Start Mininet
+ $ sudo mn --topo single,2 --switch ovsk --controller remote
+* Wait for Beacon's console to report the switch has connected
+* Send a single ping from h1 to h2 
+ mininet> h1 ping -c1 h2
+* Check that the ping was successful
+ PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+ 64 bytes from 10.0.0.2: icmp_req=1 ttl=64 time=1.68 ms
+
+ --- 10.0.0.2 ping statistics ---
+ 1 packets transmitted, 1 received, 0% packet loss, time 0ms
+ rtt min/avg/max/mdev = 1.683/1.683/1.683/0.000 ms
+
+* Switch to your Wireshark view.  After the initial Packet In/Packet Out you should see all subsequent Packet In's followed by a Flow Mod and a Packet Out.  
+* Note there is a bug in Wireshark currently that a single network packet containing both a Flow Mod and a Packet Out shows up in the Wireshark top view as only a Packet Out, if you select it then expand it in the bottom view you will see two OpenFlow packets, the Flow Mod followed by the Packet Out.
+* The Flow Mod and Packet Out's ''buffer id'' should both be set to None, as seen in the following screenshot:
+[[images/phase1-test2.png]]
