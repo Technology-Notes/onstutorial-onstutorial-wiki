@@ -136,6 +136,8 @@ In your SSH terminal:
  $ sudo ovs-controller ptcp:
 This starts a simple controller that acts as a learning switch and installs flow entries to speed things up.
 
+When the switch connects to the controller, they exchange messages; this may take some time to happen, because each failed connection by the switch causes it to wait longer before trying again.  If the switch doesn't seem to be connecting, exit your Mininet session in the other terminal and start it again.
+
 You should see a bunch of messages displayed in Wireshark, from the Hello exchange onwards.  As an example, click on the Features Reply message.  Click on the triangle by the 'OpenFlow Protocol' line in the center section to expand the message fields.  Click the triangle by Switch Features to display datapath capabilities - feel free to explore.
 
 These messages include:
