@@ -1,5 +1,6 @@
 __TOC__
 
+The ONS Tutorial was put together and tested by Brandon Heller, David Erickson, Nikhil Handigol, and Peyman Kazemian.  
 
-This tutorial was written by Brandon Heller and Yiannis Yiakoumis and beta-tested by Bob Lantz, KK Yap and Masayoshi Kobayashi.
+This tutorial builds on the [[OpenFlow Tutorial|http://www.openflow.org/wk/index.php/OpenFlow_Tutorial]], which also includes content and tweaks from Yiannis Yiakoumis, Bob Lantz, KK Yap, and Masayoshi Kobayashi.
 
