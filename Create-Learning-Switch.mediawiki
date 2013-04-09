@@ -24,25 +24,23 @@ Start Eclipse by double clicking the Eclipse shortcut on the desktop.
 
 === Run the Tutorial Controller ===
 
-Make sure the reference controller used before is not running, run the following in a terminal:
- $ sudo killall controller
+Make sure any other controllers have shut down before running Beacon. Run the following in a terminal:
+ $ sudo killall controller ovs-controller
 
 You should also restart Mininet to make sure that everything is "clean". From your Mininet console:
  mininet> exit
- $ sudo mn --topo single,3 --mac --switch ovsk --controller remote
+ $ sudo mn --topo single,3 --mac --controller remote
 
 Make sure you do not add extra spaces around the comma.
 
-Now, start Beacon in Debug mode.
+Now, start Beacon in Debug mode. Within Eclipse do the following:
 
-Within Eclipse do the following:
-
-* Run -> Debug Configurations
+* In the menu, find Run -> Debug Configurations
 * Look for the OSGi Framework on the left, expand its children and select 'beacon Tutorial LearningSwitch', then click Debug.
 
 This command will start Beacon, including the 'tutorial' bundle, listening to incoming connection from switches on the standard OpenFlow port (6633).  Alternately, you can click on the bug icon near the top left of the toolbar to start debugging.
 
-Wait until the application indicates that the OpenFlow switch has connected.  When the switch connects, your Eclipse console should print something like this: 
+Wait until the console log indicates that the OpenFlow switch has connected.  When the switch connects, your Eclipse console should print something like this: 
 
 01:07:31.095 [pool-2-thread-2] INFO  n.b.core.internal.Controller - Switch connected from java.nio.channels.SocketChannel[connected local=/192.168.206.2:6633 remote=/192.168.206.4:54994]
 
@@ -111,15 +109,15 @@ Each time you change and save the LearningSwitchTutorial file, make sure to stop
 
 There is a significant number of comments in the LearningSwitchTutorial file to help you create the proper functionality, and tips provided in the subsequent sections of this tutorial ('''read these!''').  At a high level there are two phases of work, and two optional (and independent) extra credit sections:
 
-==== Phase 1 ====
+==== Phase 1: Hub to Learning Switch ====
 ----
 ===== Enable forwardAsLearningSwitch =====
 * Find the ''receive'' method at the top of the LearningSwitchTutorial class
 * Comment out the call to ''forwardAsHub''
 * Uncomment the call to ''forwardAsLearningSwitch''
 
-===== Build an OFMatch object based on the incoming OFPacketIn =====
-* Scroll down and find the ''forwardAsLearningSwitch'' method, this is the method where you will be making the bulk of your edits
+===== Build an OFMatch object =====
+* Scroll down and find the ''forwardAsLearningSwitch'' method.  This is the method where you will be making the bulk of your edits.
 * Tip: To log a message to the console
 <dl><dd><pre>
 log.debug("Your message here")
@@ -184,9 +182,9 @@ log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
 * Once you're confident your switch works, cancel any tcpdumps on nodes, and test the speed using iperf:
  mininet> iperf
 
-==== Phase 2 ====
+==== Phase 2: Hub to Learning Switch ====
 ----
-===== Phase 2 - Overview =====
+===== Overview =====
 * If the destination port is known, instead of sending an OFPacketOut, send an OFFlowMod so that subsequent pings are matched on the switch.
 
 At the end of phase 2, when pinging and viewing the controller traffic in Wireshark you should see an initial OFPacketOut that floods for the request/response, then an OFFlodMod being sent for both request/response, then no further traffic for the same ping.
@@ -234,7 +232,7 @@ At the end of phase 2, when pinging and viewing the controller traffic in Wiresh
 * Switch to your Wireshark view.  You should see an initial Packet In/Out for the first ARP request where the switch does not know where the destination is at.  All subsequent Packet Ins should have a corresponding Flow Mod, but no Packet Out.  An example can be seen in the following screenshot:
 <a href="images/phase2-test1.png" target="_blank">[[images/phase2-test1.png]]</a>
 
-==== Extra Credit 1 ====
+==== Extra Credit 1: Multiple Switches ====
 ----
 ===== Extra Credit 1 - Overview =====
 Your learning switch so far only supports a single switch, with a single MAC table.  In this section, you'll extend it to support multiple switches.
@@ -276,7 +274,7 @@ This will create a 2-switch topology where each switch has a single connected ho
  h2 -> h1 
  *** Results: 0% dropped (0/2 lost)
 
-==== Extra Credit 2 ====
+==== Extra Credit 2: Switches Without Buffering ====
 ----
 ===== Extra Credit 2 - Overview =====
 When OpenFlow switches send a Packet In to a controller they also typically keep a copy of the packet locally, with an assigned id - the ''buffer id'', which is also included in the Packet In message.  Some switches may not support buffering packets locally, or could be out of space to buffer additional packets.  In this case the 'buffer id' on a Packet In will be set to ''OFPacketOut.BUFFER_ID_NONE''.
