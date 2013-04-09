@@ -109,15 +109,41 @@ There is a significant number of comments in the LearningSwitchTutorial file to 
 ----
 ===== Phase 1 - Overview =====
 This tutorial will walk you through the steps to complete each of the following tasks:
-* Change to the forwardAsSwitch function
+* Change to the forwardAsLearningSwitch function
 * Build an OFMatch object based on the incoming OFPacketIn
 * Learn that the source MAC address is at the incoming port and store it in the Map
-* Retrieve the port the destination MAC address is at, if it is known
-* If the destination port is known, send an OFPacketOut directly and only to that port, else forward using the flooding method in the forwardAsHub method
+* Retrieve the port for the destination MAC address, if it is known
+* If the destination port is known, send an OFPacketOut directly to that port, else forward using the flooding method in the forwardAsHub method
 
 At the end of this phase you should be able to send pings back and forth, and in Wireshark you should see an initial OFPacketOut in both directions with its action set to flood, subsequent OFPacketOut messages should have their action set to send to a single port.
 
+===== Enable forwardAsLearningSwitch =====
+
+First, '''make sure to comment out forwardAsHub and uncomment forwardAsLearningSwitch'''.
+
+===== Build an OFMatch object based on the incoming OFPacketIn =====
+
+FILL IN
+
+===== Learn that the source MAC address is at the incoming port and store it in the Map =====
+
+FILL IN
+
+===== Retrieve the port for the destination MAC address, if it is known =====
+
+FILL IN 
+
+===== If the destination port is known, send an OFPacketOut directly to that port, else forward using the flooding method in the forwardAsHub method =====
+
+FILL IN
+
+
+
+
 ===== Phase 1 - Tips =====
+
+TODO: move each tip to where it is needed.
+
 * To log a message to the console
 <dl><dd><pre>
 log.debug("Your message here")
@@ -155,7 +181,7 @@ log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
  learned_port = macTable.get(mac_address_key)
 </pre></dd></dl>
 
-===== Phase 1 - Testing =====
+===== Testing =====
 * Start Beacon
 * Start Wireshark and turn on its capturing
 * Start Mininet
