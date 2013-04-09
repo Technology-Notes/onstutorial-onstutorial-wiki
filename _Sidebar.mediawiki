@@ -10,6 +10,11 @@
 
 5: [[Create-Learning-Switch|Create Learning Switch]]
 
+6: [[FlowVisor Exercise]]
+
+7: [[Credits]]
+
+<!---
 6: [[Control-A-Slice-Of-A-Real-Network|Control A Slice Of A Real Network]]
 
 7: [[Create-Router|Create Router]]
@@ -23,4 +28,5 @@
 11: [[Notes|Notes]]
 
 12: [[VirtualBox-specific-Instructions|VirtualBox-specific Instructions]]
+--->
 
