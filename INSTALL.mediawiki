@@ -1,0 +1,9 @@
+==Installing and editing the wiki locally==
+
+ sudo gem install gollum
+ sudo gem install wikicloth
+
+ cd onstutorial.wiki
+ gollum
+
+Open browser and go to: [[http://localhost:4567/]]
