@@ -254,3 +254,5 @@ Exit Mininet:
 == Stop the controller ==
 
 Click the terminal running the controller, then on your keyboard press ctl-c to stop it.
+
+Awesome, you're ready to move on to the next section: [[Create Learning Switch]].
