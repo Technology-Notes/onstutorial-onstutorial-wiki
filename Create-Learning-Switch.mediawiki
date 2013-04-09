@@ -1,10 +1,14 @@
 __TOC__
 
-Now, let's move on building a networking application. We provide you with starter code for a hub controller. After getting yourself familiar with it, you'll modify the provided hub to act as an L2 learning switch.  In this application, the switch will examine each packet and learn the source-port mapping.  Thereafter, the source MAC address will be associated with the port.  If the destination of the packet is already associated with some port, the packet will be sent to the given port, else it will be flooded on all ports of the switch.
+Now, let's move on building a networking application. 
 
-Later, you'll turn this into a flow-based switch, where seeing a packet with a known source and dest causes a flow entry to get pushed down.
+In this exercise, we provide you with starter code for a hub controller, which inefficiently copies packets to every port.
 
-For this tutorial you will use the Beacon controller.
+After getting familiar with it, you'll modify this provided hub to act as an L2 learning switch, in Phase 1.  An L2 learning switch learns the mapping between MAC addresses and ports by watching packets.  If the switch has already seen a particular destination, it can send to exactly one port; otherwise it must flood the packet out all ports, like a hub.
+
+Later, in Phase 2, you'll turn the learning switch into a flow-based switch, where seeing a packet with a known source and destination causes a flow entry to get pushed down.  With a flow-based switch, further packets in the flow are handled in the dataplane, and they avoid the expensive hop to the controller and back.
+
+For this tutorial you'll use the Beacon controller.  The same concepts learned here apply to most other OpenFlow controller platforms, and your Mininet-based VM provides a nice environment to continue with after this tutorial.
 
 == Beacon (Java) ==
 Beacon is a Java-based OpenFlow controller platform.  For more details and tutorials see the [[Beacon Homepage|http://www.beaconcontroller.net]]. 
