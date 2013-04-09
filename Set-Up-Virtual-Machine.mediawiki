@@ -28,10 +28,6 @@ Other prompts used in this tutorial include
 
  mininet>
 
-for commands entered in the Mininet console and 
-
- C:> 
-
-for code entered into a Windows command window.
+for commands entered in the Mininet console.
 
 Next, move on to [[Learn Development Tools]] to begin.
