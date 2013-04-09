@@ -5,15 +5,15 @@ In this section, you'll bring up the development environment.  In the process, y
 Let's define some terminology, starting with terminal types:
 
 
-* terminal: Created by launching a terminal in the VM.
+* '''terminal''': Created by launching a terminal in the VM.
 
 * '''xterm''' terminal: connects to a host in the virtual network.  Created in the next section when you start up the virtual network.  Will be labeled at the top with the name of the host.
 
-The OpenFlowTutorial VM includes a number of OpenFlow-specific and general networking utilities pre-installed.  Please read the short descriptions:
+The Tutorial VM includes a number of OpenFlow-specific and general networking utilities pre-installed.  Here are the short descriptions:
 
-* '''OpenFlow Controller''': sits above the OpenFlow interface.  The OpenFlow reference distribution includes a controller that acts as an Ethernet learning switch in combination with an OpenFlow switch.  You'll run it and look at messages being sent.  Then, in the next section, you'll write our own controller on top of NOX or Beacon (platforms for writing controller applications).
+* '''OpenFlow Controller''': sits above the OpenFlow interface.  The OpenFlow reference distribution includes a controller that acts as an Ethernet learning switch in combination with an OpenFlow switch.  You'll run it and look at messages being sent.  Then, in the next section, you'll write a controller on top of Beacon, which is a platform for writing controllers.
 
-* '''OpenFlow Switch''': sits below the OpenFlow interface.  The OpenFlow reference distribution includes a user-space software switch.  Open vSwitch is another software but kernel-based switch, while there is a number of hardware switches available from Broadcom (Stanford Indigo release), HP, NEC, and others.
+* '''OpenFlow Switch''': sits below the OpenFlow interface.  In this tutorial, you'll use Open vSwitch, the main OpenFlow-capable virtual switch.  There are hardware OpenFlow switches now available from vendors in a variety of form factors.
 
 * '''dpctl''': command-line utility that sends quick OpenFlow messages, useful for viewing switch port and flow stats, plus manually inserting flow entries.
 
@@ -23,32 +23,35 @@ The OpenFlowTutorial VM includes a number of OpenFlow-specific and general netwo
 
 * '''Mininet''': network emulation platform.  Mininet creates a virtual OpenFlow network - controller, switches, hosts, and links - on a single real or virtual machine. More Mininet details can be found at the [[Mininet web page|http://openflow.org/mininet]].
 
-* '''cbench''': utility for testing the flow setup rate of OpenFlow controllers. 
+<!--- * '''cbench''': utility for testing the flow setup rate of OpenFlow controllers. --->
 
-From here on out, make sure to copy and paste as much as possible!  For example, manually typing in ‘sudo dpctl show n1:0’ may look correct, but will cause a confusing error; the 'nl' is short for NetLink, not n-one.
+From here on out, make sure to copy and paste as much as possible!  For example, manually typing in "sudo dpctl show n1:0" may look correct, but will cause a confusing error; the 'nl' is short for NetLink, not n-one.
+
+Your Tutorial VM supports copy/paste into and out of the virtual machine, so you can copy directly from this web page to the terminal.
 
 Let's get started...
 
 == Start Network ==
 The network you'll use for the first exercise includes 3 hosts and a switch (and, eventually, an OpenFlow controller, but we'll get to that later):
 
-
 [[images/three_switch_layout.png]]
 
 To create this network in the VM, in a terminal, enter:
- $ sudo mn --topo single,3 --mac --switch ovsk --controller remote
+ $ sudo mn --topo single,3 --mac --controller remote
 
-This tells Mininet to start up a 3-host, single-(openvSwitch-based)switch topology, set the MAC address of each host equal to its IP, and point to a remote controller which defaults to the localhost.
+This tells Mininet to start up a 3-host, single-switch topology, set the MAC address of each host equal to its IP, and point to a remote controller which defaults to the localhost.
 
 Here's what Mininet just did:
 * Created 3 virtual hosts, each with a separate IP address.
-* Created a single OpenFlow software switch in the kernel with 3 ports. 
+* Created a single Open vSwitch datapath in the kernel with 3 ports. 
 * Connected each virtual host to the switch with a virtual ethernet cable.
 * Set the MAC address of each host equal to its IP.
 * Configure the OpenFlow switch to connect to a remote controller.
 
+In short, you now have a virtual network that looks just like three separate physical hosts connected by an OpenFlow switch.
+
 == Mininet Brief Intro ==
-Since you'll be working in [[Mininet|http://mininet.github.com]] for the whole tutorial, it's worth learning a few Mininet-specific commands:
+Since you'll be working in [[Mininet|http://mininet.github.com]] for the whole tutorial, take a second to learn a few Mininet-specific commands:
 
 To see the list of nodes available, in the Mininet console, run:
  mininet> nodes
