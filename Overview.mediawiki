@@ -3,27 +3,26 @@ __TOC__
 
 [[images/Tutorial_flow_hw.png]]
 
-In this tutorial, you'll turn the provided hub controller into a controller-based learning switch, then a flow-accelerated learning switch, and extend this from a single-switch network to a multiple-switch multiple-host network. You can also find guidelines for further extensions. Along the way, you'll learn the full suite of OpenFlow debugging tools.  You will:
-* view flow tables with dpctl
-* dissect OpenFlow message with Wireshark
-* simulate a multi-switch, multi-host network with Mininet
-* benchmark your controller with cbench
+In this tutorial, you'll complete a set of exercises designed to explain concepts of SDN, both at the controller and switch levels, in a hands-on, guided way.  At the end, you'll know more about basic SDN concepts, and be ready to apply what you learned to physical networks.  Plus, you'll have a Mininet-based virtual development environment that you can use to conveniently build and test your own new SDN application.
 
-After the tutorial, you can apply what you've learned to physical networks based on software switches, NetFPGAs, or even hardware switches at line rate.
+Soon, you will:
+* [[Learn-Development-Tools|Learn Development Tools]]: add rules to a switch, view flow tables, watch OpenFlow messages, and benchmark a simple controller
+* [[Create-Learning-Switch|Create a Learning Switch]]: turn a hub into a faster Ethernet learning switch, and then a flow-accelerated learning switch, using the Beacon OpenFlow controller
+* [[Slice-A-Network|Slice a Network]]: slice a network in multiple ways, using FlowVisor
 
-To get you started quickly, we provide a preconfigured virtual machine with the needed software.  
+To get you started quickly, this tutorial is distributed as a preconfigured virtual machine with the needed software.  Just run the VM in VirtualBox, using the instructions in the next section, and you can get up and running.
 
 ==Pre-requisites==
-You will need a computer with at least 1GB (preferably 2GB+) of RAM and at least 5GB of free hard disk space (more preferred).  A faster processor may speed up the virtual machine boot time, and a larger screen may help to manage multiple terminal windows.
+You will need a computer with at least 1GB (preferably 2GB+) of RAM and at least 5GB of free hard disk space (more preferred).  A faster processor or solid-state drive will speed up the virtual machine boot time, and a larger screen will help to manage multiple terminal windows.
 
-These instructions consider Linux, OS X, and Windows.  Linux and OS X are preferred - there's less to install.
+The computer can run Windows, Mac OS X, or Linux - all work fine with Virtualbox, the only software requirement.
 
-You will need administrative access to the machine.
+To install VirtualBox, you will need administrative access to the machine.
 
-The tutorial instructions require no prior knowledge of OpenFlow.  The [[OpenFlow Learn More page|http://www.openflowswitch.org/wp/learnmore/]] is a concise introduction.
+The tutorial instructions require no prior knowledge of OpenFlow, and only basic familiarity with networking concepts.
 
-== Stuck?  Found a bug?  Questions?  ==
+==Stuck?  Found a bug?  Questions?==
 Email [openflow-discuss - at - lists.stanford.edu] if you're stuck, think you've found a bug, or just want to send some feedback.
 
-If you are asking a question or reporting a bug, try to include as many details about your setup as possible.  Include your OS, virtualization software info, X11 and ssh software you're using, VM image you're using, memory size, and the step you're on.
+If you are asking a question or reporting a bug, try to include as many details about your setup as possible.  Include your OS, virtualization software info, memory size, and the step you're on.
 
