@@ -100,14 +100,13 @@ Take a quick look through the file.  The key things to notice:
 * The forwardAsHub method behaves as a broadcast hub, and has code that gives you an example of how to send an OFPacketOut message.
 * The forwardAsLearningSwitch method is where you will be writing all of your code (with the exception of the receive method mentioned earlier).  It should take you around 30 lines of code in this method to implement a learning switch.
 
-Use Wireshark to inspect the packets sent and received by your controller to help debug your code.
-
-API documentation is available for both Beacon's classes and the general Java classes, look for the shortcuts on your desktop to launch a browser to view these.
-
+Also note that API documentation is available for both Beacon's classes and the general Java classes.  Look for the shortcuts on your desktop to launch a browser to view these.
 
 Each time you change and save the LearningSwitchTutorial file, make sure to stop and start your running instance, then use pings to verify hub or Ethernet learning switch behavior.  Hosts that are not the destination should display no tcpdump traffic after the initial broadcast ARP request.
 
-There is a significant number of comments in the LearningSwitchTutorial file to help you create the proper functionality, and tips provided in the subsequent sections of this tutorial ('''read these!''').  At a high level there are two phases of work, and two optional (and independent) extra credit sections:
+There is a significant number of comments in the LearningSwitchTutorial file to help you create the proper functionality, and tips provided in the subsequent sections of this tutorial ('''read these!''').
+
+Continue on: the next sections will guide you through the exercise.
 
 ==== Phase 1: Hub to Learning Switch ====
 ----
@@ -118,21 +117,27 @@ There is a significant number of comments in the LearningSwitchTutorial file to 
 
 ===== Build an OFMatch object =====
 * Scroll down and find the ''forwardAsLearningSwitch'' method.  This is the method where you will be making the bulk of your edits.
+* Tip: instantiate an OFMatch object:
+<dl><dd><pre>
+ OFMatch match = new OFMatch();
+</pre></dd></dl>
+* The ''OFMatch'' class can be used to retrieve packet header data contained in the ''OFPacketIn'' class.  The following command will build an ''OFMatch'' object based on data contained in the ''OFPacketIn'' pi object:
+<dl><dd><pre>
+ match.loadFromPacket(pi.getPacketData(), pi.getInPort()); 
+</pre></dd></dl>
 * Tip: To log a message to the console
 <dl><dd><pre>
 log.debug("Your message here")
 </pre></dd></dl>
-* Tip: The ''OFMatch'' class can be used to retrieve packet header data contained in the ''OFPacketIn'' class.  The following command will return a new ''OFMatch'' object containing data from the ''OFPacketIn'' pi object.
-<dl><dd><pre>
- match.loadFromPacket(pi.getPacketData(), pi.getInPort()); 
-</pre></dd></dl>
 
-===== Learn that the source MAC address is at the incoming port and store it in the Map =====
+Using the tips above, build an OFMatch object from the input packet.
+
+===== Learn the source MAC address =====
 * Tip: The following command shows how to add an element to a Map
 <dl><dd><pre>
  macTable.put(mac_address_key, port)
 </pre></dd></dl>
-* Tip: The macTable Map object is keyed by the ''Long'' data type, but MAC addresses in the ''OFMatch'' class are byte[].  The following command will take a byte[] from the match object and return a Long:
+* Tip: The macTable Map object is keyed by the ''Long'' data type, but MAC addresses in the ''OFMatch'' class are byte[].  The following command will take a byte array from the match object and return a Long:
 <dl><dd><pre>
  Ethernet.toLong(match.getDataLayerSource())
 </pre></dd></dl>
@@ -141,7 +146,9 @@ log.debug("Your message here")
 log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
 </pre></dd></dl>
 
-===== Retrieve the port for the destination MAC address, if it is known =====
+Using the tips above, modify your code to learn the source MAC at the input port and store it in the Map.
+
+===== Retrieve the destination port, if known =====
 * Tip: To check for an element in your HashMap:
 <dl><dd><pre>
  if (macTable.containsKey(mac_address_key)) {
@@ -153,15 +160,23 @@ log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
  learned_port = macTable.get(mac_address_key)
 </pre></dd></dl>
 
-===== If the destination port is known, send an OFPacketOut directly to that port, else forward using the flooding method in the forwardAsHub method =====
+Using the tips above (in this step, not all are necessary), retrieve the port for the '''destination''' MAC address, if it is known. 
 
-* Check the ''forwardAsHub'' method for an example of how to send an ''OFPacketOut'', just remember to replace the FLOOD action with an actual port number if the port is known.
+===== Send packet directly, or flood it =====
 
-===== Phase 1 - Testing =====
+* Check the ''forwardAsHub'' method for an example of how to send an ''OFPacketOut''. This method shows how to instantiate and set members of the OFPacketOut object.  It also shows how to send a packet-out object to a switch.  
+
+Add code to send an OFPacketOut directly to a port if the destination is known, otherwise forward using the flooding method in the forwardAsHub method.  You should set the action list, input port, and buffer id in the OFPacketOut object.
+
+Also, remember to replace the FLOOD action with an actual port number if the port is known.
+
+When your code has no compilation errors, move on to testing.
+
+===== Testing =====
 * Start Beacon
-* Start Wireshark and turn on its capturing
-* Start Mininet
- $ sudo mn --topo single,2 --switch ovsk --controller remote
+* Start Wireshark capturing on loopback, set to see OpenFlow packets as before
+* Start Mininet (only if not already started):
+ $ sudo mn --topo single,3 --switch ovsk --controller remote
 * Wait for Beacon's console to report the switch has connected
 * Send a single ping from h1 to h2 
  mininet> h1 ping -c1 h2
@@ -178,6 +193,8 @@ log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
 
 * Subsequent Packet Out actions should be directed to a single port, to indicate the switch is learning properly, as seen in this screenshot:
 <a href="images/phase1-test2.png" target="_blank">[[images/phase1-test2.png]]</a>
+
+* To verify this behavior, you may want to load three xterms, one per host, and run tcpdump on them.
 
 * Once you're confident your switch works, cancel any tcpdumps on nodes, and test the speed using iperf:
  mininet> iperf
