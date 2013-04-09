@@ -3,52 +3,26 @@ __TOC__
 
 == Import Virtual Machine Image ==
 
-If you downloaded the .ovf image,
+Start up VirtualBox, then select File>Import Appliance and select the .ovf image that  you downloaded.
 
-* '''Start up VirtualBox, then select File>Import Appliance and select the .ovf image that  you downloaded.'''
-
-You may also be able to simply double-click the .ovf file to open it up in your installed virtualization program.
-
-* '''Next, press the "Import" button.'''
+Next, press the "Import" button.  
 
 This step will take a while - the unpacked image is about 3 GB.
 
-* '''Continue with [[onstutorial#Finish-VM-Setup|Finish VM Setup]] below.'''
-
-== Finish VM Setup ==
-
-You will need to complete '''one more step before you are done with the VM setup'''. 
-
-Select your VM and go to the Settings Tab. Go to Network->Adapter 2. Select the "Enable adapter" box, and attach it to "host-only network".('''Sidenote''': on a new VirtualBox installation you may not have any "host-only network" configured yet. To have one select File menu/Preferences/Network and "Add host-only network" button with default settings. Then you can try the attach.) '''This will allow you to easily access your VM through your host machine.'''
-
-At that point you should be ready to start your VM. Press the "Start" arrow icon or double-click your VM within the VirtualBox window. 
+Then, press the "Start" arrow icon or double-click your VM within the VirtualBox window. 
 
 Once the VM starts you should see the desktop view for Lubuntu.  You can open a terminal by clicking inside the VM, then double clicking the Terminal icon in the top left corner, or pressing ctl-alt-t.
 
-== Choose Preferred Editor ==
-Nano, Vim, Emacs, and Gedit come installed on the OpenFlowTutorial VM.  Brief instructions for each:
+Make sure to read the command prompt notes below; they're important to knowing where to run each command.
 
-'''Nano''': You can immediately modify a file.  When you're done, hit 'ctrl-x', then say 'Yes' to the prompt, to save and quit.
+== Important Command Prompt Notes ==
+<font color=red>In this tutorial, commands are shown along with a command prompt to indicate the subsystem for which they are intended</font>. 
 
-'''Vim''': to modify a file, type 'i' to enter Insert mode, then use the arrow keys to navigate and edit.  When you're done, hit 'esc', type ':wq', then press enter, to save and quit.
-
-Highly recommended for the NOX tutorial: add the following to ~/.vimrc in the VM:
- set tabstop=4
- set expandtab
-
-'''Emacs''': you can immediately modify a file.  When you're done, hit 'ctrl-x', 'ctrl-s', then hit 'ctrl-x', 'ctrl-c' to exit.  
-
-'''Gedit''': a graphical text editor, no instructions needed.
-
-If you have another preferred text editor, feel free to install it now:
- $ sudo apt-get install <editor>
-
-=== Command Prompt Notes ===
-<font color=red>In this tutorial, commands are shown along with a command prompt to indicate what subsystem they are intended for </font>. For example, 
+For example, 
 
  $ ls
 
-indicates that the <code>ls</code> command should be typed at a Unix (e.g. Linux or OS X) command prompt (which generally ends in <code>$</code> if you are a regular user or <code>#</code> if you are root. 
+indicates that the <code>ls</code> command should be typed at a Terminal command prompt within the VM, which generally ends in <code>$</code> if you are a regular user or <code>#</code> if you are root.
 
 Other prompts used in this tutorial include 
 
@@ -59,3 +33,5 @@ for commands entered in the Mininet console and
  C:> 
 
 for code entered into a Windows command window.
+
+Next, move on to [[Learn Development Tools]] to begin.
