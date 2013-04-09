@@ -1,27 +1,28 @@
 __TOC__
 
 
-You will need to download these files individually.
+You will need to acquire two files: a VirtualBox installer and the Tutorial VM.
 
-The files include virtualization software, a SSH-capable terminal, an X server, and the VM image.
+'''If you are at the tutorial now, DO NOT use the wifi to download anything.'''  We will have CDs and USB keys with both files.  Download the files, then pass the key to a neighbor who needs it.
 
-The tutorial image is distributed as a compressed VirtualBox image (vdi).  VirtualBox enables you to run a virtual machine inside a physical machine, and is free and available for Windows, Mac and Linux.
+But, if you're looking to get stuff installed early to make sure they work on your system (great!) go ahead and download at will.
 
 == Download Files ==
-You'll need to download the files corresponding to your OS, plus the tutorial VM.  
 
 Start now with downloading a compressed VM image:
 
+<span style="color: red">'''Update this with the final location!'''</span>
+
 * [[Virtual Machine Image (OVF format, 64-bit, Mininet 2.0)|https://github.com/downloads/mininet/mininet/mininet-2.0.0-113012-amd64-ovf.zip]]
+
+Downloading this VDI (a compressed VirtualBox image) will take a while - it's on the order of 1GB in size.
 
 <span style="color: red">'''Important: For this VM image, the user name is 'mininet' with password 'mininet'.'''</span>
 
-The download will take a while - it's on the order of 2GB in size.
-
-You will also need to install VirtualBox version 4.2.10 or newer:
+While that is downloading, grab VirtualBox version 4.2.10 or newer, for your particular OS:
 * [[VirtualBox|http://www.virtualbox.org/wiki/Downloads]] 
 
 == Install and Verify ==
 
-After you have downloaded the Virtual Machine and VirtualBox, install VirtualBox and verify it is working for your platform.
+After you have downloaded VirtualBox, install it, then go to the next section, [[Set-Up-Virtual-Machine|Set Up Virtual Machine]] to verify that the VM is working on your platform.
 
