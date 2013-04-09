@@ -107,81 +107,53 @@ There is a significant number of comments in the LearningSwitchTutorial file to 
 
 ==== Phase 1 ====
 ----
-===== Phase 1 - Overview =====
-This tutorial will walk you through the steps to complete each of the following tasks:
-* Change to the forwardAsLearningSwitch function
-* Build an OFMatch object based on the incoming OFPacketIn
-* Learn that the source MAC address is at the incoming port and store it in the Map
-* Retrieve the port for the destination MAC address, if it is known
-* If the destination port is known, send an OFPacketOut directly to that port, else forward using the flooding method in the forwardAsHub method
-
-At the end of this phase you should be able to send pings back and forth, and in Wireshark you should see an initial OFPacketOut in both directions with its action set to flood, subsequent OFPacketOut messages should have their action set to send to a single port.
-
 ===== Enable forwardAsLearningSwitch =====
-
-First, '''make sure to comment out forwardAsHub and uncomment forwardAsLearningSwitch'''.
+* Find the ''receive'' method at the top of the LearningSwitchTutorial class
+* Comment out the call to ''forwardAsHub''
+* Uncomment the call to ''forwardAsLearningSwitch''
 
 ===== Build an OFMatch object based on the incoming OFPacketIn =====
-
-FILL IN
-
-===== Learn that the source MAC address is at the incoming port and store it in the Map =====
-
-FILL IN
-
-===== Retrieve the port for the destination MAC address, if it is known =====
-
-FILL IN 
-
-===== If the destination port is known, send an OFPacketOut directly to that port, else forward using the flooding method in the forwardAsHub method =====
-
-FILL IN
-
-
-
-
-===== Phase 1 - Tips =====
-
-TODO: move each tip to where it is needed.
-
-* To log a message to the console
+* Scroll down and find the ''forwardAsLearningSwitch'' method, this is the method where you will be making the bulk of your edits
+* Tip: To log a message to the console
 <dl><dd><pre>
 log.debug("Your message here")
 </pre></dd></dl>
-
-* The ''OFMatch'' class can be used to retrieve packet header data contained in the ''OFPacketIn'' class.  The following command will return a new ''OFMatch'' object containing data from the ''OFPacketIn'' pi object.
+* Tip: The ''OFMatch'' class can be used to retrieve packet header data contained in the ''OFPacketIn'' class.  The following command will return a new ''OFMatch'' object containing data from the ''OFPacketIn'' pi object.
 <dl><dd><pre>
  match.loadFromPacket(pi.getPacketData(), pi.getInPort()); 
 </pre></dd></dl>
 
-* The following command shows how to add an element to a Map
+===== Learn that the source MAC address is at the incoming port and store it in the Map =====
+* Tip: The following command shows how to add an element to a Map
 <dl><dd><pre>
  macTable.put(mac_address_key, port)
 </pre></dd></dl>
-
-* The macTable Map object is keyed by the ''Long'' data type, but MAC addresses in the ''OFMatch'' class are byte[].  The following command will take a byte[] from the match object and return a Long:
+* Tip: The macTable Map object is keyed by the ''Long'' data type, but MAC addresses in the ''OFMatch'' class are byte[].  The following command will take a byte[] from the match object and return a Long:
 <dl><dd><pre>
  Ethernet.toLong(match.getDataLayerSource())
 </pre></dd></dl>
-
-* You can also convert a byte[] to a String for easy logging:
+* Tip: You can also convert a byte[] to a String for easy logging:
 <dl><dd><pre>
 log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
 </pre></dd></dl>
 
-* To check for an element in your HashMap:
+===== Retrieve the port for the destination MAC address, if it is known =====
+* Tip: To check for an element in your HashMap:
 <dl><dd><pre>
  if (macTable.containsKey(mac_address_key)) {
    do..something..here
  }
 </pre></dd></dl>
-
-* To get an element from the HashMap:
+* Tip: To get an element from the HashMap:
 <dl><dd><pre>
  learned_port = macTable.get(mac_address_key)
 </pre></dd></dl>
 
-===== Testing =====
+===== If the destination port is known, send an OFPacketOut directly to that port, else forward using the flooding method in the forwardAsHub method =====
+
+* Check the ''forwardAsHub'' method for an example of how to send an ''OFPacketOut'', just remember to replace the FLOOD action with an actual port number if the port is known.
+
+===== Phase 1 - Testing =====
 * Start Beacon
 * Start Wireshark and turn on its capturing
 * Start Mininet
