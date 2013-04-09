@@ -203,6 +203,9 @@ log.debug("MAC Address:" + HexString.toHexString(match.getDataLayerSource()))
 * Subsequent Packet Out actions should be directed to a single port, to indicate the switch is learning properly, as seen in this screenshot:
 <a href="images/phase1-test2.png" target="_blank">[[images/phase1-test2.png]]</a>
 
+* Once you're confident your switch works, cancel any tcpdumps on nodes, and test the speed using iperf:
+ mininet> iperf
+
 ==== Phase 2 ====
 ----
 ===== Phase 2 - Overview =====
