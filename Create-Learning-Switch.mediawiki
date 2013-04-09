@@ -1,14 +1,20 @@
 __TOC__
 
-Now, let's move on building a networking application. 
+In this exercise, you'll progressively improve the performance and capabilities of an OpenFlow controller built on the Beacon controller platform.  The same concepts learned here apply to other OpenFlow controller platforms, and your Mininet-based VM provides a nice environment to continue with after this tutorial.
 
-In this exercise, we provide you with starter code for a hub controller, which inefficiently copies packets to every port.  First, you'll verify that this controller works and test its performance.
+Your Tutorial VM includes starter code for a hub controller, which inefficiently copies packets to every port.  
+
+First, you'll verify that this controller works and test its performance.  
 
 In Phase 1, you'll modify this provided hub to act as an L2 learning switch.  An L2 learning switch learns the mapping between MAC addresses and ports by watching packets.  If the switch has already seen a particular destination, it can send to exactly one port; otherwise it must flood the packet out all ports, like a hub.
 
 In Phase 2, you'll turn the learning switch into a flow-based switch, where seeing a packet with a known source and destination causes a flow entry to get pushed down.  With a flow-based switch, further packets in the flow are handled in the dataplane, and they avoid the expensive hop to the controller and back.
 
-For this tutorial you'll use the Beacon controller.  The same concepts learned here apply to other OpenFlow controller platforms, and your Mininet-based VM provides a nice environment to continue with after this tutorial.
+If you have time in this session, you can continue to the Extra Credit sections.
+
+In Extra Credit 1, you can extend your controller to support multiple switches.
+
+In Extra Credit 2, you can extend your controller to handle switches that do not buffer packets, or have run out of buffers.
 
 == Beacon (Java) ==
 Beacon is a Java-based OpenFlow controller platform.  For more details and tutorials see the [[Beacon Homepage|http://www.beaconcontroller.net]]. 
