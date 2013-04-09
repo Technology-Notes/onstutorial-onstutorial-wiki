@@ -108,9 +108,9 @@ There is a significant number of comments in the LearningSwitchTutorial file to 
 
 Continue on: the next sections will guide you through the exercise.
 
-==== Phase 1: Hub to Learning Switch ====
+==== Phase 1: Learning Switch ====
 ----
-===== Enable forwardAsLearningSwitch =====
+===== Enable forwardAsLearningSwitch() =====
 * Find the ''receive'' method at the top of the LearningSwitchTutorial class
 * Comment out the call to ''forwardAsHub''
 * Uncomment the call to ''forwardAsLearningSwitch''
@@ -172,7 +172,7 @@ Also, remember to replace the FLOOD action with an actual port number if the por
 
 When your code has no compilation errors, move on to testing.
 
-===== Testing =====
+===== Testing: Verify Learning Switch Behavior =====
 * Start Beacon
 * Start Wireshark capturing on loopback, set to see OpenFlow packets as before
 * Start Mininet (only if not already started):
@@ -194,19 +194,18 @@ When your code has no compilation errors, move on to testing.
 * Subsequent Packet Out actions should be directed to a single port, to indicate the switch is learning properly, as seen in this screenshot:
 <a href="images/phase1-test2.png" target="_blank">[[images/phase1-test2.png]]</a>
 
-* To verify this behavior, you may want to load three xterms, one per host, and run tcpdump on them.
+* To verify the behavior, of a flood followed by a direct forward, you may want to load three xterms, one per host, and run tcpdump on them.
 
 * Once you're confident your switch works, cancel any tcpdumps on nodes, and test the speed using iperf:
  mininet> iperf
 
-==== Phase 2: Hub to Learning Switch ====
+==== Phase 2: Flow-Accelerated Learning Switch ====
 ----
-===== Overview =====
-* If the destination port is known, instead of sending an OFPacketOut, send an OFFlowMod so that subsequent pings are matched on the switch.
+This phase pushes down flow entries to speed up your switch, by avoiding the hop to the controller and back for each packet.  If the destination port is known, instead of sending an OFPacketOut, your modified code will send an OFFlowMod so that subsequent pings are matched on the switch.
 
-At the end of phase 2, when pinging and viewing the controller traffic in Wireshark you should see an initial OFPacketOut that floods for the request/response, then an OFFlodMod being sent for both request/response, then no further traffic for the same ping.
+At the end of phase 2, when pinging and viewing the controller traffic in Wireshark, you should see an initial OFPacketOut that floods for the request/response, then an OFFlodMod being sent for both request/response, then no further traffic for the same ping.
 
-===== Phase 2 - Tips =====
+===== Tips =====
 * To install a flow in the network you will create an ''OFFlowMod'' object:
 <dl><dd><pre>
  OFFlowMod fm = new OFFlowMod();
@@ -219,39 +218,45 @@ At the end of phase 2, when pinging and viewing the controller traffic in Wiresh
 ** idle timeout - 5 seconds
 ** actions - See the next Tip
 
-* You ''OFFlowMod'' when matched should output to the port learned for this destination, use the snippet below to create the action and set it on the ''OFFlowMod'' instance:
+* Your ''OFFlowMod'' when matched should output to the port learned for this destination.  Use the snippet below to create the action and set it on the ''OFFlowMod'' instance:
 <dl><dd><pre>
  OFActionOutput action = new OFActionOutput(outPort);
  fm.setActions(Collections.singletonList((OFAction)action));
 </pre></dd></dl>
 
-* To send a message to an OpenFlow switch do the following:
+* Reminder: to send a message to an OpenFlow switch do the following:
 <dl><dd><pre>
- sw.getOutputStream().write(po);
+ sw.getOutputStream().write(message);
 </pre></dd></dl>
 
-===== Phase 2 - Testing =====
+===== Testing: Verify Flow Mods are Sent =====
 * Start Beacon
 * Start Wireshark and turn on its capturing
 * Start Mininet
- $ sudo mn --topo single,2 --switch ovsk --controller remote
+<dl><dd><pre>
+ $ sudo mn --topo single,3 --switch ovsk --controller remote
+</pre></dd></dl>
 * Wait for Beacon's console to report the switch has connected
 * Send a single ping from h1 to h2 
+<dl><dd><pre>
  mininet> h1 ping -c1 h2
+</pre></dd></dl>
 * Check that the ping was successful
+<dl><dd><pre>
  PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
  64 bytes from 10.0.0.2: icmp_req=1 ttl=64 time=1.68 ms
-
+ 
  --- 10.0.0.2 ping statistics ---
  1 packets transmitted, 1 received, 0% packet loss, time 0ms
  rtt min/avg/max/mdev = 1.683/1.683/1.683/0.000 ms
+</pre></dd></dl>
 
-* Switch to your Wireshark view.  You should see an initial Packet In/Out for the first ARP request where the switch does not know where the destination is at.  All subsequent Packet Ins should have a corresponding Flow Mod, but no Packet Out.  An example can be seen in the following screenshot:
+* Switch to your Wireshark view.  You should see an initial Packet In/Out for the first ARP request where the switch does not know where the destination.  All subsequent Packet Ins should have a corresponding Flow Mod, but no Packet Out.  An example can be seen in the following screenshot:
 <a href="images/phase2-test1.png" target="_blank">[[images/phase2-test1.png]]</a>
 
 ==== Extra Credit 1: Multiple Switches ====
 ----
-===== Extra Credit 1 - Overview =====
+
 Your learning switch so far only supports a single switch, with a single MAC table.  In this section, you'll extend it to support multiple switches.
 
 Start mininet with a different topology.  In the Mininet console:
@@ -260,15 +265,13 @@ Start mininet with a different topology.  In the Mininet console:
 
 Your created topology looks like this:
 
-
 [[images/Linear2.png]]
-
 
 This will create a 2-switch topology where each switch has a single connected host.
 
-* Modify the application to have a unique MAC table for each connected switch
+* Modify the application to have a unique MAC table for each connected switch.
 
-===== Extra Credit 1 - Tips =====
+===== Tips =====
 * Change the existing single Map macTable to a Map of macTables, indexed by the switch.
 <dl><dd><pre>
     protected Map<IOFSwitch, Map<Long,Short>> macTables =
@@ -277,7 +280,7 @@ This will create a 2-switch topology where each switch has a single connected ho
 * You will need to create a macTable once for each switch, and store it into the macTables Map.  One good place to do this is in the ''addedSwitch'' method, which is called once when a new switch connects.
 * In the ''forwardAsLearningSwitch'' method you will need to retrieve the proper macTable to use for the current ''OFPacketIn'', use the ''sw'' object as the key to retrieve it.
 
-===== Extra Credit 1 - Testing =====
+===== Testing: Verify Connectivity =====
 * Start Beacon
 * Start Wireshark and turn on its capturing
 * Start Mininet
@@ -293,14 +296,14 @@ This will create a 2-switch topology where each switch has a single connected ho
 
 ==== Extra Credit 2: Switches Without Buffering ====
 ----
-===== Extra Credit 2 - Overview =====
+
 When OpenFlow switches send a Packet In to a controller they also typically keep a copy of the packet locally, with an assigned id - the ''buffer id'', which is also included in the Packet In message.  Some switches may not support buffering packets locally, or could be out of space to buffer additional packets.  In this case the 'buffer id' on a Packet In will be set to ''OFPacketOut.BUFFER_ID_NONE''.
 
-In phase 2 when you send a Flow Mod to the switch it included the ''buffer id'' of the packet, and once the Flow Mod was installed the switch sent the packet with the provided ''buffer id''.  However this does not work if the packet has not been buffered.  The solution is to send a Flow Mod followed by a Packet Out that contains the actual packet data.  The Flow Mod's buffer id should be set to ''OFPacketOut.BUFFER_ID_NONE''.
+In phase 2 when you sent a Flow Mod to the switch, it included the ''buffer id'' of the packet, and once the Flow Mod was installed the switch sent the packet with the provided ''buffer id''.  However this does not work if the packet has not been buffered.  The solution is to send a Flow Mod followed by a Packet Out that contains the actual packet data.  The Flow Mod's buffer id should be set to ''OFPacketOut.BUFFER_ID_NONE''.
 
-* Modify the phase 2 code to send an ''OFPacketOut'' after the ''OFFlowMod'' when the OFPacketIn's ''buffer id'' is set to ''OFPacketOut.BUFFER_ID_NONE''
+* Modify the phase 2 code to send an ''OFPacketOut'' after the ''OFFlowMod'' when the OFPacketIn's ''buffer id'' is set to ''OFPacketOut.BUFFER_ID_NONE''.
 
-===== Extra Credit 2 - Tips =====
+===== Tips =====
 * After sending the Flow Mod from phase 2, test if the OFPacketIn's buffer id is none
 <dl><dd><pre>
  if (pi.getBufferId() == OFPacketOut.BUFFER_ID_NONE) {
@@ -309,7 +312,7 @@ In phase 2 when you send a Flow Mod to the switch it included the ''buffer id'' 
 ** Make sure you copy the packet data from the ''OFPacketIn'' to the ''OFPacketOut''
 ** Also ensure you set the ''OFActionOutput''s port to the outgoing port if known.
 
-===== Extra Credit 2 - Testing =====
+===== Testing: Verify Corner Case =====
 * Because the switches included in Mininet buffer all packets by default, you'll need to simulate this behavior in Beacon by modifying the actual ''OFPacketIn'' object and overwriting its ''buffer id''.  Add the following line of code right after the ''forwardAsLearningSwitch'' method declaration:
  pi.setBufferId(OFPacketOut.BUFFER_ID_NONE);
 
@@ -330,7 +333,11 @@ In phase 2 when you send a Flow Mod to the switch it included the ''buffer id'' 
  rtt min/avg/max/mdev = 1.683/1.683/1.683/0.000 ms
 
 * Switch to your Wireshark view.  After the initial Packet In/Packet Out you should see all subsequent Packet In's followed by a Flow Mod and a Packet Out.  
-* Note there is a bug in Wireshark currently that a single network packet containing both a Flow Mod and a Packet Out shows up in the Wireshark top view as only a Packet Out, if you select it then expand it in the bottom view you will see two OpenFlow packets, the Flow Mod followed by the Packet Out.
+* Note that when a single network packet contains both a Flow Mod and a Packet Out, it shows up in the Wireshark top view as only a Packet Out; if you select it then expand it in the bottom view you will see two OpenFlow packets, the Flow Mod followed by the Packet Out.  Watch out for these!
 * The Flow Mod and Packet Out's ''buffer id'' should both be set to None, as seen in the following screenshot:
 <a href="images/extracredit2-test1.png" target="_blank">[[images/extracredit2-test1.png]]</a>
 <a href="images/extracredit2-test2.png" target="_blank">[[images/extracredit2-test2.png]]</a>
+
+
+
+Have you completed at least phase 1 and 2, and maybe some extra credit?  Continue to the [[FlowVisor exercise]].
