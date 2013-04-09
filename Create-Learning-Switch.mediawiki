@@ -2,21 +2,21 @@ __TOC__
 
 Now, let's move on building a networking application. 
 
-In this exercise, we provide you with starter code for a hub controller, which inefficiently copies packets to every port.
+In this exercise, we provide you with starter code for a hub controller, which inefficiently copies packets to every port.  First, you'll verify that this controller works and test its performance.
 
-After getting familiar with it, you'll modify this provided hub to act as an L2 learning switch, in Phase 1.  An L2 learning switch learns the mapping between MAC addresses and ports by watching packets.  If the switch has already seen a particular destination, it can send to exactly one port; otherwise it must flood the packet out all ports, like a hub.
+In Phase 1, you'll modify this provided hub to act as an L2 learning switch.  An L2 learning switch learns the mapping between MAC addresses and ports by watching packets.  If the switch has already seen a particular destination, it can send to exactly one port; otherwise it must flood the packet out all ports, like a hub.
 
-Later, in Phase 2, you'll turn the learning switch into a flow-based switch, where seeing a packet with a known source and destination causes a flow entry to get pushed down.  With a flow-based switch, further packets in the flow are handled in the dataplane, and they avoid the expensive hop to the controller and back.
+In Phase 2, you'll turn the learning switch into a flow-based switch, where seeing a packet with a known source and destination causes a flow entry to get pushed down.  With a flow-based switch, further packets in the flow are handled in the dataplane, and they avoid the expensive hop to the controller and back.
 
-For this tutorial you'll use the Beacon controller.  The same concepts learned here apply to most other OpenFlow controller platforms, and your Mininet-based VM provides a nice environment to continue with after this tutorial.
+For this tutorial you'll use the Beacon controller.  The same concepts learned here apply to other OpenFlow controller platforms, and your Mininet-based VM provides a nice environment to continue with after this tutorial.
 
 == Beacon (Java) ==
 Beacon is a Java-based OpenFlow controller platform.  For more details and tutorials see the [[Beacon Homepage|http://www.beaconcontroller.net]]. 
 
-==== Start Eclipse ====
+=== Start Eclipse ===
 Start Eclipse by double clicking the Eclipse shortcut on the desktop.
 
-=== Running the Tutorial Controller ===
+=== Run the Tutorial Controller ===
 
 Make sure the reference controller used before is not running, run the following in a terminal:
  $ sudo killall controller
@@ -27,14 +27,14 @@ You should also restart Mininet to make sure that everything is "clean". From yo
 
 Make sure you do not add extra spaces around the comma.
 
-Now it's time to start Beacon in Debug mode.
+Now, start Beacon in Debug mode.
 
 Within Eclipse do the following:
 
 * Run -> Debug Configurations
 * Look for the OSGi Framework on the left, expand its children and select 'beacon Tutorial LearningSwitch', then click Debug.
 
-This command will start Beacon, including the 'tutorial' bundle, listening to incoming connection from switches on the standard OpenFlow port (6633).
+This command will start Beacon, including the 'tutorial' bundle, listening to incoming connection from switches on the standard OpenFlow port (6633).  Alternately, you can click on the bug icon near the top left of the toolbar to start debugging.
 
 Wait until the application indicates that the OpenFlow switch has connected.  When the switch connects, your Eclipse console should print something like this: 
 
@@ -47,11 +47,8 @@ Now we verify that hosts can ping each other, and that all hosts see the exact s
 
 Arrange each xterm so that they're all on the screen at once.  This may require reducing the height of to fit a cramped laptop screen.
 
-In the xterms for h2 and h3, run tcpdump, a utility to print the packets seen by a host:
- # tcpdump -XX -n -i h2-eth0
-
-and respectively:
- # tcpdump -XX -n -i h3-eth0
+In the xterms for h2 and h3, run tcpdump, a utility to print the packets seen by a host, and ignore IPv6 packets:
+ # tcpdump -XX -n not ip6
 
 In the xterm for h1, send a ping:
  # ping -c1 10.0.0.2
@@ -85,15 +82,21 @@ Go to Eclipse and stop Beacon (you should see a square, red button in the consol
 <a href="images/Eclipse_console_stop.png" target="_blank">[[images/Eclipse_console_stop.png]]</a>
 <a href="images/Eclipse_debug_stop.png" target="_blank">[[images/Eclipse_debug_stop.png]]</a>
 
-The file you'll modify is '''net.beaconcontroller.tutorial/src/main/java/net/beaconcontroller/tutorial/LearningSwitchTutorial.java'''.  Find this file in the left pane of Eclipse and double-click it to open it in the editor window.
+The file you'll modify is called LearningSwitchTutorial.java.  It is located at:
+'''net.beaconcontroller.tutorial/src/main/java/net/beaconcontroller/tutorial/LearningSwitchTutorial.java'''.
 
-Take a quick look through the file, the key things to notice:
-* The receive method is where packets initially arrive from switches, by default this method calls forwardAsHub.  Once you have implemented the code in forwardAsLearningSwitch you should change receive by commenting out the call to forwardAsHub, and uncommenting the call to forwardAsLearningSwitch.
+If this file is not already open in Eclipse, find it in the left pane of Eclipse and double-click it to open it in the editor window.
+
+After opening the file, you may want to compress the left pane of Eclipse to free up some screen space, as you won't need to open any additional files in Eclipse.  Click the Minimize button at the top right of the left pane, which looks like a dash.
+
+To jump between functions more quickly, you may want to expand the right pane to get the Outline view.  Click the Restore button at the top right of the right pane, which looks like two stacked windows.
+
+Take a quick look through the file.  The key things to notice:
+* The receive method is where packets initially arrive from switches, and by default this method calls forwardAsHub.  Once you have implemented the code in forwardAsLearningSwitch you should change receive by commenting out the call to forwardAsHub, and uncommenting the call to forwardAsLearningSwitch.
 * The forwardAsHub method behaves as a broadcast hub, and has code that gives you an example of how to send an OFPacketOut message.
 * The forwardAsLearningSwitch method is where you will be writing all of your code (with the exception of the receive method mentioned earlier).  It should take you around 30 lines of code in this method to implement a learning switch.
 
 Use Wireshark to inspect the packets sent and received by your controller to help debug your code.
-
 
 API documentation is available for both Beacon's classes and the general Java classes, look for the shortcuts on your desktop to launch a browser to view these.
 
@@ -105,6 +108,8 @@ There is a significant number of comments in the LearningSwitchTutorial file to 
 ==== Phase 1 ====
 ----
 ===== Phase 1 - Overview =====
+This tutorial will walk you through the steps to complete each of the following tasks:
+* Change to the forwardAsSwitch function
 * Build an OFMatch object based on the incoming OFPacketIn
 * Learn that the source MAC address is at the incoming port and store it in the Map
 * Retrieve the port the destination MAC address is at, if it is known
