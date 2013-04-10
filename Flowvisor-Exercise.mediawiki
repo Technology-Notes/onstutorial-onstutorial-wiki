@@ -274,3 +274,85 @@ You should now see both the <tt>video</tt> and <tt>non-video</tt> slices in addi
 
 ====Creating FlowSpaces====
 
+FlowSpace creation in this case is slightly more involved, especially at the edge ports where hosts connect to the switches, as the traffic there is split between the two slices. At the edge ports, the <tt>video</tt> slice needs to handle all the traffic with source or destination port of 9999, and the <tt>non-video</tt> slice needs to handle the rest. We will achieve it using different <tt>priority</tt> values.
+
+Let's start with (switch s1, port 3) that connects s1 to h1. First, create two high priority flowspaces that matches all traffic with source or destination port of 9999 at that port, and assign it to the <tt>video</tt> slice:
+ fvctl -f /dev/null add-flowspace dpid1-port3-video-src 1 100 in_port=3,tp_src=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid1-port3-video-dst 1 100 in_port=3,tp_dst=9999 video=7
+We have arbitrarily chosen a high priority value of 100. Next, create a low priority flowspace that matches all traffic at that port, and assign it to the <tt>non-video</tt> slice:
+ fvctl -f /dev/null add-flowspace dpid1-port3-non-video 1 1 in_port=3 non-video=7
+
+This results in all the video traffic at (switch s1, port 3) being handled by the <tt>video</tt> slice, and all the non-video traffic at being handled by the <tt>non-video</tt> slice.
+
+Similarly, create flowspaces to seggregate video and non-video traffic at (switch s1, port 4):
+ fvctl -f /dev/null add-flowspace dpid1-port4-video-src 1 100 in_port=4,tp_src=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid1-port4-video-dst 1 100 in_port=4,tp_dst=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid1-port4-non-video 1 1 in_port=4 non-video=7
+
+Similarly, create flowspaces for the other two edge ports (at switch s4).
+Create flowspaces for (switch s4, port 3):
+ fvctl -f /dev/null add-flowspace dpid4-port3-video-src 4 100 in_port=3,tp_src=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid4-port3-video-dst 4 100 in_port=3,tp_dst=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid4-port3-non-video 4 1 in_port=3 non-video=7
+Create flowspaces for (switch s4, port 4):
+ fvctl -f /dev/null add-flowspace dpid4-port4-video-src 4 100 in_port=4,tp_src=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid4-port4-video-dst 4 100 in_port=4,tp_dst=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid4-port4-non-video 4 1 in_port=4 non-video=7
+
+We are now just left with the internal ports. Creating flowspaces for them is simple, as traffic at each internal port is exclusively handled by one slice. Create flowspaces for the internal ports just the way you did part 1 (remember to use the correct slice name).
+
+Assign (switch s1, port 2) to <tt>video</tt>:
+ fvctl -f /dev/null add-flowspace dpid1-port2-video 1 100 in_port=2 video=7
+Assign (switch s3, all ports) to <tt>video</tt>:
+ fvctl -f /dev/null add-flowspace dpid3-video 3 1 any video=7
+Assign (switch s4, port 2) to <tt>video</tt>:
+ fvctl -f /dev/null add-flowspace dpid4-port2-video 4 100 in_port=2 video=7
+Assign (switch s1, port 1) to <tt>non-video</tt>:
+ fvctl -f /dev/null add-flowspace dpid1-port1-non-video 1 1 in_port=1 non-video=7
+Assign (switch s2, all ports) to <tt>non-video</tt>:
+ fvctl -f /dev/null add-flowspace dpid2-non-video 2 1 any non-video=7
+Assign (switch s4, port 1) to <tt>non-video</tt>:
+ fvctl -f /dev/null add-flowspace dpid4-port1-non-video 4 1 any non-video=7
+ 
+Now, we are done with creating all the flowspaces. Ensure that the flowspaces are correctly added:
+ fvctl -f /dev/null list-flowspace
+You should see all the flowspaces that you just added (18 in all).
+
+Connect both slices to two different instances of the FVExercise controller app:
+ TODO
+
+We will next verify that we correctly sliced our network. If we correctly sliced our network, a video flow (running on TCP port 9999) should go over the high bandwidth path and see a throughput of 10 Mb/s. A non-video flow (running on any other TCP port) should go over the low bandwidth path and see a throughput of 1 Mb/s.
+
+Open terminals for hosts h1 and h3. In the mininet console run:
+ xterm h1 h3
+In the popped up terminal of "Node: h1" run:
+ iperf -s -p 9999
+Start a video flow by running the following command in the popped up terminal of "Node: h3":
+ iperf -c 10.0.0.1 -p 9999 -t 10 -i 1
+You should see a throughput of roughly around 10 Mb/s.
+
+Next open terminals for hosts h2 and h4. In the mininet console run:
+ xterm h2 h4
+In the popped up terminal of "Node: h2" run:
+ iperf -s -p 8888
+Start a non-video flow by running the following command in the popped up terminal of "Node: h4":
+ iperf -c 10.0.0.2 -p 8888 -t 10 -i 1
+You should see a throughput of roughly around 1 Mb/s.
+
+====Cleanup====
+Stop both the controllers.
+
+Remove both the slices that you created:
+ fvctl -f /dev/null remove-slice video
+ fvctl -f /dev/null remove-slice non-video
+
+Ensure that all the slices are correctly removed:
+ fvctl -f /dev/null list-slices
+You should see only the default <tt>fvadmin</tt> slice remaining. Once the slices are removed, the associated flowspaces too are automatically removed. Ensure that all the flowspaces are correctly removed:
+ fvctl -f /dev/null list-flowspace
+
+====Quiz====
+* If static ARP entries were not set, which slice would have handled the ARP traffic? (Hint: The way the flowvisor handles arps is that it takes an arp request "who has $ip? tell $mac" and sends that to the slice that has flowspace for nw_dst=$ip.)
+** Answer: The ARP traffic would still be handled by the <tt>non-video</tt> slice. 
+
+Congratulations! You have successfully completed the Slicing exercise.
