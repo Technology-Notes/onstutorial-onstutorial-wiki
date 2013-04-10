@@ -360,7 +360,7 @@ Highlight the hidden text below each question for its answer.
 
 <font color=white>
 * Short answer:  Of course, SDN doesn't do anything you couldn't do before.
-* Long answer: In this case, an administrator might manually define access control rules to direct traffic to the video server or video port along a non-default path, logging into each switch.  The difference is that with SDN, and in particular FlowVisor, those policies can be more dynamic, as the controller for the video slice can make more dynamic traffic-routing and prioritization decisions.
+* Long answer: In this case, an administrator might manually define access control rules to direct traffic to the video server or video port along a non-default path, logging into each switch.  The difference is that with SDN, and in particular FlowVisor, those policies can be more flexible, as the controller for the video slice can make more dynamic traffic-routing and prioritization decisions for more dynamically defined slices of traffic.
 </font>
 
 * If static ARP entries were not set, which slice would have handled the ARP traffic? (Hint: The way the flowvisor handles ARPs is that it takes an ARP request "who has $ip? tell $mac" and sends that to the slice that has flowspace for nw_dst=$ip.)  
@@ -368,6 +368,8 @@ Highlight the hidden text below each question for its answer.
 
 
 ==Takeaway==
-Recall that throughout the exercise we used the same topology and the same controller. By just changing the way we sliced our network, we completely altered the behavior of the network. This is the power of the flexibility and generality of OpenFlow.
+Recall that throughout the exercise we used the same topology and the same controller. By just changing the way we sliced our network, we completely altered the behavior of the network.  This is an example of the power of the flexibility and generality of OpenFlow.
+
+Since our network slicer is a program, with an API, we could even integrate the slicing functionality with server orchestration tools, or implement a higher-level language to define our policies.
 
 Congratulations! You have successfully completed the Slicing exercise.
