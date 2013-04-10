@@ -243,13 +243,13 @@ Remove both the slices that you created:
  fvctl -f /dev/null remove-slice lower
 Ensure that all the slices are correctly removed:
  fvctl -f /dev/null list-slices
-You should see only the default <tt>fvadmin</tt> slice remaining. Once the slices are removed, the associated flowspaces too are automatically removed. Ensure that all the flowspaces are correctly removed:
+You should see only the default <tt>fvadmin</tt> slice remaining. Once the slices are removed, the associated flowspaces are also automatically removed. Ensure that all the flowspaces were correctly removed:
  fvctl -f /dev/null list-flowspace
 
 
 ====Quiz====
-* Could you have implemented this kind of slicing in a traditional network?
-** Answer: Yes, VLAN!
+* Could you have implemented this kind of slicing in a traditional network?  Highlight the hidden text below for the answer.
+<font color=white>** Answer: Yes, with a VLAN! Port-based slicing is not so new.</font>
 
 ===Part2: Advanced Flowspace Slicing===
 
@@ -354,8 +354,8 @@ You should see only the default <tt>fvadmin</tt> slice remaining. Once the slice
  fvctl -f /dev/null list-flowspace
 
 ====Quiz====
-* If static ARP entries were not set, which slice would have handled the ARP traffic? (Hint: The way the flowvisor handles arps is that it takes an arp request "who has $ip? tell $mac" and sends that to the slice that has flowspace for nw_dst=$ip.)
-** Answer: The ARP traffic would still be handled by the <tt>non-video</tt> slice. 
+* If static ARP entries were not set, which slice would have handled the ARP traffic? (Hint: The way the flowvisor handles arps is that it takes an arp request "who has $ip? tell $mac" and sends that to the slice that has flowspace for nw_dst=$ip.)  Highlight the hidden text below for the answer.
+<font color=white> ** Answer: The ARP traffic would still be handled by the non-video slice.</font>
 
 ==Takeaway==
 Recall that throughout the exercise we used the same topology and the same controller. By just changing the way we sliced our network, we completely altered the behavior of the network. This is the power of the flexibility and generality of OpenFlow.
