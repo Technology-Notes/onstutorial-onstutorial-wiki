@@ -42,9 +42,81 @@ slice and flowspace info:
 List the existing slices and flowspaces using the following commands:
  fvctl -f /dev/null list-slices
  fvctl -f /dev/null list-flowspace
-Ensure that all the switches have connected:
+Ensure that the only slice is the default <tt>fvadmin</tt> slice, and that there
+are no existing flowspaces.
+
+Ensure that all the switches have connected by running the following command:
 fvctl -f /dev/null list-datapaths
+You might have to wait for a few seconds for the switches to connect. If all the
+switches are connected, you should see an output like this:
+
+<code>
+mininet@mininet:~$ fvctl -f /dev/null list-datapaths
+Connected switches: 
+  1 : 00:00:00:00:00:00:00:01
+  2 : 00:00:00:00:00:00:00:02
+  3 : 00:00:00:00:00:00:00:03
+  4 : 00:00:00:00:00:00:00:04
+</code>
+
+Next, ensure that all the links are up by running the following command:
 fvctl -f /dev/null list-links
+You should see an output like this:
+
+<code>
+mininet@mininet:~$ fvctl -f /dev/null list-links
+[
+  {
+    "dstDPID": "00:00:00:00:00:00:00:01", 
+    "dstPort": "1", 
+    "srcDPID": "00:00:00:00:00:00:00:02", 
+    "srcPort": "1"
+  }, 
+  {
+    "dstDPID": "00:00:00:00:00:00:00:02", 
+    "dstPort": "1", 
+    "srcDPID": "00:00:00:00:00:00:00:01", 
+    "srcPort": "1"
+  }, 
+  {
+    "dstDPID": "00:00:00:00:00:00:00:04", 
+    "dstPort": "1", 
+    "srcDPID": "00:00:00:00:00:00:00:02", 
+    "srcPort": "2"
+  }, 
+  {
+    "dstDPID": "00:00:00:00:00:00:00:03", 
+    "dstPort": "2", 
+    "srcDPID": "00:00:00:00:00:00:00:04", 
+    "srcPort": "2"
+  }, 
+  {
+    "dstDPID": "00:00:00:00:00:00:00:01", 
+    "dstPort": "2", 
+    "srcDPID": "00:00:00:00:00:00:00:03", 
+    "srcPort": "1"
+  }, 
+  {
+    "dstDPID": "00:00:00:00:00:00:00:04", 
+    "dstPort": "2", 
+    "srcDPID": "00:00:00:00:00:00:00:03", 
+    "srcPort": "2"
+  }, 
+  {
+    "dstDPID": "00:00:00:00:00:00:00:02", 
+    "dstPort": "2", 
+    "srcDPID": "00:00:00:00:00:00:00:04", 
+    "srcPort": "1"
+  }, 
+  {
+    "dstDPID": "00:00:00:00:00:00:00:03", 
+    "dstPort": "1", 
+    "srcDPID": "00:00:00:00:00:00:00:01", 
+    "srcPort": "2"
+  }
+]
+</code>
+
 
 ==Slicing Exercise==
 
