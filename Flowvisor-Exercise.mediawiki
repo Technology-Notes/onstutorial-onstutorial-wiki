@@ -162,6 +162,7 @@ FlowVisor can slice a network in many ways. Here, we are going to explore the si
 [[images/flowvisor_part1.png]]
 
 ====Creating Slices====
+
 Each slice will be managed by a separate controller which will control all the traffic in its slice. A slice is created using the command:
  fvctl add-slice [options] <slicename> <controller-url> <admin-email>
 The controller url is of the form <tt>tcp:hostname:port</tt>. The admin email is used for administrative purposes if there is a problem with the slice. You can learn more about the command by typing:
@@ -235,12 +236,12 @@ Verify that h2 can ping h4 but not h1 and h3 (and vice versa). In the mininet co
 ====Cleanup====
 Stop both the controllers.
 
-Remove all the slices:
+Remove both the slices that you created:
  fvctl -f /dev/null remove-slice upper
  fvctl -f /dev/null remove-slice lower
 Ensure that all the slices are correctly removed:
  fvctl -f /dev/null list-slices
-Ensure that all the flowspaces are correctly removed:
+You should see only the default <tt>fvadmin</tt> slice remaining. Once the slices are removed, the associated flowspaces too are automatically removed. Ensure that all the flowspaces are correctly removed:
  fvctl -f /dev/null list-flowspace
 
 
@@ -250,5 +251,26 @@ Ensure that all the flowspaces are correctly removed:
 
 ===Part2: Advanced Flowspace Slicing===
 
+The previous part of the exercise showed how we can slice an OpenFlow network based on the physical topology of the network. With the centralized visibility and "layerless-ness", we can slice the network in more interesting ways. At the core, slicing is simply delegating the control of flows to different slices. OpenFlow allows us to define flows in flexible ways. This allows us to slice our network in more interesting ways. We will explore one such way in this part of the exercise.
+
+Go back to our WAN topology. We have two paths connecting our two sites: a high bandwidth path and a low bandwidth path. We, the administrators of our WAN, decide that he wants to give special treatment to video traffic in our network. In particular, we want to send all video traffic over the high bandwidth path, and send all the other traffic over the default low bandwidth path. We will see how we can achieve this using slicing.
+
+To keep things simple, we will assume that all video traffic goes on TCP port 9999. We will create two slices--<tt>video</tt> and <tt>non-video</tt>--as shown below.
+
 [[images/flowvisor_part2.png]]
+
+The video slice controls traffic on TCP port 9999. The non-video slice controls everything else. Note that the video slice controls the high-bandwidth part of network. 
+
+====Creating Slices====
+
+Just like the previous part, create two slices called <tt>video</tt> and <tt>non-video</tt> connecting to controllers listening at <tt>tcp:localhost:10001</tt> and <tt>tcp:localhost:10002</tt>, respectively:
+ fvctl -f /dev/null add-slice video tcp:localhost:10001 admin@videoslice
+ fvctl -f /dev/null add-slice non-video tcp:localhost:10002 admin@nonvideoslice
+Leave the Slice password empty by hitting Enter when prompted.
+
+Ensure that the slices were added by running the following command:
+ fvctl -f /dev/null list-slices
+You should now see both the <tt>video</tt> and <tt>non-video</tt> slices in addition to the default <tt>fvadmin</tt> slice, all enabled.
+
+====Creating FlowSpaces====
 
