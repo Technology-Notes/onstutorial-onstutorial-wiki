@@ -63,7 +63,7 @@ Next, ensure that all the links are up by running the following command:
 fvctl -f /dev/null list-links
 You should see an output like this:
 
-<code>
+<dl><dd><pre>
 mininet@mininet:~$ fvctl -f /dev/null list-links
 [
   {
@@ -115,7 +115,7 @@ mininet@mininet:~$ fvctl -f /dev/null list-links
     "srcPort": "2"
   }
 ]
-</code>
+</pre></dd></dl>
 
 
 ==Slicing Exercise==
