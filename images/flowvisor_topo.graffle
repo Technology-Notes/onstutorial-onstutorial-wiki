@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-04-10 10:10:03 -0700</string>
+	<string>2013-04-10 15:20:11 -0700</string>
 	<key>Modifier</key>
 	<string>Nikhil Handigol</string>
 	<key>NotesVisible</key>
@@ -113,7 +113,7 @@
 			<array>
 				<dict>
 					<key>Bounds</key>
-					<string>{{406.5, 225}, {60, 22}}</string>
+					<string>{{409, 225}, {55, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -159,7 +159,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 1 Mbps}</string>
+\f0\fs36 \cf0 1 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -170,7 +170,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{287, 328}, {70, 22}}</string>
+					<string>{{289.5, 328}, {65, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -216,7 +216,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 10 Mbps}</string>
+\f0\fs36 \cf0 10 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -227,7 +227,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{284.625, 229.5}, {60, 22}}</string>
+					<string>{{287.125, 229.5}, {55, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -273,7 +273,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 1 Mbps}</string>
+\f0\fs36 \cf0 1 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -284,7 +284,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{399.5, 328}, {70, 22}}</string>
+					<string>{{402, 328}, {65, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -330,7 +330,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 10 Mbps}</string>
+\f0\fs36 \cf0 10 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -1033,7 +1033,7 @@
 					<integer>69</integer>
 					<key>Points</key>
 					<array>
-						<string>{268.582, 314.325}</string>
+						<string>{268.581, 314.325}</string>
 						<string>{348.418, 382.675}</string>
 					</array>
 					<key>Style</key>
@@ -1068,8 +1068,8 @@
 					<integer>68</integer>
 					<key>Points</key>
 					<array>
-						<string>{406.334, 194.333}</string>
-						<string>{483.88, 263.667}</string>
+						<string>{406.341, 194.333}</string>
+						<string>{483.906, 263.667}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1136,8 +1136,8 @@
 					<integer>66</integer>
 					<key>Points</key>
 					<array>
-						<string>{602.567, 341.397}</string>
-						<string>{548.682, 310.186}</string>
+						<string>{602.567, 341.377}</string>
+						<string>{548.682, 310.136}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1228,7 +1228,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{107, 72}, {221, 46}}</string>
+					<string>{{196.75, 104}, {362.5, 23}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -1274,8 +1274,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs38 \cf0 WAN Topology for \
-FlowVisor Exercise}</string>
+\f0\fs38 \cf0 WAN Topology for FlowVisor Exercise}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -1292,8 +1291,8 @@ FlowVisor Exercise}</string>
 					<integer>59</integer>
 					<key>Points</key>
 					<array>
-						<string>{153.43, 340.822}</string>
-						<string>{202.575, 311.578}</string>
+						<string>{153.429, 340.602}</string>
+						<string>{202.572, 311.061}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1348,8 +1347,8 @@ FlowVisor Exercise}</string>
 					<integer>51</integer>
 					<key>Points</key>
 					<array>
-						<string>{268.356, 263.673}</string>
-						<string>{348.733, 194.327}</string>
+						<string>{268.338, 263.673}</string>
+						<string>{348.668, 194.327}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1381,8 +1380,8 @@ FlowVisor Exercise}</string>
 					<integer>48</integer>
 					<key>Points</key>
 					<array>
-						<string>{548.681, 267.615}</string>
-						<string>{602.569, 235.983}</string>
+						<string>{548.681, 267.591}</string>
+						<string>{602.569, 235.924}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1414,8 +1413,8 @@ FlowVisor Exercise}</string>
 					<integer>47</integer>
 					<key>Points</key>
 					<array>
-						<string>{153.425, 237.013}</string>
-						<string>{202.57, 267.386}</string>
+						<string>{153.426, 236.793}</string>
+						<string>{202.573, 266.87}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1790,7 +1789,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{406.5, 159}, {60, 22}}</string>
+					<string>{{409, 159}, {55, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -1836,7 +1835,7 @@ FlowVisor Exercise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 1 Mbps}</string>
+\f0\fs36 \cf0 1 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -1847,7 +1846,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{287, 352.5}, {70, 22}}</string>
+					<string>{{289.5, 352.5}, {65, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -1893,7 +1892,7 @@ FlowVisor Exercise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 10 Mbps}</string>
+\f0\fs36 \cf0 10 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -1904,7 +1903,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{284.625, 163.5}, {60, 22}}</string>
+					<string>{{287.125, 163.5}, {55, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -1950,7 +1949,7 @@ FlowVisor Exercise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 1 Mbps}</string>
+\f0\fs36 \cf0 1 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -1961,7 +1960,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{399.5, 352.5}, {70, 22}}</string>
+					<string>{{402, 352.5}, {65, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -2007,7 +2006,7 @@ FlowVisor Exercise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 10 Mbps}</string>
+\f0\fs36 \cf0 10 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -2851,59 +2850,6 @@ FlowVisor Exercise}</string>
 					</dict>
 				</dict>
 				<dict>
-					<key>Bounds</key>
-					<string>{{81, 45}, {286, 23}}</string>
-					<key>Class</key>
-					<string>ShapedGraphic</string>
-					<key>FitText</key>
-					<string>Vertical</string>
-					<key>Flow</key>
-					<string>Resize</string>
-					<key>FontInfo</key>
-					<dict>
-						<key>Font</key>
-						<string>Helvetica</string>
-						<key>Size</key>
-						<real>18</real>
-					</dict>
-					<key>ID</key>
-					<integer>62</integer>
-					<key>Shape</key>
-					<string>Rectangle</string>
-					<key>Style</key>
-					<dict>
-						<key>fill</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>shadow</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-					</dict>
-					<key>Text</key>
-					<dict>
-						<key>Pad</key>
-						<integer>0</integer>
-						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
-
-\f0\fs38 \cf0 Part 1: Topology-based Slicing}</string>
-						<key>VerticalPad</key>
-						<integer>0</integer>
-					</dict>
-				</dict>
-				<dict>
 					<key>Class</key>
 					<string>LineGraphic</string>
 					<key>Head</key>
@@ -3281,7 +3227,7 @@ FlowVisor Exercise}</string>
 			<key>BackgroundGraphic</key>
 			<dict>
 				<key>Bounds</key>
-				<string>{{0, 0}, {756, 1106}}</string>
+				<string>{{0, 0}, {756, 553}}</string>
 				<key>Class</key>
 				<string>SolidGraphic</string>
 				<key>ID</key>
@@ -3314,7 +3260,7 @@ FlowVisor Exercise}</string>
 			<array>
 				<dict>
 					<key>Bounds</key>
-					<string>{{75.5, 5.00001}, {339, 23}}</string>
+					<string>{{286.438, 229.5}, {184.125, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3327,59 +3273,6 @@ FlowVisor Exercise}</string>
 						<string>Helvetica</string>
 						<key>Size</key>
 						<real>18</real>
-					</dict>
-					<key>ID</key>
-					<integer>62</integer>
-					<key>Shape</key>
-					<string>Rectangle</string>
-					<key>Style</key>
-					<dict>
-						<key>fill</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>shadow</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-					</dict>
-					<key>Text</key>
-					<dict>
-						<key>Pad</key>
-						<integer>0</integer>
-						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
-
-\f0\fs38 \cf0 Part 2: Advanced Flowspace Slicing}</string>
-						<key>VerticalPad</key>
-						<integer>0</integer>
-					</dict>
-				</dict>
-				<dict>
-					<key>Bounds</key>
-					<string>{{286.438, 512.5}, {184.125, 29}}</string>
-					<key>Class</key>
-					<string>ShapedGraphic</string>
-					<key>FitText</key>
-					<string>Vertical</string>
-					<key>Flow</key>
-					<string>Resize</string>
-					<key>FontInfo</key>
-					<dict>
-						<key>Font</key>
-						<string>Helvetica</string>
-						<key>Size</key>
-						<real>24</real>
 					</dict>
 					<key>ID</key>
 					<integer>117</integer>
@@ -3413,14 +3306,14 @@ FlowVisor Exercise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs48 \cf0 Slice: Non-Video}</string>
+\f0\fs36 \cf0 Slice: Non-Video}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{303.375, 42.5}, {150.25, 29}}</string>
+					<string>{{303.375, 298.5}, {150.25, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3432,7 +3325,7 @@ FlowVisor Exercise}</string>
 						<key>Font</key>
 						<string>Helvetica</string>
 						<key>Size</key>
-						<real>24</real>
+						<real>18</real>
 					</dict>
 					<key>ID</key>
 					<integer>86</integer>
@@ -3466,14 +3359,14 @@ FlowVisor Exercise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs48 \cf0 Slice: Video}</string>
+\f0\fs36 \cf0 Slice: Video}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{287.5, 170.5}, {70, 22}}</string>
+					<string>{{290, 426.5}, {65, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3519,7 +3412,7 @@ FlowVisor Exercise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 10 Mbps}</string>
+\f0\fs36 \cf0 10 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -3530,7 +3423,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{400, 170.5}, {70, 22}}</string>
+					<string>{{402.5, 426.5}, {65, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3576,7 +3469,7 @@ FlowVisor Exercise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 10 Mbps}</string>
+\f0\fs36 \cf0 10 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -3587,7 +3480,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{417.5, 216}, {35, 14}}</string>
+					<string>{{417.5, 472}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3635,7 +3528,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{304.5, 216}, {35, 14}}</string>
+					<string>{{304.5, 472}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3683,7 +3576,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{183.5, 160.5}, {35, 14}}</string>
+					<string>{{183.5, 416.5}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3731,7 +3624,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{183.5, 88.5}, {35, 14}}</string>
+					<string>{{183.5, 344.5}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3779,7 +3672,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{534.5, 160.5}, {35, 14}}</string>
+					<string>{{534.5, 416.5}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3827,7 +3720,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{534.5, 88.5}, {35, 14}}</string>
+					<string>{{534.5, 344.5}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3875,7 +3768,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{476.75, 160.5}, {35, 14}}</string>
+					<string>{{476.75, 416.5}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3923,7 +3816,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{235.5, 160.5}, {35, 14}}</string>
+					<string>{{235.5, 416.5}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3981,8 +3874,8 @@ FlowVisor Exercise}</string>
 					<integer>104</integer>
 					<key>Points</key>
 					<array>
-						<string>{269.082, 156.825}</string>
-						<string>{348.918, 225.175}</string>
+						<string>{269.082, 412.825}</string>
+						<string>{348.918, 481.175}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4016,8 +3909,8 @@ FlowVisor Exercise}</string>
 					<integer>103</integer>
 					<key>Points</key>
 					<array>
-						<string>{407.078, 225.168}</string>
-						<string>{484.172, 156.832}</string>
+						<string>{407.078, 481.168}</string>
+						<string>{484.172, 412.832}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4051,8 +3944,8 @@ FlowVisor Exercise}</string>
 					<integer>102</integer>
 					<key>Points</key>
 					<array>
-						<string>{603.067, 183.873}</string>
-						<string>{549.183, 152.627}</string>
+						<string>{603.067, 439.873}</string>
+						<string>{549.183, 408.627}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4074,7 +3967,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{603.5, 180}, {72, 50}}</string>
+					<string>{{603.5, 436}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -4097,7 +3990,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{342.5, 225.5}, {72, 50}}</string>
+					<string>{{342.5, 481.5}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -4130,8 +4023,8 @@ FlowVisor Exercise}</string>
 					<integer>99</integer>
 					<key>Points</key>
 					<array>
-						<string>{153.928, 183.053}</string>
-						<string>{203.072, 153.447}</string>
+						<string>{153.928, 439.053}</string>
+						<string>{203.072, 409.447}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4153,7 +4046,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{81.5, 180}, {72, 50}}</string>
+					<string>{{81.5, 436}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -4186,8 +4079,8 @@ FlowVisor Exercise}</string>
 					<integer>97</integer>
 					<key>Points</key>
 					<array>
-						<string>{549.181, 110.087}</string>
-						<string>{603.069, 78.4131}</string>
+						<string>{549.181, 366.087}</string>
+						<string>{603.069, 334.413}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4219,8 +4112,8 @@ FlowVisor Exercise}</string>
 					<integer>96</integer>
 					<key>Points</key>
 					<array>
-						<string>{153.927, 79.2442}</string>
-						<string>{203.073, 109.256}</string>
+						<string>{153.927, 335.244}</string>
+						<string>{203.073, 365.256}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4242,7 +4135,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{476.75, 106.5}, {72, 50}}</string>
+					<string>{{476.75, 362.5}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -4265,7 +4158,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{203.5, 106.5}, {72, 50}}</string>
+					<string>{{203.5, 362.5}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -4288,7 +4181,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{603.5, 32}, {72, 50}}</string>
+					<string>{{603.5, 288}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -4311,7 +4204,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{81.5, 32}, {72, 50}}</string>
+					<string>{{81.5, 288}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -4334,7 +4227,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{407, 379}, {60, 22}}</string>
+					<string>{{409.5, 96}, {55, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -4380,7 +4273,7 @@ FlowVisor Exercise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 1 Mbps}</string>
+\f0\fs36 \cf0 1 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -4391,7 +4284,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{285.125, 383.5}, {60, 22}}</string>
+					<string>{{287.625, 100.5}, {55, 22}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -4437,7 +4330,7 @@ FlowVisor Exercise}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
 
-\f0\fs36 \cf0 1 Mbps}</string>
+\f0\fs36 \cf0 1 Mb/s}</string>
 						<key>VerticalPad</key>
 						<integer>0</integer>
 					</dict>
@@ -4448,7 +4341,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{417.5, 339}, {35, 14}}</string>
+					<string>{{417.5, 56}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -4496,7 +4389,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{304.5, 339}, {35, 14}}</string>
+					<string>{{304.5, 56}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -4544,7 +4437,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{183.5, 472}, {35, 14}}</string>
+					<string>{{183.5, 189}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -4592,7 +4485,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{183.5, 400}, {35, 14}}</string>
+					<string>{{183.5, 117}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -4640,7 +4533,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{534.5, 472}, {35, 14}}</string>
+					<string>{{534.5, 189}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -4688,7 +4581,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{534.5, 400}, {35, 14}}</string>
+					<string>{{534.5, 117}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -4736,7 +4629,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{476.75, 400}, {35, 14}}</string>
+					<string>{{476.75, 117}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -4784,7 +4677,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{235.5, 400}, {35, 14}}</string>
+					<string>{{235.5, 117}, {35, 14}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -4842,8 +4735,8 @@ FlowVisor Exercise}</string>
 					<integer>68</integer>
 					<key>Points</key>
 					<array>
-						<string>{406.842, 348.333}</string>
-						<string>{484.408, 417.667}</string>
+						<string>{406.842, 65.3332}</string>
+						<string>{484.408, 134.667}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4875,8 +4768,8 @@ FlowVisor Exercise}</string>
 					<integer>66</integer>
 					<key>Points</key>
 					<array>
-						<string>{603.067, 495.373}</string>
-						<string>{549.183, 464.127}</string>
+						<string>{603.067, 212.373}</string>
+						<string>{549.183, 181.127}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4898,7 +4791,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{603.5, 491.5}, {72, 50}}</string>
+					<string>{{603.5, 208.5}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -4921,7 +4814,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{342.5, 298}, {72, 50}}</string>
+					<string>{{342.5, 15}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -4954,8 +4847,8 @@ FlowVisor Exercise}</string>
 					<integer>59</integer>
 					<key>Points</key>
 					<array>
-						<string>{153.928, 494.553}</string>
-						<string>{203.072, 464.947}</string>
+						<string>{153.928, 211.553}</string>
+						<string>{203.072, 181.947}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4977,7 +4870,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{81.5, 491.5}, {72, 50}}</string>
+					<string>{{81.5, 208.5}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -5010,8 +4903,8 @@ FlowVisor Exercise}</string>
 					<integer>51</integer>
 					<key>Points</key>
 					<array>
-						<string>{268.837, 417.673}</string>
-						<string>{349.163, 348.327}</string>
+						<string>{268.837, 134.673}</string>
+						<string>{349.163, 65.3267}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -5043,8 +4936,8 @@ FlowVisor Exercise}</string>
 					<integer>48</integer>
 					<key>Points</key>
 					<array>
-						<string>{549.181, 421.587}</string>
-						<string>{603.069, 389.913}</string>
+						<string>{549.181, 138.587}</string>
+						<string>{603.069, 106.913}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -5076,8 +4969,8 @@ FlowVisor Exercise}</string>
 					<integer>47</integer>
 					<key>Points</key>
 					<array>
-						<string>{153.927, 390.744}</string>
-						<string>{203.073, 420.756}</string>
+						<string>{153.927, 107.744}</string>
+						<string>{203.073, 137.756}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -5099,7 +4992,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{476.75, 418}, {72, 50}}</string>
+					<string>{{476.75, 135}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -5122,7 +5015,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{203.5, 418}, {72, 50}}</string>
+					<string>{{203.5, 135}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -5145,7 +5038,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{603.5, 343.5}, {72, 50}}</string>
+					<string>{{603.5, 60.5}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -5168,7 +5061,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{81.5, 343.5}, {72, 50}}</string>
+					<string>{{81.5, 60.5}, {72, 50}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -5191,7 +5084,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{75.5, 28}, {605, 255}}</string>
+					<string>{{75.5, 284}, {605, 255}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -5226,7 +5119,7 @@ FlowVisor Exercise}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{75.5, 298}, {605, 255}}</string>
+					<string>{{75.5, 15}, {605, 255}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -5310,7 +5203,7 @@ FlowVisor Exercise}</string>
 			<key>UniqueID</key>
 			<integer>3</integer>
 			<key>VPages</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>SmartAlignmentGuidesActive</key>
@@ -5340,7 +5233,7 @@ FlowVisor Exercise}</string>
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{-13, 0}, {783, 581}}</string>
+		<string>{{-21, -13}, {797, 581}}</string>
 		<key>Zoom</key>
 		<real>1</real>
 		<key>ZoomValues</key>
