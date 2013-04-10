@@ -10,7 +10,7 @@
 
 5: [[Create-Learning-Switch|Create Learning Switch]]
 
-6: [[Flowvisor-Exercise|FlowVisor Exercise]]
+6: [[Flowvisor-Exercise|Slice a Network]]
 
 7: [[Credits]]
 

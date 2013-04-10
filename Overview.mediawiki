@@ -8,7 +8,7 @@ In this tutorial, you'll complete a set of exercises designed to explain concept
 Soon, you will:
 * [[Learn-Development-Tools|Learn Development Tools]]: add rules to a switch, view flow tables, watch OpenFlow messages, and benchmark a simple controller
 * [[Create-Learning-Switch|Create a Learning Switch]]: turn a hub into a faster Ethernet learning switch, and then a flow-accelerated learning switch, using the Beacon OpenFlow controller
-* [[Slice-A-Network|Slice a Network]]: slice a network in multiple ways, using FlowVisor
+* [[FlowVisor-Exercise|Slice a Network]]: slice a network in multiple ways, using FlowVisor
 
 To get you started quickly, this tutorial is distributed as a preconfigured virtual machine with the needed software.  Just run the VM in VirtualBox, using the instructions in the next section, and you can get up and running.
 
