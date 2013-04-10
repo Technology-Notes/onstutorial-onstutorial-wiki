@@ -9,3 +9,24 @@ For this exercise we will use an open source tool called the FlowVisor.
 * FlowVisor enforces isolation between each slice, i.e., one slice cannot control another's traffic.
 
 You can find more information about FlowVisor and source code at: [[http://www.flowvisor.org]]
+
+==Exercise Topology==
+
+In this exercise we will slice a wide-area network (WAN) in two different ways. The WAN shown in the figure above connects two sites. For simplicity, we’ll have each site represented by a single OpenFlow switch, s1 and s4, respectively. The sites, s1 and s4, have two paths between them: 
+* a low bandwidth, low latency path via switch s2
+* a high bandwidth, high latency path via switch s3
+
+s1 has two hosts attached: h1 and h2. s2 has two hosts attached: h3 and h4.
+
+==Environment Setup==
+
+===Part1: Mininet Setup===
+
+===Part 2: FlowVisor Setup====
+
+==Slicing Exercise==
+
+===Part1: Simple Topology-based Slicing===
+
+===Part2: Advanced Flowspace Slicing===
+
