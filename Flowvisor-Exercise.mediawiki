@@ -82,7 +82,6 @@ Configured Flow entries:
   None
 </pre></dd></dl>
 
-
 Ensure that all the switches have connected by running the following command:
  fvctl -f /dev/null list-datapaths
 You might have to wait for a few seconds for the switches to connect before running the command. If all the
@@ -162,6 +161,7 @@ FlowVisor can slice a network in many ways. Here, we are going to explore the si
 
 [[images/flowvisor_part1.png]]
 
+====Creating Slices====
 Each slice will be managed by a separate controller which will control all the traffic in its slice. A slice is created using the command:
  fvctl add-slice [options] <slicename> <controller-url> <admin-email>
 The controller url is of the form <tt>tcp:hostname:port</tt>. The admin email is used for administrative purposes if there is a problem with the slice. You can learn more about the command by typing:
@@ -172,10 +172,70 @@ Now, create a slice named <tt>upper</tt> connecting to a controller listening on
 Leave the Slice password empty by hitting Enter when prompted.
 
 Similarly, create a slice named <tt>lower</tt> connecting to a controller listening on <tt>tcp:localhost:10002</tt>.
-<pre style="color:white">
  fvctl -f /dev/null add-slice lower tcp:localhost:10002 admin@lowerslice
-</pre>
 Leave the Slice password empty by hitting Enter when prompted.
+
+Ensure that the slices were added by running the following command:
+ fvctl -f /dev/null list-slices
+You should now see both the <tt>upper</tt> and <tt>lower</tt> slices in addition to the default <tt>fvadmin</tt> slice, all enabled.
+
+====Creating FlowSpaces====
+
+FlowSpaces associate packets of a particular type in the network to specific slices. You can create flowspaces using the following command:
+ fvctl add-flowspace [options] <flowspace-name> <dpid> <priority> <match> <slice-perm>
+
+* When a packet matches multiple flowspaces, FlowVisor assigns it to the flowspace of the highest <tt>priority</tt>.
+* <tt>match</tt> describes a flow or flows. Such flow descriptions comprise a series field=value assignments, separated by commas.
+* <tt>slice-perm</tt> is  a  comma  separated  list  of  slices that have control over a specific FlowSpace.  <tt>slice-perm</tt> is of the form "slicename1=perm[slicename2=perm[...]]". Each slice can have three types of permissions over a flowspace: DELEGATE, READ, and WRITE.  Permissions are a  bitmask  specified as an integer, with DELEGATE=1, READ=2, WRITE=4.
+
+You can learn more about the command by typing:
+ fvctl add-flowspace -h
+
+Now, create a flowspace named <tt>dpid1-port1</tt> (with priority value 1) that maps all the traffic on port 1 of switch s1 to the upper slice by running the following command:
+ fvctl -f /dev/null add-flowspace dpid1-port1 1 1 in_port=1 upper=7
+Here we gave the upper slice all permissions: DELEGATE, READ, and WRITE.
+
+Similarly, create a flowspace named <tt>dpid1-port3</tt> that maps all the traffic on port 3 of switch s1 to the upper slice:
+ fvctl -f /dev/null add-flowspace dpid1-port3 1 1 in_port=3 upper=7
+
+We can create a flowspace for all the traffic at a switch by using the match value of <tt>any</tt>. Use that technique to add switch s2 to the upper slice:
+ fvctl -f /dev/null add-flowspace dpid2 2 1 any upper=7
+
+Now, create flowspaces to add ports 1 and 3 of switch s4 to the upper slice:
+ fvctl -f /dev/null add-flowspace dpid4-port1 4 1 in_port=1 upper=7
+ fvctl -f /dev/null add-flowspace dpid4-port3 4 1 in_port=3 upper=7
+
+Ensure that the flowspaces are correctly added:
+ fvctl -f /dev/null list-flowspace
+You should see all the flowspaces (5 in all) that you just added.
+
+Now, create flowspaces for the lower slice:
+ fvctl -f /dev/null add-flowspace dpid1-port2 1 1 in_port=2 lower=7
+ fvctl -f /dev/null add-flowspace dpid1-port4 1 1 in_port=4 lower=7
+ fvctl -f /dev/null add-flowspace dpid3 3 1 any lower=7
+ fvctl -f /dev/null add-flowspace dpid4-port2 4 1 in_port=2 lower=7
+ fvctl -f /dev/null add-flowspace dpid4-port4 4 1 in_port=4 lower=7
+
+Ensure that the flowspaces are correctly added:
+ fvctl -f /dev/null list-flowspace
+
+Connect both slices to two different instances of the FVExercise controller app, in two different windows.
+ TODO
+
+After a short delay, both controllers should connect. Verify that h1 can ping h3 but not h2 and h4 (and vice versa). In the mininet console run the following commands:
+ h1 ping -c1 h3
+ h1 ping -c1 -W1 h2
+ h1 ping -c1 -W1 h4
+
+Verify that h2 can ping h4 but not h1 and h3 (and vice versa). In the mininet console run the following commands:
+ h2 ping -c1 h4
+ h2 ping -c1 -W1 h1
+ h2 ping -c1 -W1 h3
+
+====Quiz=====
+* Could you have implemented this kind of slicing in a traditional network?
+** Answer: Yes, VLAN!
+
 
 ===Part2: Advanced Flowspace Slicing===
 
