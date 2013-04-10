@@ -1,3 +1,5 @@
+__TOC__
+
 In this exercise, you will learn how to slice your OpenFlow network and have each slice controlled by a separate controller. In the process, you will also learn the concept of flowspaces and how the centralized visibility and “layerless-ness” of OpenFlow enables flexible slicing.
 
 For this exercise we will use an open source tool called the FlowVisor.
@@ -22,11 +24,10 @@ s1 has two hosts attached: h1 and h2. s2 has two hosts attached: h3 and h4.
 
 ===Part1: Mininet Setup===
 
-===Part 2: FlowVisor Setup====
+===Part 2: FlowVisor Setup===
 
 ==Slicing Exercise==
 
 ===Part1: Simple Topology-based Slicing===
 
 ===Part2: Advanced Flowspace Slicing===
-
