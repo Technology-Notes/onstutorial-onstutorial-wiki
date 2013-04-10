@@ -24,7 +24,25 @@ s1 has two hosts attached: h1 and h2. s2 has two hosts attached: h3 and h4.
 
 ===Part1: Mininet Setup===
 
+Before starting, we need to create the topology and make sure that it works. Open the file <tt>~/onstutorial/flowvisor_scripts/flowvisor_topo.py</tt>. This file contains the python code to create the topology below in mininet. Go ahead and run mininet with the following command: 
+ sudo mn --custom ~/onstutorial/flowvisor_scripts/flowvisor_topo.py --topo fvtopo --link tc --controller remote --mac --arp
+
+This will create a network in mininet with the WAN topology. To keep things simple, we have set static ARP entries in the mininet hosts.
+
 ===Part 2: FlowVisor Setup===
+
+Next we will start FlowVisor and make sure that all the OpenFlow switches we just created connect to it. Start FlowVisor with the following command: 
+ sudo /etc/init.d/flowvisor start
+Ensure that FlowVisor is running by getting its configuration
+ fvctl -f /dev/null get-config
+slice and flowspace info: 
+<tt>fvctl</tt> is a command-line utility to manage flowvisor. The <tt>-f</tt> argument points to a password file. Your FlowVisor is configured to be passwordless, therefore the password file is <tt>/dev/null</tt>.
+List the existing slices and flowspaces using the following commands:
+ fvctl -f /dev/null list-slices
+ fvctl -f /dev/null list-flowspace
+Ensure that all the switches have connected:
+fvctl -f /dev/null list-datapaths
+fvctl -f /dev/null list-links
 
 ==Slicing Exercise==
 
