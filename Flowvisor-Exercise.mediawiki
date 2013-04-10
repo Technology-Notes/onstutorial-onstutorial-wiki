@@ -35,34 +35,71 @@ This will create a network in mininet with the WAN topology. To keep things simp
 
 Next we will start FlowVisor and make sure that all the OpenFlow switches we just created connect to it. Start FlowVisor with the following command: 
  sudo /etc/init.d/flowvisor start
-Ensure that FlowVisor is running by getting its configuration
+Ensure that FlowVisor is running by getting its configuration:
  fvctl -f /dev/null get-config
-slice and flowspace info: 
+If FlowVisor is running, you will see the FlowVisor configuration in JSON format like this:
+<dl><dd><pre>
+mininet@mininet:~$ fvctl -f /dev/null get-config
+{
+  "enable-topo-ctrl": true, 
+  "flood-perm": {
+    "dpid": "all", 
+    "slice-name": "fvadmin"
+  }, 
+  "flow-stats-cache": 30, 
+  "flowmod-limit": {
+    "fvadmin": {
+      "00:00:00:00:00:00:00:01": -1, 
+      "00:00:00:00:00:00:00:02": -1, 
+      "00:00:00:00:00:00:00:03": -1, 
+      "00:00:00:00:00:00:00:04": -1, 
+      "any": null
+    }
+  }, 
+  "stats-desc": false, 
+  "track-flows": false
+}
+</pre></dd></dl>
+
 <tt>fvctl</tt> is a command-line utility to manage flowvisor. The <tt>-f</tt> argument points to a password file. Your FlowVisor is configured to be passwordless, therefore the password file is <tt>/dev/null</tt>.
-List the existing slices and flowspaces using the following commands:
+
+
+List the existing slices using the following command:
  fvctl -f /dev/null list-slices
+Ensure that the only slice is the default <tt>fvadmin</tt> slice. The output should look like this:
+<dl><dd><pre>
+mininet@mininet:~$ fvctl -f /dev/null list-slices
+Configured slices:
+fvadmin         --> enabled 
+</pre></dd></dl>
+
+List the existing slices using the following command:
  fvctl -f /dev/null list-flowspace
-Ensure that the only slice is the default <tt>fvadmin</tt> slice, and that there
-are no existing flowspaces.
+Ensure that there are no existing flowspaces. The output should look like this:
+<dl><dd><pre>
+mininet@mininet:~$  fvctl -f /dev/null list-flowspace
+Configured Flow entries:
+  None
+</pre></dd></dl>
+
 
 Ensure that all the switches have connected by running the following command:
-fvctl -f /dev/null list-datapaths
-You might have to wait for a few seconds for the switches to connect. If all the
+ fvctl -f /dev/null list-datapaths
+You might have to wait for a few seconds for the switches to connect before running the command. If all the
 switches are connected, you should see an output like this:
 
-<code>
+<dl><dd><pre>
 mininet@mininet:~$ fvctl -f /dev/null list-datapaths
 Connected switches: 
   1 : 00:00:00:00:00:00:00:01
   2 : 00:00:00:00:00:00:00:02
   3 : 00:00:00:00:00:00:00:03
   4 : 00:00:00:00:00:00:00:04
-</code>
+</pre></dd></dl>
 
 Next, ensure that all the links are up by running the following command:
-fvctl -f /dev/null list-links
+ fvctl -f /dev/null list-links
 You should see an output like this:
-
 <dl><dd><pre>
 mininet@mininet:~$ fvctl -f /dev/null list-links
 [
