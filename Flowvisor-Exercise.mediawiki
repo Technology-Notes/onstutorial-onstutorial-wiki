@@ -1,0 +1,11 @@
+In this exercise, you will learn how to slice your OpenFlow network and have each slice controlled by a separate controller. In the process, you will also learn the concept of flowspaces and how the centralized visibility and “layerless-ness” of OpenFlow enables flexible slicing.
+
+For this exercise we will use an open source tool called the FlowVisor.
+
+==FlowVisor==
+
+* FlowVisor is a special purpose OpenFlow controller that acts as a transparent proxy between OpenFlow switches and multiple OpenFlow controllers.
+* FlowVisor creates rich slices of network resources and delegates control of each slice to a different controller. Slices can be defined by any combination of switch ports (layer 1), src/dst ethernet address or type (layer 2), src/dst IP address or type (layer 3), and src/dst TCP/UDP port or ICMP code/type (layer 4).
+* FlowVisor enforces isolation between each slice, i.e., one slice cannot control another's traffic.
+
+You can find more information about FlowVisor and source code at: [[http://www.flowvisor.org]]
