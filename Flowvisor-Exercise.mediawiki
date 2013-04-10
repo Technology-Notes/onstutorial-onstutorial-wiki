@@ -355,4 +355,7 @@ You should see only the default <tt>fvadmin</tt> slice remaining. Once the slice
 * If static ARP entries were not set, which slice would have handled the ARP traffic? (Hint: The way the flowvisor handles arps is that it takes an arp request "who has $ip? tell $mac" and sends that to the slice that has flowspace for nw_dst=$ip.)
 ** Answer: The ARP traffic would still be handled by the <tt>non-video</tt> slice. 
 
+==Takeaway==
+Recall that throughout the exercise we used the same topology and the same controller. By just changing the way we sliced our network, we completely altered the behavior of the network. This is the power of the flexibility and generality of OpenFlow.
+
 Congratulations! You have successfully completed the Slicing exercise.
