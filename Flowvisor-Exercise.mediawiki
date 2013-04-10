@@ -232,6 +232,18 @@ Verify that h2 can ping h4 but not h1 and h3 (and vice versa). In the mininet co
  h2 ping -c1 -W1 h1
  h2 ping -c1 -W1 h3
 
+====Cleanup====
+Stop both the controllers.
+
+Remove all the slices:
+ fvctl -f /dev/null remove-slice upper
+ fvctl -f /dev/null remove-slice lower
+Ensure that all the slices are correctly removed:
+ fvctl -f /dev/null list-slices
+Ensure that all the flowspaces are correctly removed:
+ fvctl -f /dev/null list-flowspace
+
+
 ====Quiz====
 * Could you have implemented this kind of slicing in a traditional network?
 ** Answer: Yes, VLAN!
