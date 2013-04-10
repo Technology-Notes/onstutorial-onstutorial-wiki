@@ -232,10 +232,9 @@ Verify that h2 can ping h4 but not h1 and h3 (and vice versa). In the mininet co
  h2 ping -c1 -W1 h1
  h2 ping -c1 -W1 h3
 
-====Quiz=====
+====Quiz====
 * Could you have implemented this kind of slicing in a traditional network?
 ** Answer: Yes, VLAN!
-
 
 ===Part2: Advanced Flowspace Slicing===
 
