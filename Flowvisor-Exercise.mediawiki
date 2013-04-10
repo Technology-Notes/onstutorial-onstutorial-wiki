@@ -263,7 +263,7 @@ To keep things simple, we will assume that all video traffic goes on TCP port 99
 
 The video slice controls traffic on TCP port 9999. The non-video slice controls everything else. Note that the video slice controls the high-bandwidth part of network. 
 
-====Creating Slices====
+====Create Slices====
 
 Just like the previous part, create two slices called <tt>video</tt> and <tt>non-video</tt> connecting to controllers listening at <tt>tcp:localhost:10001</tt> and <tt>tcp:localhost:10002</tt>, respectively:
  fvctl -f /dev/null add-slice video tcp:localhost:10001 admin@videoslice
@@ -274,7 +274,7 @@ Ensure that the slices were added by running the following command:
  fvctl -f /dev/null list-slices
 You should now see both the <tt>video</tt> and <tt>non-video</tt> slices in addition to the default <tt>fvadmin</tt> slice, all enabled.
 
-====Creating Flowspaces====
+====Create Flowspaces====
 
 FlowSpace creation in this case is slightly more involved, especially at the edge ports where hosts connect to the switches, as the traffic there is split between the two slices. At the edge ports, the <tt>video</tt> slice needs to handle all the traffic with source or destination port of 9999, and the <tt>non-video</tt> slice needs to handle the rest. We will achieve it using different <tt>priority</tt> values.
 
