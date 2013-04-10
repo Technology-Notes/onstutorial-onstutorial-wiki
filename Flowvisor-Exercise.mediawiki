@@ -354,8 +354,18 @@ You should see only the default <tt>fvadmin</tt> slice remaining. Once the slice
  fvctl -f /dev/null list-flowspace
 
 ====Quiz====
-* If static ARP entries were not set, which slice would have handled the ARP traffic? (Hint: The way the flowvisor handles arps is that it takes an arp request "who has $ip? tell $mac" and sends that to the slice that has flowspace for nw_dst=$ip.)  Highlight the hidden text below for the answer.
+Highlight the hidden text below each question for its answer.
+
+* Could this division of the network have been implemented on a more traditional network?
+
+<font color=white>
+* Short answer:  Of course, SDN doesn't do anything you couldn't do before.
+* Long answer: In this case, an administrator might manually define access control rules to direct traffic to the video server or video port along a non-default path, logging into each switch.  The difference is that with SDN, and in particular FlowVisor, those policies can be more dynamic, as the controller for the video slice can make more dynamic traffic-routing and prioritization decisions.
+</font>
+
+* If static ARP entries were not set, which slice would have handled the ARP traffic? (Hint: The way the flowvisor handles ARPs is that it takes an ARP request "who has $ip? tell $mac" and sends that to the slice that has flowspace for nw_dst=$ip.)  
 <font color=white> ** Answer: The ARP traffic would still be handled by the non-video slice.</font>
+
 
 ==Takeaway==
 Recall that throughout the exercise we used the same topology and the same controller. By just changing the way we sliced our network, we completely altered the behavior of the network. This is the power of the flexibility and generality of OpenFlow.
