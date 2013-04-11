@@ -187,7 +187,7 @@ You should now see both the <tt>upper</tt> and <tt>lower</tt> slices in addition
 Flowspaces associate packets of a particular type in the network to specific slices. You can create flowspaces using the following command:
  fvctl add-flowspace [options] <flowspace-name> <dpid> <priority> <match> <slice-perm>
 
-* When a packet matches multiple flowspaces, FlowVisor assigns it to the flowspace with the lowest <tt>priority</tt> number (lower numbers have higher priority).
+* When a packet matches multiple flowspaces, FlowVisor assigns it to the flowspace with the highest <tt>priority</tt> number.
 * <tt>match</tt> describes a flow or flows. Such flow descriptions comprise a series field=value assignments, separated by commas.
 * <tt>slice-perm</tt> is  a  comma-separated list of slices that have control over a specific FlowSpace.  <tt>slice-perm</tt> is of the form "slicename1=perm[slicename2=perm[...]]". Each slice can have three types of permissions over a flowspace: ''DELEGATE'', ''READ'', and ''WRITE''.  Permissions are a  bitmask  specified as an integer, with ''DELEGATE''=1, ''READ''=2, ''WRITE''=4.
 
