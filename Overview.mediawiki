@@ -1,7 +1,7 @@
 __TOC__
 
 
-[[images/Tutorial_flow_hw.png]]
+<!---[[images/Tutorial_flow_hw.png]]--->
 
 In this tutorial, you'll complete a set of exercises designed to explain concepts of SDN, both at the controller and switch levels, in a hands-on, guided way.  At the end, you'll know more about basic SDN concepts, and be ready to apply what you learned to physical networks.  Plus, you'll have a Mininet-based virtual development environment that you can use to conveniently build and test your own new SDN application.
 
