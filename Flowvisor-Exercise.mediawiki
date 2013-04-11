@@ -223,9 +223,16 @@ Ensure that the flowspaces are correctly added:
  fvctl -f /dev/null list-flowspace
 
 Connect each slice to a different instance of the FVexercise controller app. FVexercise app reactively installs routes based on destination MAC address. To do that, open two terminal tabs and run the following:
- ~/onstutorial/beacon-fvexercise-controller1/beacon
- ~/onstutorial/beacon-fvexercise-controller2/beacon
-This will launch two instances of FVexercise beacon controller, listening on port 10001 and 10002 respectively.
+
+* Terminal 1
+ cd ~/onstutorial/beacon-fvexercise-controller1
+ ./beacon
+
+* Terminal 2
+ cd ~/onstutorial/beacon-fvexercise-controller2
+ ./beacon
+
+This will launch two instances of FVexercise Beacon controller, listening on port 10001 and 10002 respectively.
 
 After a short delay, both controllers should connect. Verify that h1 can ping h3 but not h2 and h4 (and vice versa). In the mininet console run the following commands (note: it takes some time for the first ping to go through, as a new route is being installed):
  h1 ping -c1 h3
@@ -323,9 +330,15 @@ Now, we are done with creating all the flowspaces. Ensure that the Flowspaces we
  fvctl -f /dev/null list-flowspace
 You should see all the flowspaces that you just added (18 in all).
 
-Connect both slices to two different instances of the FVExercise controller app as before:
- ~/onstutorial/beacon-fvexercise-controller1/beacon
- ~/onstutorial/beacon-fvexercise-controller2/beacon
+Connect both slices to two different instances of the FVExercise controller app, each running in a terminal window:
+
+* Terminal 1
+ cd ~/onstutorial/beacon-fvexercise-controller1
+ ./beacon
+
+* Terminal 2
+ cd ~/onstutorial/beacon-fvexercise-controller2
+ ./beacon
 
 We will next verify that we correctly sliced our network. If we correctly sliced our network, a video flow (running on TCP port 9999) should go over the high bandwidth path and see a throughput of 10 Mb/s. A non-video flow (running on any other TCP port) should go over the low bandwidth path and see a throughput of 1 Mb/s.
 
