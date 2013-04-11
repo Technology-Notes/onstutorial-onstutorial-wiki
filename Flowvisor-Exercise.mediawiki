@@ -222,11 +222,12 @@ Now, create flowspaces for the lower slice:
 Ensure that the flowspaces are correctly added:
  fvctl -f /dev/null list-flowspace
 
-Connect both slices to two different instances of the FVexercise controller app. FVexercise app reactively installs routes based on destination MAC address.
+Connect each slice to a different instance of the FVexercise controller app. FVexercise app reactively installs routes based on destination MAC address. To do that, open two terminal tabs and run the following:
  ~/onstutorial/beacon-fvexercise-controller1/beacon
  ~/onstutorial/beacon-fvexercise-controller2/beacon
+This will launch two instances of FVexercise beacon controller, listening on port 10001 and 10002 respectively.
 
-After a short delay, both controllers should connect. Verify that h1 can ping h3 but not h2 and h4 (and vice versa). In the mininet console run the following commands:
+After a short delay, both controllers should connect. Verify that h1 can ping h3 but not h2 and h4 (and vice versa). In the mininet console run the following commands (note: it takes some time for the first ping to go through, as a new route is being installed):
  h1 ping -c1 h3
  h1 ping -c1 -W1 h2
  h1 ping -c1 -W1 h4
