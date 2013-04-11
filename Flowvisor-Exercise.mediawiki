@@ -187,7 +187,7 @@ You should now see both the <tt>upper</tt> and <tt>lower</tt> slices in addition
 Flowspaces associate packets of a particular type in the network to specific slices. You can create flowspaces using the following command:
  fvctl add-flowspace [options] <flowspace-name> <dpid> <priority> <match> <slice-perm>
 
-* When a packet matches multiple flowspaces, FlowVisor assigns it to the flowspace of the highest <tt>priority</tt>.
+* When a packet matches multiple flowspaces, FlowVisor assigns it to the flowspace with the lowest <tt>priority</tt> number (lower numbers have higher priority).
 * <tt>match</tt> describes a flow or flows. Such flow descriptions comprise a series field=value assignments, separated by commas.
 * <tt>slice-perm</tt> is  a  comma-separated list of slices that have control over a specific FlowSpace.  <tt>slice-perm</tt> is of the form "slicename1=perm[slicename2=perm[...]]". Each slice can have three types of permissions over a flowspace: ''DELEGATE'', ''READ'', and ''WRITE''.  Permissions are a  bitmask  specified as an integer, with ''DELEGATE''=1, ''READ''=2, ''WRITE''=4.
 
@@ -279,42 +279,43 @@ You should now see both the <tt>video</tt> and <tt>non-video</tt> slices in addi
 FlowSpace creation in this case is slightly more involved, especially at the edge ports where hosts connect to the switches, as the traffic there is split between the two slices. At the edge ports, the <tt>video</tt> slice needs to handle all the traffic with source or destination port of 9999, and the <tt>non-video</tt> slice needs to handle the rest. We will achieve it using different <tt>priority</tt> values.
 
 Let's start with (switch s1, port 3) that connects s1 to h1. First, create two high priority flowspaces that match all traffic with source or destination port of 9999 at that port, and assign it to the <tt>video</tt> slice:
- fvctl -f /dev/null add-flowspace dpid1-port3-video-src 1 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
- fvctl -f /dev/null add-flowspace dpid1-port3-video-dst 1 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
-We have arbitrarily chosen a high priority value of 100. Next, create a low-priority flowspace that matches all traffic at that port, and assign it to the <tt>non-video</tt> slice:
- fvctl -f /dev/null add-flowspace dpid1-port3-non-video 1 1 in_port=3 non-video=7
+ fvctl -f /dev/null add-flowspace dpid1-port3-video-src 1 1 in_port=3,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid1-port3-video-dst 1 1 in_port=3,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
+Next, create a low-priority flowspace that matches all traffic at that port, and assign it to the <tt>non-video</tt> slice:
+ fvctl -f /dev/null add-flowspace dpid1-port3-non-video 1 100 in_port=3 non-video=7
+We have arbitrarily chosen a high priority value of 100.
 
 This results in all the video traffic at (switch s1, port 3) being handled by the <tt>video</tt> slice, and all the non-video traffic at being handled by the <tt>non-video</tt> slice.
 
 Similarly, create flowspaces to segregate video and non-video traffic at (switch s1, port 4):
- fvctl -f /dev/null add-flowspace dpid1-port4-video-src 1 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
- fvctl -f /dev/null add-flowspace dpid1-port4-video-dst 1 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
- fvctl -f /dev/null add-flowspace dpid1-port4-non-video 1 1 in_port=4 non-video=7
+ fvctl -f /dev/null add-flowspace dpid1-port4-video-src 1 1 in_port=4,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid1-port4-video-dst 1 1 in_port=4,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid1-port4-non-video 1 100 in_port=4 non-video=7
 
 Similarly, create flowspaces for the other two edge ports (at switch s4).
 Create flowspaces for (switch s4, port 3):
- fvctl -f /dev/null add-flowspace dpid4-port3-video-src 4 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
- fvctl -f /dev/null add-flowspace dpid4-port3-video-dst 4 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
- fvctl -f /dev/null add-flowspace dpid4-port3-non-video 4 1 in_port=3 non-video=7
+ fvctl -f /dev/null add-flowspace dpid4-port3-video-src 4 1 in_port=3,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid4-port3-video-dst 4 1 in_port=3,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid4-port3-non-video 4 100 in_port=3 non-video=7
 Create flowspaces for (switch s4, port 4):
- fvctl -f /dev/null add-flowspace dpid4-port4-video-src 4 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
- fvctl -f /dev/null add-flowspace dpid4-port4-video-dst 4 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
- fvctl -f /dev/null add-flowspace dpid4-port4-non-video 4 1 in_port=4 non-video=7
+ fvctl -f /dev/null add-flowspace dpid4-port4-video-src 4 1 in_port=4,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid4-port4-video-dst 4 1 in_port=4,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
+ fvctl -f /dev/null add-flowspace dpid4-port4-non-video 4 100 in_port=4 non-video=7
 
 We are now just left with the internal ports. Creating flowspaces for them is simple, as traffic at each internal port is exclusively handled by one slice. Create flowspaces for the internal ports just the way you did part 1 (remember to use the correct slice name).
 
 Assign (switch s1, port 2) to <tt>video</tt>:
- fvctl -f /dev/null add-flowspace dpid1-port2-video 1 100 in_port=2 video=7
+ fvctl -f /dev/null add-flowspace dpid1-port2-video 1 1 in_port=2 video=7
 Assign (switch s3, all ports) to <tt>video</tt>:
  fvctl -f /dev/null add-flowspace dpid3-video 3 1 any video=7
 Assign (switch s4, port 2) to <tt>video</tt>:
- fvctl -f /dev/null add-flowspace dpid4-port2-video 4 100 in_port=2 video=7
+ fvctl -f /dev/null add-flowspace dpid4-port2-video 4 1 in_port=2 video=7
 Assign (switch s1, port 1) to <tt>non-video</tt>:
- fvctl -f /dev/null add-flowspace dpid1-port1-non-video 1 1 in_port=1 non-video=7
+ fvctl -f /dev/null add-flowspace dpid1-port1-non-video 1 100 in_port=1 non-video=7
 Assign (switch s2, all ports) to <tt>non-video</tt>:
- fvctl -f /dev/null add-flowspace dpid2-non-video 2 1 any non-video=7
+ fvctl -f /dev/null add-flowspace dpid2-non-video 2 100 any non-video=7
 Assign (switch s4, port 1) to <tt>non-video</tt>:
- fvctl -f /dev/null add-flowspace dpid4-port1-non-video 4 1 any non-video=7
+ fvctl -f /dev/null add-flowspace dpid4-port1-non-video 4 100 in_port=1 non-video=7
 
 Now, we are done with creating all the flowspaces. Ensure that the Flowspaces were correctly added:
  fvctl -f /dev/null list-flowspace
