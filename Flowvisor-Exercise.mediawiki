@@ -194,7 +194,7 @@ You should now see both the <tt>upper</tt> and <tt>lower</tt> slices in addition
 
 ====Create Flowspaces====
 
-Flowspaces associate packets of a particular type in the network to specific slices. You can create flowspaces using the following command:
+Flowspaces associate packets of a particular type in the network to specific slices. Commands to create flowspaces (no need to type this one) would use the <tt>add-flowspace</tt> command:
  fvctl add-flowspace [options] <flowspace-name> <dpid> <priority> <match> <slice-perm>
 
 * When a packet matches multiple flowspaces, FlowVisor assigns it to the flowspace with the highest <tt>priority</tt> number.
