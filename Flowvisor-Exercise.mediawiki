@@ -35,9 +35,22 @@ If you're curious about how to define a custom topology, check out the <tt>flowv
 
 ===Start FlowVisor===
 
-Next we will start FlowVisor and make sure that all the OpenFlow switches we just created connect to it. Start FlowVisor with the following command: 
+Next we will configure FlowVisor, as it has not been run on your VM.  First, '''in a new terminal''', generate a flowvisor config:
+ sudo -u flowvisor fvconfig generate /etc/flowvisor/config.json
+If prompted for the mininet sudo password, enter <tt>mininet</tt>.  Leave the <tt>fvadmin</tt> password blank (just hit enter when prompted for password).
+
+Start FlowVisor to be able to change the config:
  sudo /etc/init.d/flowvisor start
-Ensure that FlowVisor is running by getting its configuration:
+
+Enable the FlowVisor topology controller using <tt>fvctl</tt>, which is a command-line utility to manage FlowVisor. The <tt>-f</tt> argument points to a password file. Your configured your FlowVisor instance to be passwordless, therefore the password file is <tt>/dev/null</tt>.
+ fvctl -f /dev/null set-config --enable-topo-ctrl
+
+Restart FlowVisor:
+ sudo /etc/init.d/flowvisor restart
+
+When FlowVisor started, all the OpenFlow switches we created earlier should have connected to it.
+
+Next, ensure that FlowVisor is running by getting its configuration:
  fvctl -f /dev/null get-config
 If FlowVisor is running, you will see the FlowVisor configuration in JSON format like this:
 <dl><dd><pre>
@@ -62,9 +75,6 @@ mininet@mininet:~$ fvctl -f /dev/null get-config
   "track-flows": false
 }
 </pre></dd></dl>
-
-<tt>fvctl</tt> is a command-line utility to manage flowvisor. The <tt>-f</tt> argument points to a password file. Your FlowVisor is configured to be passwordless, therefore the password file is <tt>/dev/null</tt>.
-
 
 List the existing slices using the following command:
  fvctl -f /dev/null list-slices
