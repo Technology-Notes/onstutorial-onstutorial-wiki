@@ -255,8 +255,6 @@ Verify that h2 can ping h4 but not h1 and h3 (and vice versa). In the mininet co
  h2 ping -c1 -W1 h3
 
 ====Cleanup====
-Stop both the controllers.
-
 Remove both the slices that you created:
  fvctl -f /dev/null remove-slice upper
  fvctl -f /dev/null remove-slice lower
