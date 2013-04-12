@@ -232,7 +232,7 @@ Now, create flowspaces for the lower slice:
 Ensure that the flowspaces are correctly added:
  fvctl -f /dev/null list-flowspace
 
-Connect each slice to a different instance of the FVexercise controller app. FVexercise app reactively installs routes based on destination MAC address. To do that, open two terminal tabs and run the following:
+Connect each slice to a different instance of the FVexercise controller app.  The FVexercise app reactively installs routes based on the destination MAC address, and it is provided as an executable.  Open '''two fresh terminal tabs''' and run the following:
 
 * Terminal 1
  cd ~/onstutorial/beacon-fvexercise-controller1
