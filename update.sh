@@ -6,3 +6,4 @@ git pull
 # Update code, assumed to be cloned at same dir depth
 cd ../onstutorial
 git pull
+sleep 1
