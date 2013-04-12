@@ -244,7 +244,7 @@ Connect each slice to a different instance of the FVexercise controller app.  Th
 
 This will launch two instances of FVexercise Beacon controller, listening on port 10001 and 10002 respectively.
 
-After a short delay, both controllers should connect. Verify that h1 can ping h3 but not h2 and h4 (and vice versa). In the mininet console run the following commands (note: it takes some time for the first ping to go through, as a new route is being installed):
+After a short delay, both controllers should connect. Verify that h1 can ping h3 but not h2 and h4 (and vice versa). In the Mininet console run the following commands (note: it takes some time for the first ping to go through, as a new route is being installed):
  h1 ping -c1 h3
  h1 ping -c1 -W1 h2
  h1 ping -c1 -W1 h4
