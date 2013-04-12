@@ -169,13 +169,13 @@ mininet@mininet:~$ fvctl -f /dev/null list-links
 ==Slicing Exercise==
 
 ===Part1: Simple Topology-based Slicing===
-FlowVisor can slice a network in many ways. Here, we are going to explore the simplest way--slicing by switch ports. An example use case is a WAN provider who wants to slice her network to provide dedicated links to each of her tenants. In this part, we will create two physical slices of our WAN, and name them upper and lower as shown in the figure below.
+FlowVisor can slice a network in many ways. Here, we are going to explore the simplest way--slicing by switch ports. An example use case is a WAN provider who wants to slice her network to provide dedicated links to each of her tenants. In this part, we will create two physical slices of our WAN, naming them upper and lower as shown in the figure below.
 
 [[images/flowvisor_part1.png]]
 
 ====Create Slices====
 
-Each slice will be managed by a separate controller which will control all the traffic in its slice. To create a slice, use the <tt>fvctl</tt> command:
+Each slice will be managed by a separate controller which will control all the traffic in its slice. As an example (no need to type this one), commands to create a slice would use the <tt>add-slice</tt> command in <tt>fvctl</tt>:
  fvctl add-slice [options] <slicename> <controller-url> <admin-email>
 The controller URL is of the form <tt>tcp:hostname:port</tt>. The admin email is used for administrative purposes if there is a problem with the slice. You can learn more about the command by typing:
  fvctl add-slice -h
