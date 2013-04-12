@@ -350,19 +350,24 @@ Connect both slices to two different instances of the FVExercise controller app,
 
 We will next verify that we correctly sliced our network. If we correctly sliced our network, a video flow (running on TCP port 9999) should go over the high bandwidth path and see a throughput of 10 Mb/s. A non-video flow (running on any other TCP port) should go over the low bandwidth path and see a throughput of 1 Mb/s.
 
-Open terminals for hosts h1 and h3. In the mininet console run:
- xterm h1 h3
-In the popped up terminal of "Node: h1" run:
- iperf -s -p 9999
-Start a video flow by running the following command in the popped up terminal of "Node: h3":
- iperf -c 10.0.0.1 -p 9999 -t 10 -i 1
-You should see a throughput of roughly around 10 Mb/s.
+Verify connectivity. In the Mininet console, run:
+ pingall
+Note that the network has full connectivity now, as compared to before, where ports were isolated from each other.
 
-Next open terminals for hosts h2 and h4. In the mininet console run:
+Now, we will verify that video and non-video flows take the right paths.
+Open terminals for hosts h1 and h3. In the Mininet console run:
+ xterm h1 h3
+Note: to copy text into an xterm, one way is to click the middle mouse button.  In the popped up terminal of "Node: h1" run:
+ iperf -s -p 9999
+Start a video flow by running the following command in the popped up terminal of node h3:
+ iperf -c 10.0.0.1 -p 9999 -t 10 -i 1
+You should see a throughput of roughly around 10 Mb/s.  You can run this same command in h4, and get the same result, whereas before, there was no connectivity.
+
+Next open terminals for hosts h2 and h4. In the Mininet console run:
  xterm h2 h4
 In the popped up terminal of "Node: h2" run:
  iperf -s -p 8888
-Start a non-video flow by running the following command in the popped up terminal of "Node: h4":
+Start a non-video flow by running the following command in the popped up terminal of node h4:
  iperf -c 10.0.0.2 -p 8888 -t 10 -i 1
 You should see a throughput of roughly around 1 Mb/s.
 
