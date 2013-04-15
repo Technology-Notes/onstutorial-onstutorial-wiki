@@ -9,6 +9,8 @@ Next, press the "Import" button.
 
 This step will take a while - the unpacked image is about 3 GB.
 
+'''If you are running Windows''', make sure to change the number of processors to 1, as VirtualBox v4.2.10 has a confusing bug where it reports a VT-X (virtualization hardware) error. Set the number of processors to 1, in Settings -> System -> Processor, to avoid this error.
+
 Then, press the "Start" arrow icon or double-click your VM within the VirtualBox window. 
 
 Once the VM starts you should see the desktop view for Lubuntu.  You can open a terminal by clicking inside the VM, then double clicking the Terminal icon in the top left corner, or pressing ctl-alt-t.
