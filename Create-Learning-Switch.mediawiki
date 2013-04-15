@@ -59,7 +59,7 @@ In the xterm for h1, send a ping:
 
 The ping packets are now going up to the controller, which then floods them out all interfaces except the sending one.   You should see identical ARP and ICMP packets corresponding to the ping in both xterms running tcpdump.
 
-Now, see what happens when a non-existent host doesn't reply.  From h2 xterm:
+Now, see what happens when a non-existent host doesn't reply.  From the h1 xterm:
  # ping -c1 10.0.0.5
 
 You should see three unanswered ARP requests in the tcpdump xterms.  If your code is off later, three unanswered ARP requests is a signal that you might be accidentally dropping packets.
