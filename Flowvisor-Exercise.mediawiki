@@ -27,7 +27,7 @@ s1 has two hosts attached: h1 and h2. s2 has two hosts attached: h3 and h4.
 === Run Diamond Topology ===
 
 First, start up the diamond topology for this exercise.  Exit any running Mininet instance, and run: 
- sudo mn --custom ~/onstutorial/flowvisor_scripts/flowvisor_topo.py --topo fvtopo --link tc --controller remote --mac --arp
+ $ sudo mn --custom ~/onstutorial/flowvisor_scripts/flowvisor_topo.py --topo fvtopo --link tc --controller remote --mac --arp
 
 This will create a network in mininet with the WAN topology. To keep things simple, we have set static ARP entries for the Mininet hosts.
 
@@ -36,25 +36,25 @@ If you're curious about how to define a custom topology, check out the <tt>flowv
 ===Start FlowVisor===
 
 Next we will configure FlowVisor, as it has not been run on your VM.  First, '''in a new terminal''', generate a flowvisor config:
- sudo -u flowvisor fvconfig generate /etc/flowvisor/config.json
+ $ sudo -u flowvisor fvconfig generate /etc/flowvisor/config.json
 If prompted for the mininet sudo password, enter <tt>mininet</tt>.  Leave the <tt>fvadmin</tt> password blank (just hit enter when prompted for password).
 
 Start FlowVisor to be able to change the config:
- sudo /etc/init.d/flowvisor start
+ $ sudo /etc/init.d/flowvisor start
 
 Enable the FlowVisor topology controller using <tt>fvctl</tt>, which is a command-line utility to manage FlowVisor. The <tt>-f</tt> argument points to a password file. Your configured your FlowVisor instance to be passwordless, therefore the password file is <tt>/dev/null</tt>.
- fvctl -f /dev/null set-config --enable-topo-ctrl
+ $ fvctl -f /dev/null set-config --enable-topo-ctrl
 
 Restart FlowVisor:
- sudo /etc/init.d/flowvisor restart
+ $ sudo /etc/init.d/flowvisor restart
 
 When FlowVisor started, all the OpenFlow switches we created earlier should have connected to it.
 
 Next, ensure that FlowVisor is running by getting its configuration:
- fvctl -f /dev/null get-config
+ $ fvctl -f /dev/null get-config
 If FlowVisor is running, you will see the FlowVisor configuration in JSON format like this:
 <dl><dd><pre>
-mininet@mininet:~$ fvctl -f /dev/null get-config
+$ fvctl -f /dev/null get-config
 {
   "enable-topo-ctrl": true, 
   "flood-perm": {
@@ -77,30 +77,30 @@ mininet@mininet:~$ fvctl -f /dev/null get-config
 </pre></dd></dl>
 
 List the existing slices using the following command:
- fvctl -f /dev/null list-slices
+ $ fvctl -f /dev/null list-slices
 Ensure that the only slice is the default <tt>fvadmin</tt> slice. The output should look like this:
 <dl><dd><pre>
-mininet@mininet:~$ fvctl -f /dev/null list-slices
+$ fvctl -f /dev/null list-slices
 Configured slices:
 fvadmin         --> enabled 
 </pre></dd></dl>
 
 List the existing slices using the following command:
- fvctl -f /dev/null list-flowspace
+ $ fvctl -f /dev/null list-flowspace
 Ensure that there are no existing flowspaces. The output should look like this:
 <dl><dd><pre>
-mininet@mininet:~$  fvctl -f /dev/null list-flowspace
+$  fvctl -f /dev/null list-flowspace
 Configured Flow entries:
   None
 </pre></dd></dl>
 
 Ensure that all the switches have connected by running the following command:
- fvctl -f /dev/null list-datapaths
+ $ fvctl -f /dev/null list-datapaths
 You might have to wait for a few seconds for the switches to connect before running the command. If all the
 switches are connected, you should see an output like this:
 
 <dl><dd><pre>
-mininet@mininet:~$ fvctl -f /dev/null list-datapaths
+$ fvctl -f /dev/null list-datapaths
 Connected switches: 
   1 : 00:00:00:00:00:00:00:01
   2 : 00:00:00:00:00:00:00:02
@@ -109,10 +109,10 @@ Connected switches:
 </pre></dd></dl>
 
 Next, ensure that all the links are up by running the following command:
- fvctl -f /dev/null list-links
+ $ fvctl -f /dev/null list-links
 You should see an output like this:
 <dl><dd><pre>
-mininet@mininet:~$ fvctl -f /dev/null list-links
+$ fvctl -f /dev/null list-links
 [
   {
     "dstDPID": "00:00:00:00:00:00:00:01", 
@@ -178,90 +178,90 @@ FlowVisor can slice a network in many ways. Here, we are going to explore the si
 Each slice will be managed by a separate controller which will control all the traffic in its slice. As an example (no need to type this one), commands to create a slice would use the <tt>add-slice</tt> command in <tt>fvctl</tt>:
  fvctl add-slice [options] <slicename> <controller-url> <admin-email>
 The controller URL is of the form <tt>tcp:hostname:port</tt>. The admin email is used for administrative purposes if there is a problem with the slice. You can learn more about the command by typing:
- fvctl add-slice -h
+ $ fvctl add-slice -h
 
 Now, create a slice named <tt>upper</tt> connecting to a controller listening on <tt>tcp:localhost:10001</tt> by running the following command:
- fvctl -f /dev/null add-slice upper tcp:localhost:10001 admin@upperslice
+ $ fvctl -f /dev/null add-slice upper tcp:localhost:10001 admin@upperslice
 Leave the Slice password empty by hitting Enter when prompted.
 
 Similarly, create a slice named <tt>lower</tt> connecting to a controller listening on <tt>tcp:localhost:10002</tt>.
- fvctl -f /dev/null add-slice lower tcp:localhost:10002 admin@lowerslice
+ $ fvctl -f /dev/null add-slice lower tcp:localhost:10002 admin@lowerslice
 Leave the Slice password empty by hitting Enter when prompted.
 
 Ensure that the slices were added by running the following command:
- fvctl -f /dev/null list-slices
+ $ fvctl -f /dev/null list-slices
 You should now see both the <tt>upper</tt> and <tt>lower</tt> slices in addition to the default <tt>fvadmin</tt> slice, all enabled.
 
 ====Create Flowspaces====
 
 Flowspaces associate packets of a particular type in the network to specific slices. Commands to create flowspaces (no need to type this one) would use the <tt>add-flowspace</tt> command:
- fvctl add-flowspace [options] <flowspace-name> <dpid> <priority> <match> <slice-perm>
+ $ fvctl add-flowspace [options] <flowspace-name> <dpid> <priority> <match> <slice-perm>
 
 * When a packet matches multiple flowspaces, FlowVisor assigns it to the flowspace with the highest <tt>priority</tt> number.
 * <tt>match</tt> describes a flow or flows. Such flow descriptions comprise a series field=value assignments, separated by commas.
 * <tt>slice-perm</tt> is  a  comma-separated list of slices that have control over a specific FlowSpace.  <tt>slice-perm</tt> is of the form "slicename1=perm[slicename2=perm[...]]". Each slice can have three types of permissions over a flowspace: ''DELEGATE'', ''READ'', and ''WRITE''.  Permissions are a  bitmask  specified as an integer, with ''DELEGATE''=1, ''READ''=2, ''WRITE''=4.
 
 You can learn more about the command by typing:
- fvctl add-flowspace -h
+ $ fvctl add-flowspace -h
 
 Now, create a flowspace named <tt>dpid1-port1</tt> (with priority value 1) that maps all the traffic on port 1 of switch s1 to the upper slice by running the following command:
- fvctl -f /dev/null add-flowspace dpid1-port1 1 1 in_port=1 upper=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port1 1 1 in_port=1 upper=7
 Here we gave the upper slice all permissions: ''DELEGATE'', ''READ'', and ''WRITE''.
 
 Similarly, create a flowspace named <tt>dpid1-port3</tt> that maps all the traffic on port 3 of switch s1 to the upper slice:
- fvctl -f /dev/null add-flowspace dpid1-port3 1 1 in_port=3 upper=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port3 1 1 in_port=3 upper=7
 
 We can create a flowspace for all the traffic at a switch by using the match value of <tt>any</tt>. Use that technique to add switch s2 to the upper slice:
- fvctl -f /dev/null add-flowspace dpid2 2 1 any upper=7
+ $ fvctl -f /dev/null add-flowspace dpid2 2 1 any upper=7
 
 Now, create flowspaces to add ports 1 and 3 of switch s4 to the upper slice:
- fvctl -f /dev/null add-flowspace dpid4-port1 4 1 in_port=1 upper=7
- fvctl -f /dev/null add-flowspace dpid4-port3 4 1 in_port=3 upper=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port1 4 1 in_port=1 upper=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port3 4 1 in_port=3 upper=7
 
 Ensure that the flowspaces are correctly added:
- fvctl -f /dev/null list-flowspace
+ $ fvctl -f /dev/null list-flowspace
 You should see all the flowspaces (5 in all) that you just added.
 
 Now, create flowspaces for the lower slice:
- fvctl -f /dev/null add-flowspace dpid1-port2 1 1 in_port=2 lower=7
- fvctl -f /dev/null add-flowspace dpid1-port4 1 1 in_port=4 lower=7
- fvctl -f /dev/null add-flowspace dpid3 3 1 any lower=7
- fvctl -f /dev/null add-flowspace dpid4-port2 4 1 in_port=2 lower=7
- fvctl -f /dev/null add-flowspace dpid4-port4 4 1 in_port=4 lower=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port2 1 1 in_port=2 lower=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port4 1 1 in_port=4 lower=7
+ $ fvctl -f /dev/null add-flowspace dpid3 3 1 any lower=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port2 4 1 in_port=2 lower=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port4 4 1 in_port=4 lower=7
 
 Ensure that the flowspaces are correctly added:
- fvctl -f /dev/null list-flowspace
+ $ fvctl -f /dev/null list-flowspace
 
 Connect each slice to a different instance of the FVexercise controller app.  The FVexercise app reactively installs routes based on the destination MAC address, and it is provided as an executable.  Open '''two fresh terminal tabs''' and run the following:
 
 * Terminal 1
- cd ~/onstutorial/beacon-fvexercise-controller1
- ./beacon
+ $ cd ~/onstutorial/beacon-fvexercise-controller1
+ $ ./beacon
 
 * Terminal 2
- cd ~/onstutorial/beacon-fvexercise-controller2
- ./beacon
+ $ cd ~/onstutorial/beacon-fvexercise-controller2
+ $ ./beacon
 
 This will launch two instances of FVexercise Beacon controller, listening on port 10001 and 10002 respectively.
 
 After a short delay, both controllers should connect. Verify that h1 can ping h3 but not h2 and h4 (and vice versa). In the Mininet console run the following commands (note: it takes some time for the first ping to go through, as a new route is being installed):
- h1 ping -c1 h3
- h1 ping -c1 -W1 h2
- h1 ping -c1 -W1 h4
+ mininet> h1 ping -c1 h3
+ mininet> h1 ping -c1 -W1 h2
+ mininet> h1 ping -c1 -W1 h4
 
 Verify that h2 can ping h4 but not h1 and h3 (and vice versa). In the mininet console run the following commands:
- h2 ping -c1 h4
- h2 ping -c1 -W1 h1
- h2 ping -c1 -W1 h3
+ mininet> h2 ping -c1 h4
+ mininet> h2 ping -c1 -W1 h1
+ mininet> h2 ping -c1 -W1 h3
 
 ====Cleanup====
 Remove both the slices that you created:
- fvctl -f /dev/null remove-slice upper
- fvctl -f /dev/null remove-slice lower
+ $ fvctl -f /dev/null remove-slice upper
+ $ fvctl -f /dev/null remove-slice lower
 Ensure that all the slices are correctly removed:
- fvctl -f /dev/null list-slices
+ $ fvctl -f /dev/null list-slices
 You should see only the default <tt>fvadmin</tt> slice remaining. Once the slices are removed, the associated flowspaces are also automatically removed. Ensure that all the flowspaces were correctly removed:
- fvctl -f /dev/null list-flowspace
+ $ fvctl -f /dev/null list-flowspace
 Finally, kill the two instances of beacon controller you are running.
 
 
@@ -284,12 +284,12 @@ The video slice controls traffic on TCP port 9999. The non-video slice controls 
 ====Create Slices====
 
 Just like the previous part, create two slices called <tt>video</tt> and <tt>non-video</tt> connecting to controllers listening at <tt>tcp:localhost:10001</tt> and <tt>tcp:localhost:10002</tt>, respectively:
- fvctl -f /dev/null add-slice video tcp:localhost:10001 admin@videoslice
- fvctl -f /dev/null add-slice non-video tcp:localhost:10002 admin@nonvideoslice
+ $ fvctl -f /dev/null add-slice video tcp:localhost:10001 admin@videoslice
+ $ fvctl -f /dev/null add-slice non-video tcp:localhost:10002 admin@nonvideoslice
 Leave the Slice password empty by hitting Enter when prompted.
 
 Ensure that the slices were added by running the following command:
- fvctl -f /dev/null list-slices
+ $ fvctl -f /dev/null list-slices
 You should now see both the <tt>video</tt> and <tt>non-video</tt> slices in addition to the default <tt>fvadmin</tt> slice, all enabled.
 
 ====Create Flowspaces====
@@ -297,91 +297,91 @@ You should now see both the <tt>video</tt> and <tt>non-video</tt> slices in addi
 FlowSpace creation in this case is slightly more involved, especially at the edge ports where hosts connect to the switches, as the traffic there is split between the two slices. At the edge ports, the <tt>video</tt> slice needs to handle all the traffic with source or destination port of 9999, and the <tt>non-video</tt> slice needs to handle the rest. We will achieve it using different <tt>priority</tt> values.
 
 Let's start with (switch s1, port 3) that connects s1 to h1. First, create two high priority flowspaces that match all traffic with source or destination port of 9999 at that port, and assign it to the <tt>video</tt> slice:
- fvctl -f /dev/null add-flowspace dpid1-port3-video-src 1 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
- fvctl -f /dev/null add-flowspace dpid1-port3-video-dst 1 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port3-video-src 1 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port3-video-dst 1 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
 We have arbitrarily chosen a high priority value of 100. Next, create a low-priority flowspace that matches all traffic at that port, and assign it to the <tt>non-video</tt> slice:
- fvctl -f /dev/null add-flowspace dpid1-port3-non-video 1 1 in_port=3 non-video=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port3-non-video 1 1 in_port=3 non-video=7
 
 This results in all the video traffic at (switch s1, port 3) being handled by the <tt>video</tt> slice, and all the non-video traffic at being handled by the <tt>non-video</tt> slice.
 
 Similarly, create flowspaces to segregate video and non-video traffic at (switch s1, port 4):
- fvctl -f /dev/null add-flowspace dpid1-port4-video-src 1 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
- fvctl -f /dev/null add-flowspace dpid1-port4-video-dst 1 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
- fvctl -f /dev/null add-flowspace dpid1-port4-non-video 1 1 in_port=4 non-video=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port4-video-src 1 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port4-video-dst 1 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port4-non-video 1 1 in_port=4 non-video=7
 
 Similarly, create flowspaces for the other two edge ports (at switch s4).
 Create flowspaces for (switch s4, port 3):
- fvctl -f /dev/null add-flowspace dpid4-port3-video-src 4 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
- fvctl -f /dev/null add-flowspace dpid4-port3-video-dst 4 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
- fvctl -f /dev/null add-flowspace dpid4-port3-non-video 4 1 in_port=3 non-video=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port3-video-src 4 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port3-video-dst 4 100 in_port=3,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port3-non-video 4 1 in_port=3 non-video=7
 Create flowspaces for (switch s4, port 4):
- fvctl -f /dev/null add-flowspace dpid4-port4-video-src 4 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
- fvctl -f /dev/null add-flowspace dpid4-port4-video-dst 4 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
- fvctl -f /dev/null add-flowspace dpid4-port4-non-video 4 1 in_port=4 non-video=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port4-video-src 4 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_src=9999 video=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port4-video-dst 4 100 in_port=4,dl_type=0x0800,nw_proto=6,tp_dst=9999 video=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port4-non-video 4 1 in_port=4 non-video=7
 
 We are now just left with the internal ports. Creating flowspaces for them is simple, as traffic at each internal port is exclusively handled by one slice. Create flowspaces for the internal ports just the way you did part 1 (remember to use the correct slice name).
 
 Assign (switch s1, port 2) to <tt>video</tt>:
- fvctl -f /dev/null add-flowspace dpid1-port2-video 1 100 in_port=2 video=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port2-video 1 100 in_port=2 video=7
 Assign (switch s3, all ports) to <tt>video</tt>:
- fvctl -f /dev/null add-flowspace dpid3-video 3 100 any video=7
+ $ fvctl -f /dev/null add-flowspace dpid3-video 3 100 any video=7
 Assign (switch s4, port 2) to <tt>video</tt>:
- fvctl -f /dev/null add-flowspace dpid4-port2-video 4 100 in_port=2 video=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port2-video 4 100 in_port=2 video=7
 Assign (switch s1, port 1) to <tt>non-video</tt>:
- fvctl -f /dev/null add-flowspace dpid1-port1-non-video 1 1 in_port=1 non-video=7
+ $ fvctl -f /dev/null add-flowspace dpid1-port1-non-video 1 1 in_port=1 non-video=7
 Assign (switch s2, all ports) to <tt>non-video</tt>:
- fvctl -f /dev/null add-flowspace dpid2-non-video 2 1 any non-video=7
+ $ fvctl -f /dev/null add-flowspace dpid2-non-video 2 1 any non-video=7
 Assign (switch s4, port 1) to <tt>non-video</tt>:
- fvctl -f /dev/null add-flowspace dpid4-port1-non-video 4 1 in_port=1 non-video=7
+ $ fvctl -f /dev/null add-flowspace dpid4-port1-non-video 4 1 in_port=1 non-video=7
 
 Now, we are done with creating all the flowspaces. Ensure that the Flowspaces were correctly added:
- fvctl -f /dev/null list-flowspace
+ $ fvctl -f /dev/null list-flowspace
 You should see all the flowspaces that you just added (18 in all).
 
 Connect both slices to two different instances of the FVExercise controller app, each running in a terminal window:
 
 * Terminal 1
- cd ~/onstutorial/beacon-fvexercise-controller1
- ./beacon
+ $ cd ~/onstutorial/beacon-fvexercise-controller1
+ $ ./beacon
 
 * Terminal 2
- cd ~/onstutorial/beacon-fvexercise-controller2
- ./beacon
+ $ cd ~/onstutorial/beacon-fvexercise-controller2
+ $ ./beacon
 
 We will next verify that we correctly sliced our network. If we correctly sliced our network, a video flow (running on TCP port 9999) should go over the high bandwidth path and see a throughput of 10 Mb/s. A non-video flow (running on any other TCP port) should go over the low bandwidth path and see a throughput of 1 Mb/s.
 
 Verify connectivity. In the Mininet console, run:
- pingall
+ mininet> pingall
 Note that the network has full connectivity now, as compared to before, where ports were isolated from each other.
 
 Now, we will verify that video and non-video flows take the right paths.
 Open terminals for hosts h1 and h3. In the Mininet console run:
- xterm h1 h3
+ mininet> xterm h1 h3
 Note: to copy text into an xterm, one way is to click the middle mouse button.  In the popped up terminal of "Node: h1" run:
- iperf -s -p 9999
+ # iperf -s -p 9999
 Start a video flow by running the following command in the popped up terminal of node h3:
- iperf -c 10.0.0.1 -p 9999 -t 10 -i 1
+ # iperf -c 10.0.0.1 -p 9999 -t 10 -i 1
 You should see a throughput of roughly around 10 Mb/s.  You can run this same command in h4, and get the same result, whereas before, there was no connectivity.
 
 Next open terminals for hosts h2 and h4. In the Mininet console run:
- xterm h2 h4
+ mininet> xterm h2 h4
 In the popped up terminal of "Node: h2" run:
- iperf -s -p 8888
+ # iperf -s -p 8888
 Start a non-video flow by running the following command in the popped up terminal of node h4:
- iperf -c 10.0.0.2 -p 8888 -t 10 -i 1
+ # iperf -c 10.0.0.2 -p 8888 -t 10 -i 1
 You should see a throughput of roughly around 1 Mb/s.
 
 ====Cleanup====
 Stop both the controllers.
 
 Remove both the slices that you created:
- fvctl -f /dev/null remove-slice video
- fvctl -f /dev/null remove-slice non-video
+ $ fvctl -f /dev/null remove-slice video
+ $ fvctl -f /dev/null remove-slice non-video
 
 Ensure that all the slices are correctly removed:
- fvctl -f /dev/null list-slices
+ $ fvctl -f /dev/null list-slices
 You should see only the default <tt>fvadmin</tt> slice remaining. Once the slices are removed, the associated flowspaces too are automatically removed. Ensure that all the flowspaces are correctly removed:
- fvctl -f /dev/null list-flowspace
+ $ fvctl -f /dev/null list-flowspace
 
 ====Quiz====
 Highlight the hidden text below each question for its answer.
