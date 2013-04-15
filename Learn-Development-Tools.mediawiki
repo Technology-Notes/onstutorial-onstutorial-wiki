@@ -231,6 +231,8 @@ In the mininet console run :
 
 This Mininet command runs an iperf TCP server on one virtual host, then runs an iperf client on a second virtual host.  Once connected, they blast packets between each other and report the results.
 
+If this statement is not working for you, make sure that you're running a controller and verify that you have ping-level connectivity.  If there is no controller running, you will see the text <tt>waiting for iperf to start up</tt>repeating.
+
 <!---
 
 Now compare with the user-space switch.  In the mininet console:
