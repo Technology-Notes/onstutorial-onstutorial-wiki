@@ -3,8 +3,9 @@ __TOC__
 
 You will need to acquire two files: a VirtualBox installer and the Tutorial VM.
 
-'''If you are at the tutorial now, DO NOT use the wifi to download anything.'''  We will have CDs and USB keys with both files.  Download the files, then pass the key to a neighbor who needs it.
+'''If you are at the tutorial now, DO NOT use the wifi to download any large files.'''  We will have CDs and USB keys with both files.  Copy the VirtualBox installer for your OS type (if needed), then copy the Tutorial VM (<tt>ons-2013-tutorial.ova</tt>),  then pass the key to a neighbor who needs it.
 
+<!---
 But, if you're looking to get stuff installed early to make sure they work on your system (great!) go ahead and download at will.
 
 == Download Files ==
@@ -23,6 +24,7 @@ While that is downloading, grab VirtualBox version 4.2.10 or newer, for your par
 * [[VirtualBox|http://www.virtualbox.org/wiki/Downloads]] 
 
 == Install and Verify ==
+--->
 
-After you have downloaded VirtualBox, install it, then go to the next section, [[Set-Up-Virtual-Machine|Set Up Virtual Machine]] to verify that the VM is working on your platform.
+After you have acquired VirtualBox, install it, then go to the next section, [[Set-Up-Virtual-Machine|Set Up Virtual Machine]] to verify that the VM is working on your platform.
 
