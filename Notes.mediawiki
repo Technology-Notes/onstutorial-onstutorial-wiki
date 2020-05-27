@@ -29,7 +29,7 @@ See http://yuba.stanford.edu/foswiki/bin/view/OpenFlow/MininetVMCreationNotes
 
 sudo apt-get install -y git-core
 sudo apt-get install python-setuptools
-git clone git://github.com/mininet/mininet.git
+git clone --depth 1 git://github.com/mininet/mininet.git
 cd mininet 
 sudo make install
 cd ..
